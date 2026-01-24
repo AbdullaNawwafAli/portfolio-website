@@ -10,22 +10,22 @@ const Navbar = () => {
       </div>
       <div className="flex gap-5">
         <div className="flex min-w-[129px] justify-end">
-          <Button variant={"ghost"} className="">
+          <Button variant={"ghost"} className="px-0">
           <span className={raleway.className}>Home</span>
           </Button>
         </div>
         <div className="flex min-w-[129px] justify-end">
-          <Button variant={"ghost"} className="">
+          <Button variant={"ghost"} className="px-0">
             <span className={raleway.className}>Projects</span>
           </Button>
         </div>
         <div className="flex min-w-[129px] justify-end">
-          <Button variant={"ghost"} className="">
+          <Button variant={"ghost"} className="px-0">
           <span className={raleway.className}>Hobbies</span>
           </Button>
         </div>
         <div className="flex min-w-[129px] justify-end">
-          <Button variant={"ghost"} className="">
+          <Button variant={"ghost"} className="px-0">
           <span className={raleway.className}>About Me</span>
           </Button>
         </div>
