@@ -1,36 +1,38 @@
 import Image from "next/image";
 import { Button } from "../shadcn/button";
-import { raleway } from "@/app/layout";
+import {ralewayNav } from "@/app/layout";
 
 const Navbar = () => {
   return (
-    <div className="flex  justify-between px-8 py-3 items-center">
-      <div>
-        <Image src={"navBarSVG.svg"} alt={"here"} width={175} height={50} />
+    <>
+      <div className="flex w-full justify-between px-[30px] py-2 items-center">
+        <div>
+          <Image src={"navBarSVG.svg"} alt={"here"} width={175} height={50} />
+        </div>
+        <div className="hidden md:flex gap-[20px]">
+          <div className="flex w-[129px] justify-end">
+            <Button variant={"ghost"} className="px-0">
+              <span className={ralewayNav.className}>Home</span>
+            </Button>
+          </div>
+          <div className="flex w-[129px] justify-end">
+            <Button variant={"ghost"} className="px-0">
+              <span className={ralewayNav.className}>Projects</span>
+            </Button>
+          </div>
+          <div className="flex w-[129px] justify-end">
+            <Button variant={"ghost"} className="px-0">
+              <span className={ralewayNav.className}>Hobbies</span>
+            </Button>
+          </div>
+          <div className="flex w-[129px] justify-end">
+            <Button variant={"ghost"} className="px-0">
+              <span className={ralewayNav.className}>About Me</span>
+            </Button>
+          </div>
+        </div>
       </div>
-      <div className="flex gap-5">
-        <div className="flex min-w-[129px] justify-end">
-          <Button variant={"ghost"} className="px-0">
-          <span className={raleway.className}>Home</span>
-          </Button>
-        </div>
-        <div className="flex min-w-[129px] justify-end">
-          <Button variant={"ghost"} className="px-0">
-            <span className={raleway.className}>Projects</span>
-          </Button>
-        </div>
-        <div className="flex min-w-[129px] justify-end">
-          <Button variant={"ghost"} className="px-0">
-          <span className={raleway.className}>Hobbies</span>
-          </Button>
-        </div>
-        <div className="flex min-w-[129px] justify-end">
-          <Button variant={"ghost"} className="px-0">
-          <span className={raleway.className}>About Me</span>
-          </Button>
-        </div>
-      </div>
-    </div>
+    </>
   );
 };
 
