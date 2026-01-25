@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import { Cinzel_Decorative, Raleway } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/ui/layout/Navbar";
+import Navbar from "@/features/Shell/components/Navbar";
+import Footer from "@/features/Shell/components/Footer";
 
 export const cinzel = Cinzel_Decorative({
   subsets: ["latin"],
   weight: ["700"],
 });
+
 
 export const raleway = Raleway({
   subsets: ["latin"],
@@ -45,6 +47,7 @@ export default function RootLayout({
         <div className="content">
           <Navbar>
             {children}
+            <Footer />
           </Navbar>
         </div>
       </body>

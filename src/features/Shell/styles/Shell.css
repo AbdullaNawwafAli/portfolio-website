@@ -1,0 +1,21 @@
+/* Navbar.module.css */
+
+.navBarButtonContainer {
+    @apply hidden md:flex box-border justify-end items-start gap-2.5 w-[129px] h-full flex-auto self-stretch grow;
+  }
+  
+  .navbar-container {
+    @apply top-0 left-0 w-full flex flex-row justify-start items-center gap-2.5;
+  }
+  
+  .logo-container {
+    @apply box-border flex flex-row justify-start items-center md:w-[129px] h-full flex-auto grow;
+  }
+  
+  .mobileNavBarButtonContainer {
+    @apply flex md:hidden box-border justify-end items-start gap-2.5 w-[129px] h-full flex-auto self-stretch grow;
+  }
+  
+  .navButton {
+    @apply px-0;
+  }
