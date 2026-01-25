@@ -34,11 +34,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        {/* Background columns */}
         <div className="background-columns">
           {[...Array(10).keys()].map((key) => (
             <div className="column" key={key}></div>
           ))}
         </div>
+
+        {/*Content */}
         <div className="content">
           <Navbar>
             {children}
