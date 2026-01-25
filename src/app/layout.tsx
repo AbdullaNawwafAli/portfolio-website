@@ -40,8 +40,9 @@ export default function RootLayout({
           ))}
         </div>
         <div className="content">
-          <Navbar />
-          {children}
+          <Navbar>
+            {children}
+          </Navbar>
         </div>
       </body>
     </html>
