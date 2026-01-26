@@ -4,7 +4,6 @@ import Navbar from "@/features/Shell/components/Navbar";
 import Footer from "@/features/Shell/components/Footer";
 import { cinzel, raleway } from "@/lib/fonts";
 
-
 export const metadata: Metadata = {
   title: "Nawwaf's Portfolio Website",
   description: "My portfolio website showcasing me",
@@ -16,7 +15,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className= {`${cinzel.variable} ${raleway.variable}`}>
+    <html lang="en" className={`${cinzel.variable} ${raleway.variable}`}>
       <body>
         {/* Background columns */}
         <div className="background-columns">
