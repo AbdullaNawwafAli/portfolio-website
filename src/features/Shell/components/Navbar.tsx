@@ -13,22 +13,22 @@ const Navbar = ({ children }: NavBarProps) => {
 
   return (<>
 
-    <div className="navBarContainer">
+    <div className="navbar-container">
 
       {/* Logo in invisible column*/}
-      <div className="logoContainer">
-        <Image src={"navBarSVG.svg"} alt={"here"} width={175} height={100} style={{ minWidth: 175, objectFit: 'contain' }} />
+      <div className="logo-container">
+        <Image src={"navBarSVG.svg"} alt={"Website logo/text"} width={175} height={100} style={{ minWidth: 175, objectFit: 'contain' }} />
       </div>
 
       {/*Invisible columns to pad so that it makes sure Navbar UI elements stay in line with columns in background*/}
       {[...Array(5).keys()].map((key) => (
-        <div className="navBarButtonContainer" key={key}>
+        <div className="navbar-button-container" key={key}>
         </div>
       ))}
 
       {/*Buttons in invisible columns*/}
       {navBarButtons.map((button) => (
-        <div className="navBarButtonContainer" key={button.label}>
+        <div className="navbar-button-container" key={button.label}>
           <Button variant={"ghost"} className="px-0">
             <span className={ralewayNav.className}>{button.label}</span>
           </Button>
@@ -39,9 +39,9 @@ const Navbar = ({ children }: NavBarProps) => {
     {children}
 
     {/* Mobile Navbar */}
-    <div className="navBarContainer">
+    <div className="navbar-container">
       {navBarButtons.map((button) => (
-        <div className="mobileNavBarButtonContainer" key={button.label}>
+        <div className="mobile-navbar-button-container" key={button.label}>
           <Button variant={"ghost"} className="px-0">
             <span className={ralewayNav.className}>{button.label}</span>
           </Button>

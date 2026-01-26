@@ -1,6 +1,6 @@
 /* Navbar.module.css */
 
-.navBarButtonContainer {
+.navbar-button-container {
     @apply hidden md:flex box-border justify-end items-start gap-2.5 w-[129px] h-full flex-auto self-stretch grow;
   }
   
@@ -12,10 +12,6 @@
     @apply box-border flex flex-row justify-start items-center md:w-[129px] h-full flex-auto grow;
   }
   
-  .mobileNavBarButtonContainer {
+  .mobile-navbar-button-container {
     @apply flex md:hidden box-border justify-end items-start gap-2.5 w-[129px] h-full flex-auto self-stretch grow;
-  }
-  
-  .navButton {
-    @apply px-0;
   }
