@@ -1,11 +1,11 @@
-import { ralewayNav } from "@/app/layout"
+
 
 const Footer = () => {
 
   return (
-    <div className="flex justify-between">
-      <span className={`${ralewayNav.className} text-[#243C4C]`}>@2026</span>
-      <span className={`${ralewayNav.className} text-[#243C4C]`}>@2026</span>
+    <div className="flex justify-between font-nav">
+      <span >@2026</span>
+      <span >@2026</span>
     </div>
   )
 }

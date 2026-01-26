@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { Button } from "../../../ui/shadcn/button";
-import { ralewayNav } from "@/app/layout";
 import { ReactNode } from "react";
 
 
@@ -29,8 +28,8 @@ const Navbar = ({ children }: NavBarProps) => {
       {/*Buttons in invisible columns*/}
       {navBarButtons.map((button) => (
         <div className="navbar-button-container" key={button.label}>
-          <Button variant={"ghost"} className="px-0">
-            <span className={ralewayNav.className}>{button.label}</span>
+          <Button variant={"ghost"} className="px-0 font-nav font-semibold">
+            {button.label}
           </Button>
         </div>
       ))}
@@ -42,8 +41,8 @@ const Navbar = ({ children }: NavBarProps) => {
     <div className="navbar-container">
       {navBarButtons.map((button) => (
         <div className="mobile-navbar-button-container" key={button.label}>
-          <Button variant={"ghost"} className="px-0">
-            <span className={ralewayNav.className}>{button.label}</span>
+          <Button variant={"ghost"} className="px-0 font-nav font-semibold">
+            {button.label}
           </Button>
         </div>
       ))}

@@ -1,27 +1,9 @@
 import type { Metadata } from "next";
-import { Cinzel_Decorative, Raleway } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/features/Shell/components/Navbar";
 import Footer from "@/features/Shell/components/Footer";
+import { cinzel, raleway } from "@/lib/fonts";
 
-export const cinzel = Cinzel_Decorative({
-  subsets: ["latin"],
-  weight: ["700"],
-});
-
-
-export const raleway = Raleway({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-raleway",
-});
-
-export const ralewayNav = Raleway({
-  subsets: ["latin"],
-  display: "swap",
-  weight: ["600"],
-  variable: "--font-raleway",
-});
 
 export const metadata: Metadata = {
   title: "Nawwaf's Portfolio Website",
@@ -34,7 +16,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className= {`${cinzel.variable} ${raleway.variable}`}>
       <body>
         {/* Background columns */}
         <div className="background-columns">
