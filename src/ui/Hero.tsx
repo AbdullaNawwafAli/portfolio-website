@@ -1,6 +1,6 @@
 const Hero = () => {
   return (
-    <div className="flex flex-col md:flex-row items-end justify-between">
+    <div className="flex flex-col md:flex-row items-end justify-between py-32.5 w-full">
       <div className="flex flex-col items-start justify-start h-full">
         <span
           className=" font-heading font-bold text-9xl leading-[120px] text-[#243C4C]
