@@ -1,4 +1,4 @@
-import Hero from "@/features/Hero/components/Hero";
+import Hero from "@/ui/Hero";
 import { Button } from "@/ui/shadcn/button";
 
 export default async function Home() {
