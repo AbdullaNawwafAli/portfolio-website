@@ -1,9 +1,14 @@
-import { pgTable, serial, varchar, timestamp } from "drizzle-orm/pg-core";
+import { pgTable, varchar, timestamp, integer } from "drizzle-orm/pg-core";
+import { projectsTable } from "./projects";
 
-export const media = pgTable("media", {
-  id: serial("id").primaryKey(),
+export const mediaTable = pgTable("media", {
+  id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  projectId: integer("project_id")
+    .notNull()
+    .references(() => projectsTable.id, { onDelete: "cascade" }),
   cloudinaryId: varchar("cloudinary_id", { length: 255 }).notNull(),
-  url: varchar("url", { length: 512 }).notNull(),
-  type: varchar("type", { length: 50 }),
-  createdAt: timestamp("created_at").defaultNow(),
+  url: varchar({ length: 512 }).notNull(),
+  type: varchar({ length: 50 }).notNull(), // 'image' or 'video'
+  order: integer().default(0),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
 });
