@@ -35,7 +35,8 @@ export default async function Home() {
                 />
               </div>
               <CardContent className="flex justify-center"></CardContent>
-              <CardFooter>
+              <CardFooter className="flex justify-between items-center">
+                <span className="font-sans">21 April 2025</span>
                 <Button
                   variant={"ghost"}
                   className="px-0 font-sans  text-background"
