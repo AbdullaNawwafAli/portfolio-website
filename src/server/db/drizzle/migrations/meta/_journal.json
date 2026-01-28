@@ -8,6 +8,13 @@
       "when": 1769065950639,
       "tag": "0000_awesome_dark_beast",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1769586823492,
+      "tag": "0001_secret_ironclad",
+      "breakpoints": true
     }
   ]
 }
