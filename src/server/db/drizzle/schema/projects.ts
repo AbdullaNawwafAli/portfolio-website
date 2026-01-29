@@ -10,18 +10,18 @@ import {
 
 export const MediaType = pgEnum("mediaType", ["img", "vid"]);
 
-export const projectsTable = pgTable("projects", {
+export const projects = pgTable("projects", {
   id: uuid("id").primaryKey().defaultRandom(),
   name: varchar({ length: 255 }).notNull(),
   description: varchar({ length: 1024 }).notNull(),
   createdDate: varchar({ length: 255 }).notNull(),
 });
 
-export const projectsMediaTable = pgTable("media", {
+export const projectsMedia = pgTable("media", {
   id: uuid("id").primaryKey().defaultRandom(),
   projectId: uuid("project_id")
     .notNull()
-    .references(() => projectsTable.id, { onDelete: "cascade" }),
+    .references(() => projects.id, { onDelete: "cascade" }),
   cloudinaryId: varchar("cloudinary_id", { length: 255 }).notNull(),
   url: varchar({ length: 512 }).notNull(),
   type: MediaType("mediaType").default("img"),
@@ -30,19 +30,19 @@ export const projectsMediaTable = pgTable("media", {
 });
 
 //RELATIONS
-export const projectsTableRelations = relations(projectsTable, ({ many }) => {
+export const projectsTableRelations = relations(projects, ({ many }) => {
   return {
-    media: many(projectsMediaTable),
+    media: many(projectsMedia),
   };
 });
 
 export const projectsMediaTableRelations = relations(
-  projectsMediaTable,
+  projectsMedia,
   ({ one }) => {
     return {
-      projects: one(projectsTable, {
-        fields: [projectsMediaTable.projectId],
-        references: [projectsTable.id],
+      projects: one(projects, {
+        fields: [projectsMedia.projectId],
+        references: [projects.id],
       }),
     };
   }
