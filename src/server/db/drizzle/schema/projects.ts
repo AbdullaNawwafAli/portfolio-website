@@ -1,8 +1,10 @@
 import { relations } from "drizzle-orm";
 import {
+  boolean,
   integer,
   pgEnum,
   pgTable,
+  primaryKey,
   timestamp,
   uuid,
   varchar,
@@ -10,39 +12,76 @@ import {
 
 export const MediaType = pgEnum("mediaType", ["img", "vid"]);
 
-export const projects = pgTable("projects", {
+export const projectsTable = pgTable("projects", {
   id: uuid("id").primaryKey().defaultRandom(),
-  name: varchar({ length: 255 }).notNull(),
-  description: varchar({ length: 1024 }).notNull(),
-  createdDate: varchar({ length: 255 }).notNull(),
+  name: varchar("name", { length: 255 }).notNull(),
+  description: varchar("description", { length: 1024 }).notNull(),
+  startDate: timestamp("start_date").notNull(),
+  finishDate: timestamp("finish_date").notNull(),
+  order: integer().default(0),
+  featured: boolean("featured").notNull(),
 });
 
-export const projectsMedia = pgTable("media", {
+export const projectsMediaTable = pgTable("projects_media", {
   id: uuid("id").primaryKey().defaultRandom(),
   projectId: uuid("project_id")
     .notNull()
-    .references(() => projects.id, { onDelete: "cascade" }),
+    .references(() => projectsTable.id, { onDelete: "cascade" }),
   cloudinaryId: varchar("cloudinary_id", { length: 255 }).notNull(),
-  url: varchar({ length: 512 }).notNull(),
   type: MediaType("mediaType").default("img"),
   order: integer().default(0),
-  createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 
+export const projectsTagsTable = pgTable("projects_tags", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  text: varchar("text", { length: 100 }).notNull(),
+});
+
+export const projectsTagsRelationTable = pgTable(
+  "projects_tags_relation_table",
+  {
+    projectId: uuid("project_id")
+      .references(() => projectsTable.id)
+      .notNull(),
+    tagId: uuid("tag_id")
+      .references(() => projectsTagsTable.id)
+      .notNull(),
+  },
+  //composite KEY
+  (table) => {
+    return {
+      pk: primaryKey({ columns: [table.projectId, table.tagId] }),
+    };
+  }
+);
+
 //RELATIONS
-export const projectsTableRelations = relations(projects, ({ many }) => {
+export const projectsTableRelations = relations(projectsTable, ({ many }) => {
   return {
-    media: many(projectsMedia),
+    media: many(projectsMediaTable),
+    tags: many(projectsTagsRelationTable),
   };
 });
 
 export const projectsMediaTableRelations = relations(
-  projectsMedia,
+  projectsMediaTable,
   ({ one }) => {
     return {
-      projects: one(projects, {
-        fields: [projectsMedia.projectId],
-        references: [projects.id],
+      projects: one(projectsTable, {
+        fields: [projectsMediaTable.projectId],
+        references: [projectsTable.id],
+      }),
+    };
+  }
+);
+
+export const projectsTagTableRelations = relations(
+  projectsMediaTable,
+  ({ one }) => {
+    return {
+      projects: one(projectsTable, {
+        fields: [projectsMediaTable.projectId],
+        references: [projectsTable.id],
       }),
     };
   }
