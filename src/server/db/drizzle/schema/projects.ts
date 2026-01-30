@@ -76,12 +76,25 @@ export const projectsMediaTableRelations = relations(
 );
 
 export const projectsTagTableRelations = relations(
-  projectsMediaTable,
+  projectsTagsTable,
+  ({ many }) => {
+    return {
+      projectsTagsRelation: many(projectsTagsRelationTable),
+    };
+  }
+);
+
+export const projectsTagRelationTableRelations = relations(
+  projectsTagsRelationTable,
   ({ one }) => {
     return {
-      projects: one(projectsTable, {
-        fields: [projectsMediaTable.projectId],
+      project: one(projectsTable, {
+        fields: [projectsTagsRelationTable.projectId],
         references: [projectsTable.id],
+      }),
+      tag: one(projectsTagsTable, {
+        fields: [projectsTagsRelationTable.projectId],
+        references: [projectsTagsTable.id],
       }),
     };
   }
