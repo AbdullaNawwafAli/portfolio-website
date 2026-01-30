@@ -1,2 +1,5 @@
 export * from "./projects";
-export * from "./users";
+export * from "./bio";
+export * from "./education";
+export * from "./skills";
+export * from "./work";
