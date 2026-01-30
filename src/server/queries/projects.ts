@@ -1,7 +1,7 @@
 import { db } from "../db/drizzle";
 
 export async function getProjects() {
-  const projects = await db.query.projects.findMany({
+  const projects = await db.query.projectsTable.findMany({
     columns: { name: true },
     with: {
       media: {
