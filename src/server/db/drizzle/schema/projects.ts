@@ -18,7 +18,7 @@ export const projectsTable = pgTable("projects", {
   description: varchar("description", { length: 1024 }).notNull(),
   startDate: timestamp("start_date").notNull(),
   finishDate: timestamp("finish_date").notNull(),
-  order: integer().default(0),
+  order: integer().default(0).notNull(),
   featured: boolean("featured").notNull(),
 });
 
@@ -28,8 +28,10 @@ export const projectsMediaTable = pgTable("projects_media", {
     .notNull()
     .references(() => projectsTable.id, { onDelete: "cascade" }),
   cloudinaryId: varchar("cloudinary_id", { length: 255 }).notNull(),
-  type: MediaType("mediaType").default("img"),
-  order: integer().default(0),
+  type: MediaType("mediaType").default("img").notNull(),
+  description: varchar("description", { length: 255 }).notNull(),
+  alt: varchar("alt_text", { length: 50 }).notNull(),
+  order: integer().default(0).notNull(),
 });
 
 export const projectsTagsTable = pgTable("projects_tags", {
