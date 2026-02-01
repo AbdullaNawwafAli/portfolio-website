@@ -1,7 +1,7 @@
 import { getBio } from "@/server/api-calls/bio";
 import { getProjects } from "@/server/db/queries/projects";
 import Cards from "@/ui/Cards";
-import Hero from "@/ui/Hero";
+import Hero from "@/features/Hero/components/Hero";
 
 export default async function Home() {
   const bioData = await getBio();
