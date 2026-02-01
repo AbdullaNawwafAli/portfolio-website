@@ -1,7 +1,7 @@
 import { pgTable, text, uuid, varchar } from "drizzle-orm/pg-core";
 
 export const bioTable = pgTable("bio", {
-  id: uuid("id").defaultRandom(),
+  id: uuid("id").primaryKey().defaultRandom(),
   bio_picture_cloudinary_id: varchar("bio_picture_cloudinary_id", {
     length: 255,
   }).notNull(),

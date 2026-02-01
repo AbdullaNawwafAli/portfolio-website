@@ -2,12 +2,12 @@ import { relations } from "drizzle-orm";
 import { pgTable, uuid, varchar } from "drizzle-orm/pg-core";
 
 export const skillTypeTable = pgTable("skill_type", {
-  id: uuid("id").defaultRandom(),
+  id: uuid("id").primaryKey().defaultRandom(),
   skill_type_name: varchar("skill_type_name", { length: 255 }).notNull(),
 });
 
 export const skillInfoTable = pgTable("skill_info", {
-  id: uuid("id").defaultRandom(),
+  id: uuid("id").primaryKey().defaultRandom(),
   skill_type_id: uuid("skill_type_id")
     .references(() => skillTypeTable.id)
     .notNull(),
