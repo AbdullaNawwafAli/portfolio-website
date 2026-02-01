@@ -1,25 +1,76 @@
-const Hero = () => {
+import {
+  ArrowDownToLine,
+  ChevronRight,
+  Github,
+  Instagram,
+  Linkedin,
+  Mail,
+} from "lucide-react";
+import CloudinaryImage from "./CloudinaryImage";
+import { Button } from "./shadcn/button";
+
+interface HeroProps {
+  data: {
+    name: string;
+    name_subtext: string;
+    hero_description: string;
+    email: string;
+    bio_picture_cloudinary_id: string;
+    resume_pdf_cloudinary_id: string;
+    instagram_url: string;
+    linked_in_url: string;
+  };
+}
+
+const Hero = ({ data }: HeroProps) => {
   return (
-    <div className="flex flex-col md:flex-row items-end justify-between py-32.5 w-full">
-      <div className="flex flex-col items-start justify-start h-full">
-        <span
-          className=" font-heading font-bold text-9xl leading-[120px] text-[#243C4C]
-     max-md:text-7xl max-md:leading-[90px]"
-        >
-          De me Omnia
-        </span>
-        <span className=" font-sans font-semibold text-xl  text-[#243C4C]">
-          A Latin Phrase translating to &apos;All Things About Me&apos;
-        </span>
+    <div className="flex flex-col md:flex-row items-start justify-between py-32.5 w-full">
+      <div className="flex flex-col items-start justify-start w-full">
+        <div className="flex justify-between items-center font-heading text-2xl font-semibold w-full">
+          <div>{data.name}</div>
+          {/* email/git/linkedin/insta icon buttons */}
+          <div>
+            <Button variant={"ghost"}>
+              <Mail />
+            </Button>
+            <Button variant={"ghost"}>
+              <Github />
+            </Button>
+            <Button variant={"ghost"}>
+              <Linkedin />
+            </Button>
+            <Button variant={"ghost"}>
+              <Instagram />
+            </Button>
+          </div>
+        </div>
+        <div>{data.name_subtext}</div>
+        <div>{data.hero_description}</div>
+        <div>
+          <Button variant={"ghost"}>
+            Work <ChevronRight />
+          </Button>
+          <Button variant={"ghost"}>
+            Skills
+            <ChevronRight />
+          </Button>
+          <Button variant={"ghost"}>
+            Education
+            <ChevronRight />
+          </Button>
+          <Button variant={"ghost"}>
+            Resume
+            <ArrowDownToLine />
+          </Button>
+        </div>
       </div>
-      <div className="flex flex-col items-end justify-end text-xl h-full">
-        <span className=" font-sans font-bold text  text-[#243C4C] ">
-          A Portfolio Website
-        </span>
-        <span className="font-sans font-semibold text-xl  text-[#243C4C] ">
-          By Ryfaem, a Software Developer
-        </span>
-      </div>
+
+      <CloudinaryImage
+        src={data.bio_picture_cloudinary_id}
+        alt="Hero Image"
+        width={361}
+        height={300}
+      />
     </div>
   );
 };

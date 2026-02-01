@@ -1,15 +1,16 @@
-import { getProjects } from "@/server/queries/projects";
+import { getBio } from "@/server/api-calls/bio";
+import { getProjects } from "@/server/db/queries/projects";
 import Cards from "@/ui/Cards";
 import Hero from "@/ui/Hero";
 
 export default async function Home() {
-  const getProj = await getProjects();
-  console.log(getProj);
+  const bioData = await getBio();
+  console.log(bioData);
 
   return (
     <>
       <div className="flex flex-col gap-2 flex-1 h-full justify-between py-10 w-full">
-        <Hero />
+        <Hero data={bioData} />
         <Cards />
       </div>
     </>
