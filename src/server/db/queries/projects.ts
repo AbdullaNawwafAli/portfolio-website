@@ -1,4 +1,4 @@
-import { db } from "../db/drizzle";
+import { db } from "../drizzle";
 
 export async function getProjects() {
   const projects = await db.query.projectsTable.findMany({
