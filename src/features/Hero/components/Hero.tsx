@@ -28,7 +28,7 @@ const Hero = ({ data }: HeroProps) => {
       <div className="flex gap-2.5">
         <div className="flex flex-col md:flex-row gap-2.5 z-0  w-full h-auto">
           {/*Hero Image*/}
-          <div className="flex-[1.9324] flex rounded-md overflow-hidden">
+          <div className="flex-[1.95] flex rounded-md overflow-hidden">
             <CloudinaryImage
               src={data.bio_picture_cloudinary_id}
               alt="Hero Image"
@@ -39,65 +39,75 @@ const Hero = ({ data }: HeroProps) => {
           </div>
 
           {/*Hero Description*/}
-          <div className="flex-[7.9] ">
-            <div className="flex  flex-col gap-4">
+          <div className="flex-[8] ">
+            <div className="flex  flex-col ">
               {/* Name and Social Icons Row */}
-              <div className="flex gap-2.5 justify-start items-end">
-                <div className="flex-1 flex flex-col justify-start">
-                  <div className="font-heading text-3xl font-semibold text-primary">
-                    {data.name}
+              <div className="flex flex-col">
+                <div className="font-heading text-3xl font-semibold text-primary">
+                  {data.name}
+                </div>
+                <div className="flex gap-2.5 justify-start items-center">
+                  <div className="flex-1 hidden md:flex font-sans text-lg">
+                    {data.name_subtext}
                   </div>
-                  <div className="font-sans text-lg">{data.name_subtext}</div>
-                </div>
-                <div className="flex-[3.15]"></div>
-                <div className="flex-1 hidden md:flex justify-center items-center">
-                  <Button variant={"ghost"}>
-                    <Mail />
-                  </Button>
-                </div>
-                <div className="flex-1 hidden md:flex justify-center items-center">
-                  <Button variant={"ghost"}>
-                    <Github />
-                  </Button>
-                </div>
-                <div className="flex-1 hidden md:flex justify-center items-center">
-                  <Button variant={"ghost"}>
-                    <Linkedin />
-                  </Button>
-                </div>
-                <div className="flex-1 hidden md:flex justify-center items-center">
-                  <Button variant={"ghost"}>
-                    <Instagram />
-                  </Button>
+
+                  {[...Array(3).keys()].map((key) => (
+                    <div key={key} className="flex-[1]"></div>
+                  ))}
+
+                  <div className="flex-1 hidden md:flex justify-center items-center">
+                    <Button variant={"ghost"} className="">
+                      <Mail />
+                    </Button>
+                  </div>
+                  <div className="flex-1 hidden md:flex justify-center items-center">
+                    <Button variant={"ghost"}>
+                      <Github />
+                    </Button>
+                  </div>
+                  <div className="flex-1 hidden md:flex justify-center items-center">
+                    <Button variant={"ghost"}>
+                      <Linkedin />
+                    </Button>
+                  </div>
+                  <div className="flex-1 hidden md:flex justify-center items-center">
+                    <Button variant={"ghost"}>
+                      <Instagram />
+                    </Button>
+                  </div>
                 </div>
               </div>
 
               {/* Description */}
-              <div className="font-sans text-lg">{data.hero_description}</div>
+              <div className="flex flex-col gap-1">
+                <div className="font-sans text-lg">{data.hero_description}</div>
 
-              {/* Bottom Buttons Row */}
-              <div className="flex gap-2.5">
-                <div className="flex-1 hidden md:flex justify-center items-center">
-                  <Button variant={"ghost"}>
-                    Work <ChevronRight />
-                  </Button>
+                {/* Bottom Buttons Row */}
+                <div className="flex gap-2.5">
+                  <div className="flex-[1] hidden md:flex justify-center items-center">
+                    <Button variant={"ghost"}>
+                      Work <ChevronRight />
+                    </Button>
+                  </div>
+                  <div className="flex-[1] hidden md:flex justify-center items-center">
+                    <Button variant={"ghost"}>
+                      Skills <ChevronRight />
+                    </Button>
+                  </div>
+                  <div className="flex-[1] hidden md:flex justify-center items-center">
+                    <Button variant={"ghost"}>
+                      Education <ChevronRight />
+                    </Button>
+                  </div>
+                  <div className="flex-[1] hidden md:flex justify-center items-center">
+                    <Button variant={"ghost"}>
+                      Resume <ArrowDownToLine />
+                    </Button>
+                  </div>
+                  {[...Array(4).keys()].map((key) => (
+                    <div key={key} className="flex-[1]"></div>
+                  ))}
                 </div>
-                <div className="flex-1 hidden md:flex justify-center items-center">
-                  <Button variant={"ghost"}>
-                    Skills <ChevronRight />
-                  </Button>
-                </div>
-                <div className="flex-1 hidden md:flex justify-center items-center">
-                  <Button variant={"ghost"}>
-                    Education <ChevronRight />
-                  </Button>
-                </div>
-                <div className="flex-1 hidden md:flex justify-center items-center">
-                  <Button variant={"ghost"}>
-                    Resume <ArrowDownToLine />
-                  </Button>
-                </div>
-                <div className="flex-[4.15]"></div>
               </div>
             </div>
           </div>
