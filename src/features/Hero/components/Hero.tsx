@@ -24,79 +24,83 @@ interface HeroProps {
 
 const Hero = ({ data }: HeroProps) => {
   return (
-    <div className="flex flex-col md:flex-row items-start justify-between py-32.5 w-full gap-2.5">
-      <CloudinaryImage
-        src={data.bio_picture_cloudinary_id}
-        alt="Hero Image"
-        width={361}
-        height={500}
-      />
-      <div className="flex flex-col items-start justify-start w-full gap-1">
-        {/* Top Row Name and Social Icons */}
-        <div className=" w-full flex flex-row justify-end items-center gap-2.5 ">
-          <div className="flex flex-col box-border justify-center items-start w-[129px] h-full flex-auto self-stretch grow">
-            <div className="h-full font-heading text-2xl font-semibold flex justify-center items-center">
-              {data.name}
+    <div className="relative py-32.5 w-full">
+      <div className="flex gap-2.5">
+        <div className="flex flex-col md:flex-row gap-2.5 z-0  w-full h-auto">
+          {/*Hero Image*/}
+          <div className="flex-[1.9324] flex rounded-md overflow-hidden">
+            <CloudinaryImage
+              src={data.bio_picture_cloudinary_id}
+              alt="Hero Image"
+              width={500}
+              height={500}
+              className="w-full h-auto object-cover"
+            />
+          </div>
+
+          {/*Hero Description*/}
+          <div className="flex-[7.9] ">
+            <div className="flex  flex-col gap-4">
+              {/* Name and Social Icons Row */}
+              <div className="flex gap-2.5 justify-start items-end">
+                <div className="flex-1 flex flex-col justify-start">
+                  <div className="font-heading text-3xl font-semibold text-primary">
+                    {data.name}
+                  </div>
+                  <div className="font-sans text-lg">{data.name_subtext}</div>
+                </div>
+                <div className="flex-[3.15]"></div>
+                <div className="flex-1 hidden md:flex justify-center items-center">
+                  <Button variant={"ghost"}>
+                    <Mail />
+                  </Button>
+                </div>
+                <div className="flex-1 hidden md:flex justify-center items-center">
+                  <Button variant={"ghost"}>
+                    <Github />
+                  </Button>
+                </div>
+                <div className="flex-1 hidden md:flex justify-center items-center">
+                  <Button variant={"ghost"}>
+                    <Linkedin />
+                  </Button>
+                </div>
+                <div className="flex-1 hidden md:flex justify-center items-center">
+                  <Button variant={"ghost"}>
+                    <Instagram />
+                  </Button>
+                </div>
+              </div>
+
+              {/* Description */}
+              <div className="font-sans text-lg">{data.hero_description}</div>
+
+              {/* Bottom Buttons Row */}
+              <div className="flex gap-2.5">
+                <div className="flex-1 hidden md:flex justify-center items-center">
+                  <Button variant={"ghost"}>
+                    Work <ChevronRight />
+                  </Button>
+                </div>
+                <div className="flex-1 hidden md:flex justify-center items-center">
+                  <Button variant={"ghost"}>
+                    Skills <ChevronRight />
+                  </Button>
+                </div>
+                <div className="flex-1 hidden md:flex justify-center items-center">
+                  <Button variant={"ghost"}>
+                    Education <ChevronRight />
+                  </Button>
+                </div>
+                <div className="flex-1 hidden md:flex justify-center items-center">
+                  <Button variant={"ghost"}>
+                    Resume <ArrowDownToLine />
+                  </Button>
+                </div>
+                <div className="flex-[4.15]"></div>
+              </div>
             </div>
-            <div className="font-sans text-lg">{data.name_subtext}</div>
           </div>
-          <div className="hidden md:flex box-border justify-end items-start gap-2.5 w-[129px] h-full flex-auto self-stretch grow"></div>
-          <div className="hidden md:flex box-border justify-end items-start gap-2.5 w-[129px] h-full flex-auto self-stretch grow"></div>
-          <div className="hidden md:flex box-border justify-end items-start gap-2.5 w-[129px] h-full flex-auto self-stretch grow"></div>
-          <div className="hidden md:flex box-border justify-center items-start gap-2.5 w-[129px] h-full flex-auto self-stretch grow">
-            <Button variant={"ghost"}>
-              <Mail />
-            </Button>
-          </div>
-          <div className="hidden md:flex box-border justify-center items-center gap-2.5 w-[129px] h-full flex-auto self-stretch grow">
-            <Button variant={"ghost"}>
-              <Github />
-            </Button>
-          </div>
-          <div className="hidden md:flex box-border justify-center items-center gap-2.5 w-[129px] h-full flex-auto self-stretch grow">
-            <Button variant={"ghost"}>
-              <Linkedin />
-            </Button>
-          </div>
-          <div className="hidden md:flex box-border justify-center items-center gap-2.5 w-[129px] h-full flex-auto self-stretch grow">
-            <Button variant={"ghost"}>
-              <Instagram />
-            </Button>
-          </div>
-        </div>
-
-        {/* Descriptions*/}
-        <div className="font-sans text-lg">{data.hero_description}</div>
-
-        {/* Bottom Row ButtonsS */}
-        <div className="top-0 left-0 w-full flex flex-row justify-start items-center gap-2.5">
-          <div className="hidden md:flex box-border justify-center items-start gap-2.5 w-[129px] h-full flex-auto self-stretch grow">
-            <Button variant={"ghost"}>
-              Work <ChevronRight />
-            </Button>
-          </div>
-          <div className="hidden md:flex box-border justify-center items-start gap-2.5 w-[129px] h-full flex-auto self-stretch grow">
-            <Button variant={"ghost"}>
-              Skills
-              <ChevronRight />
-            </Button>
-          </div>
-          <div className="hidden md:flex box-border justify-center items-start gap-2.5 w-[129px] h-full flex-auto self-stretch grow">
-            <Button variant={"ghost"}>
-              Education
-              <ChevronRight />
-            </Button>
-          </div>
-          <div className="hidden md:flex box-border justify-center items-start gap-2.5 w-[129px] h-full flex-auto self-stretch grow">
-            <Button variant={"ghost"}>
-              Resume
-              <ArrowDownToLine />
-            </Button>
-          </div>
-          <div className="hidden md:flex box-border justify-end items-start gap-2.5 w-[129px] h-full flex-auto self-stretch grow"></div>
-          <div className="hidden md:flex box-border justify-end items-start gap-2.5 w-[129px] h-full flex-auto self-stretch grow"></div>
-          <div className="hidden md:flex box-border justify-end items-start gap-2.5 w-[129px] h-full flex-auto self-stretch grow"></div>
-          <div className="hidden md:flex box-border justify-end items-start gap-2.5 w-[129px] h-full flex-auto self-stretch grow"></div>
         </div>
       </div>
     </div>

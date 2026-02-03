@@ -1,7 +1,7 @@
 /* Navbar.module.css */
 
 .navbar-button-container {
-  @apply hidden md:flex box-border justify-end items-start gap-2.5 w-[129px] h-full flex-auto self-stretch grow;
+  @apply hidden md:flex box-border justify-center items-start gap-2.5 w-[129px] h-full flex-auto self-stretch grow;
 }
 
 .navbar-container {
