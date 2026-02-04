@@ -28,7 +28,7 @@ const Hero = ({ data }: HeroProps) => {
       <div className="flex gap-2.5">
         <div className="flex flex-col md:flex-row gap-2.5 z-0  w-full h-auto">
           {/*Hero Image*/}
-          <div className="flex-[1.95] flex rounded-md overflow-hidden">
+          <div className="flex-[1.940] flex rounded-md overflow-hidden">
             <CloudinaryImage
               src={data.bio_picture_cloudinary_id}
               alt="Hero Image"
