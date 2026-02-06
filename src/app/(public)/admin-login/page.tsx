@@ -1,4 +1,13 @@
-import React from "react";
+import {
+  FieldSet,
+  FieldLegend,
+  FieldDescription,
+  FieldGroup,
+  Field,
+  FieldLabel,
+  FieldError,
+} from "@/ui/shadcn/field";
+import { Input } from "@/ui/shadcn/input";
 
 const AdminLogin = () => {
   return (
@@ -11,6 +20,20 @@ const AdminLogin = () => {
           <div className="text-5xl flex justify-center center-text">
             IDENTIFY THYSELF! WHAT&apos;S THE SECRET PHRASE?
           </div>
+          <FieldSet>
+            <FieldGroup>
+              <Field>
+                <FieldLabel htmlFor="Name">Name</FieldLabel>
+                <Input id="Name" autoComplete="off" />
+                <FieldError>DON&apos;T KNOWS YOU.</FieldError>
+              </Field>
+              <Field>
+                <FieldLabel htmlFor="Secret">Secret Phrase</FieldLabel>
+                <Input id="name" autoComplete="off" placeholder="Evil Rabbit" />
+                <FieldError>BOUT TO GET STABBED.</FieldError>
+              </Field>
+            </FieldGroup>
+          </FieldSet>
         </div>
       </div>
     </>
