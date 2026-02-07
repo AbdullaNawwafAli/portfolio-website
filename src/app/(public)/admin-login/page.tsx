@@ -1,3 +1,6 @@
+import { login } from "@/server/actions/auth";
+import GithubLoginButton from "@/ui/GithubLoginButton";
+import { Button } from "@/ui/shadcn/button";
 import {
   FieldSet,
   FieldLegend,
@@ -34,6 +37,7 @@ const AdminLogin = () => {
               </Field>
             </FieldGroup>
           </FieldSet>
+          <GithubLoginButton />
         </div>
       </div>
     </>
