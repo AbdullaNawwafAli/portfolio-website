@@ -6,15 +6,15 @@ import {
   Linkedin,
   Mail,
 } from "lucide-react";
-import CloudinaryImage from "@/ui/CloudinaryImage";
+import CloudinaryImage from "../../../ui/CloudinaryImage";
+import { Button } from "../../../ui/shadcn/button";
 import { heroData } from "../types/hero-data";
-import { Button } from "@/ui/shadcn/button";
 
-interface AdminHeroProps {
+interface HeroProps {
   data: heroData;
 }
 
-const AdminHero = ({ data }: AdminHeroProps) => {
+const Hero = ({ data }: HeroProps) => {
   return (
     <div className="hero-container">
       <div className="hero-flex-wrapper">
@@ -107,4 +107,4 @@ const AdminHero = ({ data }: AdminHeroProps) => {
   );
 };
 
-export default AdminHero;
+export default Hero;
