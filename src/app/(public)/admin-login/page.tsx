@@ -12,7 +12,7 @@ import {
 } from "@/ui/shadcn/field";
 import { Input } from "@/ui/shadcn/input";
 
-const AdminLogin = () => {
+const AdminLoginPage = () => {
   return (
     <>
       <div className="flex flex-col gap-2 flex-1 h-full justify-between py-10 w-full">
@@ -44,4 +44,4 @@ const AdminLogin = () => {
   );
 };
 
-export default AdminLogin;
+export default AdminLoginPage;
