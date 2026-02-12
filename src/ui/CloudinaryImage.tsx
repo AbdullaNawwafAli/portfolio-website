@@ -23,7 +23,6 @@ const CloudinaryImage = ({
       width={width}
       height={height}
       className={className}
-      sizes="(max-width: 768px) 100vw, 258px"
     />
   );
 };
