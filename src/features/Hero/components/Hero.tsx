@@ -6,71 +6,59 @@ import {
   Linkedin,
   Mail,
 } from "lucide-react";
-import CloudinaryImage from "../../../ui/CloudinaryImage";
-import { Button } from "../../../ui/shadcn/button";
+import CloudinaryImage from "@/ui/CloudinaryImage";
+import { heroData } from "../types/hero-data";
+import { Button } from "@/ui/shadcn/button";
 
-interface HeroProps {
-  data: {
-    name: string;
-    name_subtext: string;
-    hero_description: string;
-    email: string;
-    bio_picture_cloudinary_id: string;
-    resume_pdf_cloudinary_id: string;
-    instagram_url: string;
-    linked_in_url: string;
-  };
+interface AdminHeroProps {
+  data: heroData;
 }
 
-const Hero = ({ data }: HeroProps) => {
+const AdminHero = ({ data }: AdminHeroProps) => {
   return (
-    <div className="relative py-32.5 w-full">
-      <div className="flex gap-2.5">
-        <div className="flex flex-col md:flex-row gap-2.5 z-0  w-full h-auto">
+    <div className="hero-container">
+      <div className="hero-flex-wrapper">
+        <div className="hero-inner">
           {/*Hero Image*/}
-          <div className="flex-[1.940] flex rounded-md overflow-hidden">
+          <div className="hero-image-container">
             <CloudinaryImage
               src={data.bio_picture_cloudinary_id}
               alt="Hero Image"
               width={500}
               height={500}
-              className="w-full h-auto object-cover"
+              className="hero-image"
             />
           </div>
 
           {/*Hero Description*/}
-          <div className="flex-[8] ">
-            <div className="flex  flex-col ">
+          <div className="hero-description-container">
+            <div className="hero-content">
               {/* Name and Social Icons Row */}
-              <div className="flex flex-col">
-                <div className="font-heading text-3xl font-semibold text-primary">
-                  {data.name}
-                </div>
-                <div className="flex gap-2.5 justify-start items-center">
-                  <div className="flex-1 hidden md:flex font-sans text-lg">
-                    {data.name_subtext}
-                  </div>
+              <div className="hero-name-row">
+                <div className="hero-name">{data.name}</div>
+                <div className="hero-social-row">
+                  <div className="hero-name-subtext">{data.name_subtext}</div>
 
                   {[...Array(3).keys()].map((key) => (
-                    <div key={key} className="flex-[1]"></div>
+                    <div key={key} className="hero-spacer" />
                   ))}
 
-                  <div className="flex-1 hidden md:flex justify-center items-center">
-                    <Button variant={"ghost"} className="">
+                  <div className="hero-social-button">
+                    <Button variant={"ghost"}>
                       <Mail />
                     </Button>
                   </div>
-                  <div className="flex-1 hidden md:flex justify-center items-center">
+                  <div className="hero-social-button">
                     <Button variant={"ghost"}>
                       <Github />
                     </Button>
                   </div>
-                  <div className="flex-1 hidden md:flex justify-center items-center">
+                  <div className="hero-social-button">
                     <Button variant={"ghost"}>
                       <Linkedin />
                     </Button>
                   </div>
-                  <div className="flex-1 hidden md:flex justify-center items-center">
+                  <div className="hero-social-button">
                     <Button variant={"ghost"}>
                       <Instagram />
                     </Button>
@@ -79,33 +67,35 @@ const Hero = ({ data }: HeroProps) => {
               </div>
 
               {/* Description */}
-              <div className="flex flex-col gap-1">
-                <div className="font-sans text-lg">{data.hero_description}</div>
+              <div className="hero-body-container">
+                <div className="hero-description-text">
+                  {data.hero_description}
+                </div>
 
                 {/* Bottom Buttons Row */}
-                <div className="flex gap-2.5">
-                  <div className="flex-[1] hidden md:flex justify-center items-center">
+                <div className="hero-bottom-row">
+                  <div className="hero-nav-button">
                     <Button variant={"ghost"}>
                       Work <ChevronRight />
                     </Button>
                   </div>
-                  <div className="flex-[1] hidden md:flex justify-center items-center">
+                  <div className="hero-nav-button">
                     <Button variant={"ghost"}>
                       Skills <ChevronRight />
                     </Button>
                   </div>
-                  <div className="flex-[1] hidden md:flex justify-center items-center">
+                  <div className="hero-nav-button">
                     <Button variant={"ghost"}>
                       Education <ChevronRight />
                     </Button>
                   </div>
-                  <div className="flex-[1] hidden md:flex justify-center items-center">
+                  <div className="hero-nav-button">
                     <Button variant={"ghost"}>
                       Resume <ArrowDownToLine />
                     </Button>
                   </div>
                   {[...Array(4).keys()].map((key) => (
-                    <div key={key} className="flex-[1]"></div>
+                    <div key={key} className="hero-spacer" />
                   ))}
                 </div>
               </div>
@@ -117,4 +107,4 @@ const Hero = ({ data }: HeroProps) => {
   );
 };
 
-export default Hero;
+export default AdminHero;
