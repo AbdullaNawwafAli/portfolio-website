@@ -1,8 +1,5 @@
 import AdminHero from "@/features/Hero/components/AdminHero";
-import Hero from "@/features/Hero/components/AdminHero";
 import { getBio } from "@/server/api-calls/bio";
-import GithubLogoutButton from "@/ui/GithubLogoutButton";
-import React from "react";
 
 const AdminHomePage = async () => {
   const bioData = await getBio();

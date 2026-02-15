@@ -5,6 +5,7 @@ import {
   Instagram,
   Linkedin,
   Mail,
+  SquarePen,
 } from "lucide-react";
 import CloudinaryImage from "@/ui/CloudinaryImage";
 import { heroData } from "../types/hero-data";
@@ -51,11 +52,13 @@ const AdminHero = ({ data }: AdminHeroProps) => {
                   <div className="hero-social-button">
                     <Button variant={"ghost"}>
                       <Mail />
+                      <SquarePen />
                     </Button>
                   </div>
                   <div className="hero-social-button">
                     <Button variant={"ghost"}>
                       <Github />
+                      <SquarePen />
                     </Button>
                   </div>
                   <div className="hero-social-button">
@@ -64,8 +67,11 @@ const AdminHero = ({ data }: AdminHeroProps) => {
                     </Button>
                   </div>
                   <div className="hero-social-button">
-                    <Button variant={"ghost"}>
+                    <div className="text-primary ">
                       <Instagram />
+                    </div>
+                    <Button variant={"ghost"} size={"icon-xs"}>
+                      <SquarePen className="p-0" />
                     </Button>
                   </div>
                 </div>
