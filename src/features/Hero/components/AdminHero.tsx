@@ -30,8 +30,9 @@ const AdminHero = ({ data }: AdminHeroProps) => {
                 height={500}
                 className="w-full h-auto object-cover transition-opacity duration-300 group-hover:opacity-30"
               />
-              <div className="duration-300 opacity-0 absolute top-1/2 left-1/2  group-hover:opacity-100 transition-all color-bg  text-center -translate-x-1/2 -translate-y-1/2">
-                EDIT
+              <div className=" flex gap-2 duration-300 opacity-0 absolute top-1/2 left-1/2  group-hover:opacity-100 transition-all color-bg  text-center -translate-x-1/2 -translate-y-1/2">
+                Edit
+                <SquarePen />
               </div>
             </div>
           </div>
@@ -41,7 +42,13 @@ const AdminHero = ({ data }: AdminHeroProps) => {
             <div className="hero-content">
               {/* Name and Social Icons Row */}
               <div className="hero-name-row">
-                <div className="hero-name">{data.name}</div>
+                <div className="hero-name">
+                  {data.name}
+                  <Button variant={"ghost"}>
+                    Edit
+                    <SquarePen />
+                  </Button>
+                </div>
                 <div className="hero-social-row">
                   <div className="hero-name-subtext">{data.name_subtext}</div>
 
@@ -58,7 +65,6 @@ const AdminHero = ({ data }: AdminHeroProps) => {
                   <div className="hero-social-button">
                     <Button variant={"ghost"}>
                       <Github />
-                      <SquarePen />
                     </Button>
                   </div>
                   <div className="hero-social-button">
@@ -67,11 +73,8 @@ const AdminHero = ({ data }: AdminHeroProps) => {
                     </Button>
                   </div>
                   <div className="hero-social-button">
-                    <div className="text-primary ">
+                    <Button variant={"ghost"}>
                       <Instagram />
-                    </div>
-                    <Button variant={"ghost"} size={"icon-xs"}>
-                      <SquarePen className="p-0" />
                     </Button>
                   </div>
                 </div>

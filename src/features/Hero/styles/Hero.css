@@ -33,7 +33,7 @@
 }
 
 .hero-name {
-  @apply font-heading text-3xl font-semibold text-primary;
+  @apply font-heading text-3xl font-semibold text-primary flex items-center gap-2;
 }
 
 .hero-social-row {
