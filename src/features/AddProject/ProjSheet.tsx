@@ -9,13 +9,16 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/ui/shadcn/sheet";
+import { SquarePen } from "lucide-react";
 
 export function SheetSide() {
   return (
     <div className="flex flex-wrap gap-2">
       <Sheet>
         <SheetTrigger asChild>
-          <Button variant="outline" className="capitalize"></Button>
+          <Button variant="ghost" className="capitalize font-sans">
+            EDIT <SquarePen />
+          </Button>
         </SheetTrigger>
         <SheetContent
           side={"right"}

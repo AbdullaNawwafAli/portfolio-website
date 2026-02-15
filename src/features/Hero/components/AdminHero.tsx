@@ -10,6 +10,7 @@ import {
 import CloudinaryImage from "@/ui/CloudinaryImage";
 import { heroData } from "../types/hero-data";
 import { Button } from "@/ui/shadcn/button";
+import { SheetSide } from "@/features/AddProject/ProjSheet";
 
 interface AdminHeroProps {
   data: heroData;
@@ -44,10 +45,7 @@ const AdminHero = ({ data }: AdminHeroProps) => {
               <div className="hero-name-row">
                 <div className="hero-name">
                   {data.name}
-                  <Button variant={"ghost"}>
-                    Edit
-                    <SquarePen />
-                  </Button>
+                  <SheetSide />
                 </div>
                 <div className="hero-social-row">
                   <div className="hero-name-subtext">{data.name_subtext}</div>
@@ -59,7 +57,6 @@ const AdminHero = ({ data }: AdminHeroProps) => {
                   <div className="hero-social-button">
                     <Button variant={"ghost"}>
                       <Mail />
-                      <SquarePen />
                     </Button>
                   </div>
                   <div className="hero-social-button">
