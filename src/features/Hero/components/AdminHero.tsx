@@ -10,7 +10,7 @@ import {
 import CloudinaryImage from "@/ui/CloudinaryImage"
 import { heroData } from "../types/hero-data"
 import { Button } from "@/ui/shadcn/button"
-import { EditBioSheet } from "@/features/EditBio/EditBioSheet"
+import { EditHeroSheet } from "@/features/EditBio/EditBioSheet"
 
 interface AdminHeroProps {
   data: heroData
@@ -45,7 +45,7 @@ const AdminHero = ({ data }: AdminHeroProps) => {
               <div className="hero-name-row">
                 <div className="hero-name">
                   {data.name}
-                  <EditBioSheet />
+                  <EditHeroSheet data={data} />
                 </div>
                 <div className="hero-social-row">
                   <div className="hero-name-subtext">{data.name_subtext}</div>

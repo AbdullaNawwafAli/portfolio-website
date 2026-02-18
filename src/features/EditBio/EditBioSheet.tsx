@@ -22,6 +22,8 @@ import {
   InputGroupAddon,
   InputGroupText,
 } from "@/ui/shadcn/input-group"
+import { heroData } from "../Hero/types/hero-data"
+import { updateBio } from "@/server/api-calls/bio"
 
 const formSchema = z.object({
   name: z
@@ -49,30 +51,33 @@ const formSchema = z.object({
     .min(1, "Resume PDF Cloudinary ID must be at least 1 character."),
 })
 
-export function EditBioSheet() {
+interface EditHeroSheetProps {
+  data: heroData
+}
+export function EditHeroSheet({ data }: EditHeroSheetProps) {
   const form = useForm({
     defaultValues: {
-      name: "",
-      name_subtext: "",
-      hero_description: "",
-      email: "",
-      instagram_url: "",
-      linked_in_url: "",
-      github_url: "",
-      resume_pdf_cloudinary_id: "",
+      name: data.name,
+      name_subtext: data.name_subtext,
+      hero_description: data.hero_description,
+      email: data.email,
+      instagram_url: data.instagram_url,
+      linked_in_url: data.linked_in_url,
+      github_url: data.github_url,
+      resume_pdf_cloudinary_id: data.resume_pdf_cloudinary_id,
     },
     validators: {
       onChange: formSchema,
     },
     onSubmit: async ({ value }) => {
-      console.log(value)
+      updateBio(data.id, value)
     },
   })
   return (
     <div className="flex flex-wrap gap-2">
       <Sheet>
         <form
-          id="bug-report-form"
+          id="bio-form"
           onSubmit={(e) => {
             e.preventDefault()
             form.handleSubmit()
@@ -111,7 +116,7 @@ export function EditBioSheet() {
                           onBlur={field.handleBlur}
                           onChange={(e) => field.handleChange(e.target.value)}
                           aria-invalid={isInvalid}
-                          placeholder="Login button not working on mobile"
+                          placeholder="Name"
                           autoComplete="off"
                         />
                         {isInvalid && (
@@ -135,7 +140,7 @@ export function EditBioSheet() {
                           onBlur={field.handleBlur}
                           onChange={(e) => field.handleChange(e.target.value)}
                           aria-invalid={isInvalid}
-                          placeholder="Login button not working on mobile"
+                          placeholder="Sub Text"
                           autoComplete="off"
                         />
                         {isInvalid && (
@@ -161,7 +166,7 @@ export function EditBioSheet() {
                             value={field.state.value}
                             onBlur={field.handleBlur}
                             onChange={(e) => field.handleChange(e.target.value)}
-                            placeholder="I'm having an issue with the login button on mobile."
+                            placeholder="Description"
                             rows={6}
                             className="min-h-24 resize-none"
                             aria-invalid={isInvalid}
@@ -193,7 +198,7 @@ export function EditBioSheet() {
                           onBlur={field.handleBlur}
                           onChange={(e) => field.handleChange(e.target.value)}
                           aria-invalid={isInvalid}
-                          placeholder="Login button not working on mobile"
+                          placeholder="something@gmail.com"
                           autoComplete="off"
                         />
                         {isInvalid && (
@@ -217,7 +222,7 @@ export function EditBioSheet() {
                           onBlur={field.handleBlur}
                           onChange={(e) => field.handleChange(e.target.value)}
                           aria-invalid={isInvalid}
-                          placeholder="Login button not working on mobile"
+                          placeholder="something URL"
                           autoComplete="off"
                         />
                         {isInvalid && (
@@ -243,7 +248,7 @@ export function EditBioSheet() {
                           onBlur={field.handleBlur}
                           onChange={(e) => field.handleChange(e.target.value)}
                           aria-invalid={isInvalid}
-                          placeholder="Login button not working on mobile"
+                          placeholder="something URL"
                           autoComplete="off"
                         />
                         {isInvalid && (
@@ -269,7 +274,7 @@ export function EditBioSheet() {
                           onBlur={field.handleBlur}
                           onChange={(e) => field.handleChange(e.target.value)}
                           aria-invalid={isInvalid}
-                          placeholder="Login button not working on mobile"
+                          placeholder="something URL"
                           autoComplete="off"
                         />
                         {isInvalid && (
@@ -295,7 +300,7 @@ export function EditBioSheet() {
                           onBlur={field.handleBlur}
                           onChange={(e) => field.handleChange(e.target.value)}
                           aria-invalid={isInvalid}
-                          placeholder="Login button not working on mobile"
+                          placeholder="something URL"
                           autoComplete="off"
                         />
                         {isInvalid && (
@@ -323,7 +328,7 @@ export function EditBioSheet() {
                   <Button
                     variant="outline"
                     type="submit"
-                    form="bug-report-form"
+                    form="bio-form"
                     className="w-full"
                   >
                     Submit
