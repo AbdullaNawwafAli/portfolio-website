@@ -1,12 +1,6 @@
 "use client"
 import { Button } from "@/ui/shadcn/button"
-import {
-  FieldGroup,
-  Field,
-  FieldLabel,
-  FieldDescription,
-  FieldError,
-} from "@/ui/shadcn/field"
+import { FieldGroup, Field, FieldLabel, FieldError } from "@/ui/shadcn/field"
 import { Input } from "@/ui/shadcn/input"
 import {
   Sheet,
@@ -55,7 +49,7 @@ const formSchema = z.object({
     .min(1, "Resume PDF Cloudinary ID must be at least 1 character."),
 })
 
-export function SheetSide() {
+export function EditBioSheet() {
   const form = useForm({
     defaultValues: {
       name: "",

@@ -6,14 +6,14 @@ import {
   Linkedin,
   Mail,
   SquarePen,
-} from "lucide-react";
-import CloudinaryImage from "@/ui/CloudinaryImage";
-import { heroData } from "../types/hero-data";
-import { Button } from "@/ui/shadcn/button";
-import { SheetSide } from "@/features/AddProject/ProjSheet";
+} from "lucide-react"
+import CloudinaryImage from "@/ui/CloudinaryImage"
+import { heroData } from "../types/hero-data"
+import { Button } from "@/ui/shadcn/button"
+import { EditBioSheet } from "@/features/EditBio/EditBioSheet"
 
 interface AdminHeroProps {
-  data: heroData;
+  data: heroData
 }
 
 const AdminHero = ({ data }: AdminHeroProps) => {
@@ -45,7 +45,7 @@ const AdminHero = ({ data }: AdminHeroProps) => {
               <div className="hero-name-row">
                 <div className="hero-name">
                   {data.name}
-                  <SheetSide />
+                  <EditBioSheet />
                 </div>
                 <div className="hero-social-row">
                   <div className="hero-name-subtext">{data.name_subtext}</div>
@@ -115,7 +115,7 @@ const AdminHero = ({ data }: AdminHeroProps) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default AdminHero;
+export default AdminHero
