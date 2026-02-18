@@ -1,4 +1,5 @@
 export interface heroData {
+  id: string
   name: string
   name_subtext: string
   hero_description: string
@@ -7,4 +8,5 @@ export interface heroData {
   resume_pdf_cloudinary_id: string
   instagram_url: string
   linked_in_url: string
+  github_url: string
 }
