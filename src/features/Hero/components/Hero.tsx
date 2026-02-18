@@ -5,13 +5,13 @@ import {
   Instagram,
   Linkedin,
   Mail,
-} from "lucide-react";
-import CloudinaryImage from "../../../ui/CloudinaryImage";
-import { Button } from "../../../ui/shadcn/button";
-import { heroData } from "../types/hero-data";
+} from "lucide-react"
+import CloudinaryImage from "../../../ui/CloudinaryImage"
+import { Button } from "../../../ui/shadcn/button"
+import { heroData } from "../types/hero-data"
 
 interface HeroProps {
-  data: heroData;
+  data: heroData
 }
 
 const Hero = ({ data }: HeroProps) => {
@@ -104,7 +104,7 @@ const Hero = ({ data }: HeroProps) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Hero;
+export default Hero

@@ -4,7 +4,7 @@ const Footer = () => {
       <span>@2026</span>
       <span>@2026</span>
     </div>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer

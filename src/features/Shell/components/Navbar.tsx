@@ -1,9 +1,9 @@
-import Image from "next/image";
-import { Button } from "../../../ui/shadcn/button";
-import { ReactNode } from "react";
+import Image from "next/image"
+import { Button } from "../../../ui/shadcn/button"
+import { ReactNode } from "react"
 
 interface NavBarProps {
-  children: ReactNode;
+  children: ReactNode
 }
 
 const Navbar = ({ children }: NavBarProps) => {
@@ -12,7 +12,7 @@ const Navbar = ({ children }: NavBarProps) => {
     { label: "Projects", route: "/" },
     { label: "Hobbies", route: "/" },
     { label: "About Me", route: "/" },
-  ];
+  ]
 
   return (
     <>
@@ -56,7 +56,7 @@ const Navbar = ({ children }: NavBarProps) => {
         ))}
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar

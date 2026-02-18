@@ -1,5 +1,5 @@
-import "dotenv/config";
-import { defineConfig } from "drizzle-kit";
+import "dotenv/config"
+import { defineConfig } from "drizzle-kit"
 export default defineConfig({
   out: "./src/server/db/drizzle/migrations",
   schema: "./src/server/db/drizzle/schema",
@@ -9,4 +9,4 @@ export default defineConfig({
   },
   verbose: true,
   strict: true,
-});
+})

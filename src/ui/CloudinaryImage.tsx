@@ -1,12 +1,12 @@
-"use client";
-import { CldImage } from "next-cloudinary";
+"use client"
+import { CldImage } from "next-cloudinary"
 
 export interface CloudinaryImageProps {
-  src: string;
-  alt: string;
-  width: number;
-  height: number;
-  className?: string;
+  src: string
+  alt: string
+  width: number
+  height: number
+  className?: string
 }
 
 const CloudinaryImage = ({
@@ -24,7 +24,7 @@ const CloudinaryImage = ({
       height={height}
       className={className}
     />
-  );
-};
+  )
+}
 
-export default CloudinaryImage;
+export default CloudinaryImage

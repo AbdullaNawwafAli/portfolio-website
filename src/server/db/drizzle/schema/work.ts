@@ -1,5 +1,5 @@
-import { sql } from "drizzle-orm";
-import { pgTable, text, timestamp, uuid, varchar } from "drizzle-orm/pg-core";
+import { sql } from "drizzle-orm"
+import { pgTable, text, timestamp, uuid, varchar } from "drizzle-orm/pg-core"
 
 export const workTable = pgTable("work", {
   id: uuid("id").primaryKey().defaultRandom(),
@@ -11,4 +11,4 @@ export const workTable = pgTable("work", {
     .array()
     .notNull()
     .default(sql`ARRAY[]::text[]`),
-});
+})

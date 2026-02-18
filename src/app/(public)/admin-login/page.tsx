@@ -1,6 +1,6 @@
-import { login } from "@/server/actions/auth";
-import GithubLoginButton from "@/ui/GithubLoginButton";
-import { Button } from "@/ui/shadcn/button";
+import { login } from "@/server/actions/auth"
+import GithubLoginButton from "@/ui/GithubLoginButton"
+import { Button } from "@/ui/shadcn/button"
 import {
   FieldSet,
   FieldLegend,
@@ -9,8 +9,8 @@ import {
   Field,
   FieldLabel,
   FieldError,
-} from "@/ui/shadcn/field";
-import { Input } from "@/ui/shadcn/input";
+} from "@/ui/shadcn/field"
+import { Input } from "@/ui/shadcn/input"
 
 const AdminLoginPage = () => {
   return (
@@ -27,7 +27,7 @@ const AdminLoginPage = () => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default AdminLoginPage;
+export default AdminLoginPage

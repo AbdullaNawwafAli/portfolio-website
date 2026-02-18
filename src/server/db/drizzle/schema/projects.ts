@@ -1,4 +1,4 @@
-import { relations } from "drizzle-orm";
+import { relations } from "drizzle-orm"
 import {
   boolean,
   integer,
@@ -8,9 +8,9 @@ import {
   timestamp,
   uuid,
   varchar,
-} from "drizzle-orm/pg-core";
+} from "drizzle-orm/pg-core"
 
-export const MediaType = pgEnum("mediaType", ["img", "vid"]);
+export const MediaType = pgEnum("mediaType", ["img", "vid"])
 
 export const projectsTable = pgTable("projects", {
   id: uuid("id").primaryKey().defaultRandom(),
@@ -20,7 +20,7 @@ export const projectsTable = pgTable("projects", {
   finishDate: timestamp("finish_date").notNull(),
   order: integer().default(0).notNull(),
   featured: boolean("featured").notNull(),
-});
+})
 
 export const projectsMediaTable = pgTable("projects_media", {
   id: uuid("id").primaryKey().defaultRandom(),
@@ -32,12 +32,12 @@ export const projectsMediaTable = pgTable("projects_media", {
   description: varchar("description", { length: 255 }).notNull(),
   alt: varchar("alt_text", { length: 50 }).notNull(),
   order: integer().default(0).notNull(),
-});
+})
 
 export const projectsTagsTable = pgTable("projects_tags", {
   id: uuid("id").primaryKey().defaultRandom(),
   text: varchar("text", { length: 100 }).notNull(),
-});
+})
 
 export const projectsTagsRelationTable = pgTable(
   "projects_tags_relation_table",
@@ -53,17 +53,17 @@ export const projectsTagsRelationTable = pgTable(
   (table) => {
     return {
       pk: primaryKey({ columns: [table.projectId, table.tagId] }),
-    };
+    }
   }
-);
+)
 
 //RELATIONS
 export const projectsTableRelations = relations(projectsTable, ({ many }) => {
   return {
     media: many(projectsMediaTable),
     tags: many(projectsTagsRelationTable),
-  };
-});
+  }
+})
 
 export const projectsMediaTableRelations = relations(
   projectsMediaTable,
@@ -73,18 +73,18 @@ export const projectsMediaTableRelations = relations(
         fields: [projectsMediaTable.projectId],
         references: [projectsTable.id],
       }),
-    };
+    }
   }
-);
+)
 
 export const projectsTagTableRelations = relations(
   projectsTagsTable,
   ({ many }) => {
     return {
       projectsTagsRelation: many(projectsTagsRelationTable),
-    };
+    }
   }
-);
+)
 
 export const projectsTagRelationTableRelations = relations(
   projectsTagsRelationTable,
@@ -98,6 +98,6 @@ export const projectsTagRelationTableRelations = relations(
         fields: [projectsTagsRelationTable.projectId],
         references: [projectsTagsTable.id],
       }),
-    };
+    }
   }
-);
+)

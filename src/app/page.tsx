@@ -1,11 +1,11 @@
-import { getBio } from "@/server/api-calls/bio";
-import { getProjects } from "@/server/db/queries/projects";
-import Cards from "@/ui/Cards";
-import Hero from "@/features/Hero/components/AdminHero";
+import { getBio } from "@/server/api-calls/bio"
+import { getProjects } from "@/server/db/queries/projects"
+import Cards from "@/ui/Cards"
+import Hero from "@/features/Hero/components/AdminHero"
 
 export default async function Home() {
-  const bioData = await getBio();
-  console.log(bioData);
+  const bioData = await getBio()
+  console.log(bioData)
 
   return (
     <>
@@ -14,5 +14,5 @@ export default async function Home() {
         <Cards />
       </div>
     </>
-  );
+  )
 }

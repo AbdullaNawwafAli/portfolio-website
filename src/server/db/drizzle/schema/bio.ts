@@ -1,4 +1,4 @@
-import { pgTable, text, uuid, varchar } from "drizzle-orm/pg-core";
+import { pgTable, text, uuid, varchar } from "drizzle-orm/pg-core"
 
 export const bioTable = pgTable("bio", {
   id: uuid("id").primaryKey().defaultRandom(),
@@ -23,4 +23,4 @@ export const bioTable = pgTable("bio", {
   github_url: varchar("github_url", {
     length: 255,
   }).notNull(),
-});
+})

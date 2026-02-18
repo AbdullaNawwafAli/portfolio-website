@@ -1,12 +1,12 @@
-import "dotenv/config";
-import { drizzle } from "drizzle-orm/node-postgres";
-import { Pool } from "pg";
-import * as schema from "./drizzle/schema";
+import "dotenv/config"
+import { drizzle } from "drizzle-orm/node-postgres"
+import { Pool } from "pg"
+import * as schema from "./drizzle/schema"
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-});
+})
 
-console.log(Object(schema));
+console.log(Object(schema))
 
-export const db = drizzle(pool, { schema });
+export const db = drizzle(pool, { schema })

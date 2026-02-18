@@ -1,12 +1,12 @@
-import { Button } from "./shadcn/button";
+import { Button } from "./shadcn/button"
 import {
   Card,
   CardHeader,
   CardTitle,
   CardContent,
   CardFooter,
-} from "./shadcn/card";
-import Image from "next/image";
+} from "./shadcn/card"
+import Image from "next/image"
 
 const Cards = () => {
   return (
@@ -43,7 +43,7 @@ const Cards = () => {
         </Card>
       ))}
     </div>
-  );
-};
+  )
+}
 
-export default Cards;
+export default Cards
