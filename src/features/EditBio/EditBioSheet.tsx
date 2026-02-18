@@ -53,26 +53,19 @@ export function EditBioSheet() {
   const form = useForm({
     defaultValues: {
       name: "",
+      name_subtext: "",
       hero_description: "",
+      email: "",
+      instagram_url: "",
+      linked_in_url: "",
+      github_url: "",
+      resume_pdf_cloudinary_id: "",
     },
     validators: {
       onChange: formSchema,
     },
     onSubmit: async ({ value }) => {
-      toast("You submitted the following values:", {
-        description: (
-          <pre className="bg-code text-code-foreground mt-2 w-[320px] overflow-x-auto rounded-md p-4">
-            <code>{JSON.stringify(value, null, 2)}</code>
-          </pre>
-        ),
-        position: "bottom-right",
-        classNames: {
-          content: "flex flex-col gap-2",
-        },
-        style: {
-          "--border-radius": "calc(var(--radius)  + 4px)",
-        } as React.CSSProperties,
-      })
+      console.log(value)
     },
   })
   return (
@@ -102,7 +95,7 @@ export function EditBioSheet() {
                 and education data here.
               </SheetDescription>
             </SheetHeader>
-            <div className="no-scrollbar overflow-y-auto px-4">
+            <div className="no-scrollbar overflow-y-auto p-4">
               <FieldGroup>
                 <form.Field name="name">
                   {(field) => {
@@ -110,7 +103,31 @@ export function EditBioSheet() {
                       field.state.meta.isTouched && !field.state.meta.isValid
                     return (
                       <Field data-invalid={isInvalid}>
-                        <FieldLabel htmlFor={field.name}>Bug Title</FieldLabel>
+                        <FieldLabel htmlFor={field.name}>Name</FieldLabel>
+                        <Input
+                          id={field.name}
+                          name={field.name}
+                          value={field.state.value}
+                          onBlur={field.handleBlur}
+                          onChange={(e) => field.handleChange(e.target.value)}
+                          aria-invalid={isInvalid}
+                          placeholder="Login button not working on mobile"
+                          autoComplete="off"
+                        />
+                        {isInvalid && (
+                          <FieldError errors={field.state.meta.errors} />
+                        )}
+                      </Field>
+                    )
+                  }}
+                </form.Field>
+                <form.Field name="name_subtext">
+                  {(field) => {
+                    const isInvalid =
+                      field.state.meta.isTouched && !field.state.meta.isValid
+                    return (
+                      <Field data-invalid={isInvalid}>
+                        <FieldLabel htmlFor={field.name}>Sub Text</FieldLabel>
                         <Input
                           id={field.name}
                           name={field.name}
@@ -135,7 +152,7 @@ export function EditBioSheet() {
                     return (
                       <Field data-invalid={isInvalid}>
                         <FieldLabel htmlFor={field.name}>
-                          Description
+                          Hero Description
                         </FieldLabel>
                         <InputGroup>
                           <InputGroupTextarea
@@ -162,21 +179,158 @@ export function EditBioSheet() {
                     )
                   }}
                 </form.Field>
+                <form.Field name="email">
+                  {(field) => {
+                    const isInvalid =
+                      field.state.meta.isTouched && !field.state.meta.isValid
+                    return (
+                      <Field data-invalid={isInvalid}>
+                        <FieldLabel htmlFor={field.name}>Email</FieldLabel>
+                        <Input
+                          id={field.name}
+                          name={field.name}
+                          value={field.state.value}
+                          onBlur={field.handleBlur}
+                          onChange={(e) => field.handleChange(e.target.value)}
+                          aria-invalid={isInvalid}
+                          placeholder="Login button not working on mobile"
+                          autoComplete="off"
+                        />
+                        {isInvalid && (
+                          <FieldError errors={field.state.meta.errors} />
+                        )}
+                      </Field>
+                    )
+                  }}
+                </form.Field>
+                <form.Field name="github_url">
+                  {(field) => {
+                    const isInvalid =
+                      field.state.meta.isTouched && !field.state.meta.isValid
+                    return (
+                      <Field data-invalid={isInvalid}>
+                        <FieldLabel htmlFor={field.name}>GitHub URL</FieldLabel>
+                        <Input
+                          id={field.name}
+                          name={field.name}
+                          value={field.state.value}
+                          onBlur={field.handleBlur}
+                          onChange={(e) => field.handleChange(e.target.value)}
+                          aria-invalid={isInvalid}
+                          placeholder="Login button not working on mobile"
+                          autoComplete="off"
+                        />
+                        {isInvalid && (
+                          <FieldError errors={field.state.meta.errors} />
+                        )}
+                      </Field>
+                    )
+                  }}
+                </form.Field>
+                <form.Field name="linked_in_url">
+                  {(field) => {
+                    const isInvalid =
+                      field.state.meta.isTouched && !field.state.meta.isValid
+                    return (
+                      <Field data-invalid={isInvalid}>
+                        <FieldLabel htmlFor={field.name}>
+                          LinkedIn URL
+                        </FieldLabel>
+                        <Input
+                          id={field.name}
+                          name={field.name}
+                          value={field.state.value}
+                          onBlur={field.handleBlur}
+                          onChange={(e) => field.handleChange(e.target.value)}
+                          aria-invalid={isInvalid}
+                          placeholder="Login button not working on mobile"
+                          autoComplete="off"
+                        />
+                        {isInvalid && (
+                          <FieldError errors={field.state.meta.errors} />
+                        )}
+                      </Field>
+                    )
+                  }}
+                </form.Field>
+                <form.Field name="instagram_url">
+                  {(field) => {
+                    const isInvalid =
+                      field.state.meta.isTouched && !field.state.meta.isValid
+                    return (
+                      <Field data-invalid={isInvalid}>
+                        <FieldLabel htmlFor={field.name}>
+                          Instagram URL
+                        </FieldLabel>
+                        <Input
+                          id={field.name}
+                          name={field.name}
+                          value={field.state.value}
+                          onBlur={field.handleBlur}
+                          onChange={(e) => field.handleChange(e.target.value)}
+                          aria-invalid={isInvalid}
+                          placeholder="Login button not working on mobile"
+                          autoComplete="off"
+                        />
+                        {isInvalid && (
+                          <FieldError errors={field.state.meta.errors} />
+                        )}
+                      </Field>
+                    )
+                  }}
+                </form.Field>
+                <form.Field name="resume_pdf_cloudinary_id">
+                  {(field) => {
+                    const isInvalid =
+                      field.state.meta.isTouched && !field.state.meta.isValid
+                    return (
+                      <Field data-invalid={isInvalid}>
+                        <FieldLabel htmlFor={field.name}>
+                          Resume PDF Cloudinary ID
+                        </FieldLabel>
+                        <Input
+                          id={field.name}
+                          name={field.name}
+                          value={field.state.value}
+                          onBlur={field.handleBlur}
+                          onChange={(e) => field.handleChange(e.target.value)}
+                          aria-invalid={isInvalid}
+                          placeholder="Login button not working on mobile"
+                          autoComplete="off"
+                        />
+                        {isInvalid && (
+                          <FieldError errors={field.state.meta.errors} />
+                        )}
+                      </Field>
+                    )
+                  }}
+                </form.Field>
               </FieldGroup>
             </div>
             <SheetFooter>
-              <Button type="submit" form="bug-report-form" className="w-full">
-                Submit
-              </Button>
+              <div className="flex justify-between gap-2">
+                <div className="w-full">
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() => form.reset()}
+                    className="w-full"
+                  >
+                    Reset
+                  </Button>
+                </div>
+                <div className="w-full">
+                  <Button
+                    variant="outline"
+                    type="submit"
+                    form="bug-report-form"
+                    className="w-full"
+                  >
+                    Submit
+                  </Button>
+                </div>
+              </div>
 
-              <Button
-                type="button"
-                variant="outline"
-                onClick={() => form.reset()}
-                className="w-full"
-              >
-                Reset
-              </Button>
               <SheetClose asChild>
                 <Button variant="outline">Cancel</Button>
               </SheetClose>
