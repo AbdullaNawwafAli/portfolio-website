@@ -8,12 +8,12 @@ import {
   SquarePen,
 } from "lucide-react"
 import CloudinaryImage from "@/ui/CloudinaryImage"
-import { heroData } from "../types/hero-data"
 import { Button } from "@/ui/shadcn/button"
-import { EditHeroSheet } from "@/features/EditBio/EditBioSheet"
+import { EditHeroSheet } from "@/features/EditHero/EditHeroSheet"
+import { bioData } from "@/types/bioData"
 
 interface AdminHeroProps {
-  data: heroData
+  data: bioData
 }
 
 const AdminHero = ({ data }: AdminHeroProps) => {

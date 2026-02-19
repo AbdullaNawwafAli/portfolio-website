@@ -5,7 +5,6 @@ import Hero from "@/features/Hero/components/AdminHero"
 
 export default async function Home() {
   const bioData = await getBio()
-  console.log(bioData)
 
   return (
     <>

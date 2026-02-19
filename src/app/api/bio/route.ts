@@ -16,7 +16,7 @@ export async function PUT(request: NextRequest) {
       })
     }
 
-    const updateItem = updateBio(id, updatedData)
+    const updateItem = updateBio({ id, updatedData })
 
     return NextResponse.json({
       message: "Bio updated successfully",

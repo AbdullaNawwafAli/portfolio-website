@@ -1,16 +1,18 @@
+import { bioData, updateBioDataDto } from "@/types/bioData"
+
 export async function getBio() {
   const res = await fetch("http://localhost:3000/api/bio")
-  const data = await res.json()
+  const data: bioData = await res.json()
   return data
 }
 
-export async function updateBio(id, updateData) {
+export async function updateBio({ id, updatedData }: updateBioDataDto) {
   const res = await fetch("http://localhost:3000/api/bio", {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(updateData),
+    body: JSON.stringify({ id, updatedData }),
   })
   const data = await res.json()
   return data

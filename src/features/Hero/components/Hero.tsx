@@ -8,10 +8,10 @@ import {
 } from "lucide-react"
 import CloudinaryImage from "../../../ui/CloudinaryImage"
 import { Button } from "../../../ui/shadcn/button"
-import { heroData } from "../types/hero-data"
+import { bioData } from "@/types/bioData"
 
 interface HeroProps {
-  data: heroData
+  data: bioData
 }
 
 const Hero = ({ data }: HeroProps) => {
