@@ -2,8 +2,13 @@ import { getBio, updateBio } from "@/server/db/queries/bio"
 import { NextRequest, NextResponse } from "next/server"
 
 export async function GET() {
-  const bio = await getBio()
-  return NextResponse.json(bio)
+  try {
+    const bio = await getBio()
+
+    return NextResponse.json(bio)
+  } catch (error) {
+    return NextResponse.json({ message: "Error fetching bio" }, { status: 500 })
+  }
 }
 
 export async function PUT(request: NextRequest) {
