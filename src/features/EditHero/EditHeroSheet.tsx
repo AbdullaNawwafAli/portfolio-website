@@ -22,8 +22,8 @@ import {
   InputGroupAddon,
   InputGroupText,
 } from "@/ui/shadcn/input-group"
-import { heroData } from "../Hero/types/hero-data"
 import { updateBio } from "@/server/api-calls/bio"
+import { bioData } from "@/types/bioData"
 
 const formSchema = z.object({
   name: z
@@ -37,7 +37,7 @@ const formSchema = z.object({
   hero_description: z
     .string()
     .min(20, "Hero description must be at least 20 characters.")
-    .max(100, "Hero description must be at most 100 characters."),
+    .max(200, "Hero description must be at most 100 characters."),
   email: z.email(),
   instagram_url: z
     .string()
@@ -52,8 +52,9 @@ const formSchema = z.object({
 })
 
 interface EditHeroSheetProps {
-  data: heroData
+  data: bioData
 }
+
 export function EditHeroSheet({ data }: EditHeroSheetProps) {
   const form = useForm({
     defaultValues: {
@@ -70,7 +71,7 @@ export function EditHeroSheet({ data }: EditHeroSheetProps) {
       onChange: formSchema,
     },
     onSubmit: async ({ value }) => {
-      updateBio(data.id, value)
+      updateBio({ id: data.id, updatedData: value })
     },
   })
   return (
