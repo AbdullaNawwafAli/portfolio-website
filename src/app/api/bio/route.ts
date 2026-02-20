@@ -1,9 +1,9 @@
-import { getBio, updateBio } from "@/server/db/queries/bio"
+import { getBioDb, updateBioDb } from "@/server/db/queries/bio"
 import { NextRequest, NextResponse } from "next/server"
 
 export async function GET() {
   try {
-    const bio = await getBio()
+    const bio = await getBioDb()
 
     return NextResponse.json(bio)
   } catch (error) {
@@ -21,7 +21,7 @@ export async function PUT(request: NextRequest) {
       })
     }
 
-    const updateItem = updateBio({ id, updatedData })
+    const updateItem = updateBioDb({ id, updatedData })
 
     return NextResponse.json({
       message: "Bio updated successfully",
