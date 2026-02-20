@@ -1,10 +1,10 @@
-import { getBioApiCall } from "@/lib/api-calls/bio"
+import { getBioApi } from "@/lib/api-calls/bio"
 import { getProjects } from "@/server/db/queries/projects"
 import Cards from "@/ui/Cards"
 import Hero from "@/features/Hero/components/AdminHero"
 
 export default async function Home() {
-  const bioData = await getBioApiCall()
+  const bioData = await getBioApi()
 
   return (
     <>

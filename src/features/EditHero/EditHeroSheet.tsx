@@ -22,7 +22,7 @@ import {
   InputGroupAddon,
   InputGroupText,
 } from "@/ui/shadcn/input-group"
-import { updateBioApiCall } from "@/lib/api-calls/bio"
+import { updateBioApi } from "@/lib/api-calls/bio"
 import { bioData } from "@/types/bioData"
 
 const formSchema = z.object({
@@ -71,7 +71,7 @@ export function EditHeroSheet({ data }: EditHeroSheetProps) {
       onChange: formSchema,
     },
     onSubmit: async ({ value }) => {
-      const res = updateBioApiCall({ id: data.id, updatedData: value })
+      const res = updateBioApi({ id: data.id, updatedData: value })
       console.log(res)
     },
   })
