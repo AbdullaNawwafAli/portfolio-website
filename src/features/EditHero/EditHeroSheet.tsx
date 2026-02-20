@@ -71,7 +71,8 @@ export function EditHeroSheet({ data }: EditHeroSheetProps) {
       onChange: formSchema,
     },
     onSubmit: async ({ value }) => {
-      updateBio({ id: data.id, updatedData: value })
+      const res = updateBio({ id: data.id, updatedData: value })
+      console.log(res)
     },
   })
   return (
