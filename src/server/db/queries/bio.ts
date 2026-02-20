@@ -3,12 +3,12 @@ import { db } from "../drizzle"
 import { bioTable } from "../drizzle/schema"
 import { updateBioDataDto } from "@/types/bioData"
 
-export async function getBio() {
+export async function getBioDb() {
   const bio = await db.query.bioTable.findFirst()
   return bio
 }
 
-export async function updateBio({ id, updatedData }: updateBioDataDto) {
+export async function updateBioDb({ id, updatedData }: updateBioDataDto) {
   const bio = await db
     .update(bioTable)
     .set({
