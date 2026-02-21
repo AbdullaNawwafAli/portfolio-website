@@ -21,5 +21,3 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
     },
   },
 })
-
-console.log("Auth exports:", { auth, handlers, signIn, signOut })
