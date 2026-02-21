@@ -13,10 +13,12 @@ import { EditHeroSheet } from "@/features/EditHero/EditHeroSheet"
 import { bioData } from "@/types/bioData"
 
 interface AdminHeroProps {
-  data: bioData
+  data?: bioData
 }
 
 const AdminHero = ({ data }: AdminHeroProps) => {
+  console.log(data, "here")
+  if (!data) return <div>not ready</div>
   return (
     <div className="hero-container">
       <div className="hero-flex-wrapper">

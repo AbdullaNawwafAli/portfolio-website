@@ -4,8 +4,9 @@ import { NextRequest, NextResponse } from "next/server"
 export async function GET() {
   try {
     const bio = await getBioDb()
-
-    return NextResponse.json(bio)
+    if (!bio) {
+      return new NextResponse(null, { status: 204 })
+    }
   } catch (error) {
     return NextResponse.json({ message: "Error fetching bio" }, { status: 500 })
   }
@@ -21,7 +22,7 @@ export async function PUT(request: NextRequest) {
       })
     }
 
-    const updateItem = updateBioDb({ id, updatedData })
+    const updateItem = await updateBioDb({ id, updatedData })
 
     return NextResponse.json({
       message: "Bio updated successfully",
