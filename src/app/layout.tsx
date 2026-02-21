@@ -3,7 +3,7 @@ import "./globals.css"
 import Navbar from "@/features/Shell/components/Navbar"
 import Footer from "@/features/Shell/components/Footer"
 import { cinzel, raleway } from "@/lib/fonts"
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import QueryProvider from "@/features/TanStack/QueryProvider"
 
 export const metadata: Metadata = {
   title: "Nawwaf's Portfolio Website",
@@ -15,12 +15,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const queryClient = new QueryClient()
-
   return (
     <html lang="en" className={`${cinzel.variable} ${raleway.variable}`}>
       <body>
-        <QueryClientProvider client={queryClient}>
+        <QueryProvider>
           {/* Background columns */}
           <div className="background-columns">
             {[...Array(10).keys()].map((key) => (
@@ -35,7 +33,7 @@ export default function RootLayout({
               <Footer />
             </Navbar>
           </div>
-        </QueryClientProvider>
+        </QueryProvider>
       </body>
     </html>
   )
