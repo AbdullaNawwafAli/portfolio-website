@@ -11,14 +11,22 @@ import CloudinaryImage from "@/ui/CloudinaryImage"
 import { Button } from "@/ui/shadcn/button"
 import { EditHeroSheet } from "@/features/EditHero/EditHeroSheet"
 import { bioData } from "@/types/bioData"
+import { CreateHeroSheet } from "@/features/CreateHero/CreateHeroSheet"
 
 interface AdminHeroProps {
   data?: bioData
 }
 
 const AdminHero = ({ data }: AdminHeroProps) => {
-  console.log(data, "here")
-  if (!data) return <div>not ready</div>
+  if (!data)
+    return (
+      <div className="hero-container">
+        <div className="flex justify-center">
+          <CreateHeroSheet />
+        </div>
+      </div>
+    )
+
   return (
     <div className="hero-container">
       <div className="hero-flex-wrapper">
