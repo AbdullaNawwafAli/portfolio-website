@@ -23,7 +23,6 @@ import {
   InputGroupText,
 } from "@/ui/shadcn/input-group"
 import { updateBioApi } from "@/lib/api-calls/bio"
-import { bioData } from "@/types/bioData"
 
 const formSchema = z.object({
   name: z
@@ -71,6 +70,7 @@ export function CreateHeroSheet() {
       console.log(res)
     },
   })
+
   return (
     <div className="flex flex-wrap gap-2">
       <Sheet>

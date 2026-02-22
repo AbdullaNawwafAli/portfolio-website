@@ -1,3 +1,4 @@
+"use client"
 import {
   ArrowDownToLine,
   ChevronRight,
@@ -12,15 +13,53 @@ import { Button } from "@/ui/shadcn/button"
 import { EditHeroSheet } from "@/features/EditHero/EditHeroSheet"
 import { bioData } from "@/types/bioData"
 import { CreateHeroSheet } from "@/features/CreateHero/CreateHeroSheet"
+import { useState } from "react"
+import { CldUploadWidget } from "next-cloudinary"
 
 interface AdminHeroProps {
   data?: bioData
 }
 
 const AdminHero = ({ data }: AdminHeroProps) => {
+  const [imageUrl, setImageUrl] = useState(null)
+
+  const handleUploadSuccess = (result) => {
+    if (result.info && result.info.secure_url) {
+      setImageUrl(result.info.secure_url)
+      console.log("Uploaded image URL:", result.info.secure_url)
+    }
+  }
+
   if (!data)
     return (
       <div className="hero-container">
+        <div>
+          <CldUploadWidget
+            uploadPreset="nextAPP"
+            onSuccess={handleUploadSuccess}
+          >
+            {({ open }) => {
+              return (
+                <button type="button" onClick={() => open()}>
+                  Upload an Image
+                </button>
+              )
+            }}
+          </CldUploadWidget>
+
+          {imageUrl && (
+            <div>
+              <p>Upload successful!</p>
+              <CloudinaryImage
+                src={imageUrl}
+                alt="Uploaded Image"
+                width={500}
+                height={500}
+                className="w-full h-auto object-cover transition-opacity duration-300 group-hover:opacity-30"
+              />
+            </div>
+          )}
+        </div>
         <div className="flex justify-center">
           <CreateHeroSheet />
         </div>
