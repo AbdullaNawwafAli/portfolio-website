@@ -5,8 +5,9 @@ export async function GET() {
   try {
     const bio = await getBioDb()
     if (!bio) {
-      return new NextResponse(null, { status: 204 })
+      return NextResponse.json(null, { status: 200 })
     }
+    return NextResponse.json(bio)
   } catch (error) {
     return NextResponse.json({ message: "Error fetching bio" }, { status: 500 })
   }

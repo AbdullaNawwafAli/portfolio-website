@@ -1,10 +1,8 @@
 import { bioData, updateBioDataDto } from "@/types/bioData"
 
-export async function getBioApi() {
+export async function getBioApi(): Promise<bioData> {
   const res = await fetch("http://localhost:3000/api/bio")
-  if (res.status === 204) return null
-  if (!res.ok) throw new Error("Error fetching bio")
-  return res.json() as Promise<bioData>
+  return res.json()
 }
 
 export async function updateBioApi({ id, updatedData }: updateBioDataDto) {
