@@ -5,7 +5,6 @@ import { updateBioDataDto } from "@/types/bioData"
 
 export async function getBioDb() {
   const bio = await db.query.bioTable.findFirst()
-  console.log("not erroring")
   return bio
 }
 
