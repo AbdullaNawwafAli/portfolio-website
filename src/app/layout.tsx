@@ -3,7 +3,7 @@ import "./globals.css"
 import Navbar from "@/features/Shell/components/Navbar"
 import Footer from "@/features/Shell/components/Footer"
 import { cinzel, raleway } from "@/lib/fonts"
-import QueryProvider from "@/features/TanStack/QueryProvider"
+import QueryProvider from "@/features/TanStackQuery/QueryProvider"
 
 export const metadata: Metadata = {
   title: "Nawwaf's Portfolio Website",
