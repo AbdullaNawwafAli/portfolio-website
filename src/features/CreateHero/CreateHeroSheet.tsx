@@ -156,40 +156,11 @@ export function CreateHeroSheet() {
                   {(field) => <field.Input label="Sub Text" />}
                 </form.AppField>
 
-                <form.Field name="hero_description">
-                  {(field) => {
-                    const isInvalid =
-                      field.state.meta.isTouched && !field.state.meta.isValid
-                    return (
-                      <Field data-invalid={isInvalid}>
-                        <FieldLabel htmlFor={field.name}>
-                          Hero Description
-                        </FieldLabel>
-                        <InputGroup>
-                          <InputGroupTextarea
-                            id={field.name}
-                            name={field.name}
-                            value={field.state.value}
-                            onBlur={field.handleBlur}
-                            onChange={(e) => field.handleChange(e.target.value)}
-                            placeholder="Description"
-                            rows={6}
-                            className="min-h-24 resize-none"
-                            aria-invalid={isInvalid}
-                          />
-                          <InputGroupAddon align="block-end">
-                            <InputGroupText className="tabular-nums">
-                              {field.state.value.length}/100 characters
-                            </InputGroupText>
-                          </InputGroupAddon>
-                        </InputGroup>
-                        {isInvalid && (
-                          <FieldError errors={field.state.meta.errors} />
-                        )}
-                      </Field>
-                    )
-                  }}
-                </form.Field>
+                <form.AppField name="hero_description">
+                  {(field) => (
+                    <field.InputGroupTextArea label="Hero Description" />
+                  )}
+                </form.AppField>
                 <form.AppField name="email">
                   {(field) => <field.Input label="Email" />}
                 </form.AppField>
