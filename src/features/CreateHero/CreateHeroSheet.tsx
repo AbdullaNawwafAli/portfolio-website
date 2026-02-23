@@ -25,6 +25,7 @@ import {
 import { updateBioApi } from "@/lib/api-calls/bio"
 import Image from "next/image"
 import { useEffect, useState } from "react"
+import { useAppForm } from "../TanstackForm/hooks"
 
 const formSchema = z.object({
   hero_photo: z.instanceof(File),
@@ -54,7 +55,7 @@ const formSchema = z.object({
 })
 
 export function CreateHeroSheet() {
-  const form = useForm({
+  const form = useAppForm({
     defaultValues: {
       hero_photo: undefined as File | undefined,
       name: "",
@@ -132,6 +133,7 @@ export function CreateHeroSheet() {
                           onChange={(e) => {
                             const file = e.target.files?.[0]
                             field.handleChange(file)
+
                             // Clean up previous object URL to avoid memory leaks
                             if (preview) URL.revokeObjectURL(preview)
                             setPreview(file ? URL.createObjectURL(file) : null)
@@ -146,55 +148,14 @@ export function CreateHeroSheet() {
                     )
                   }}
                 </form.Field>
+                <form.AppField name="name">
+                  {(field) => <field.Input label="Name" />}
+                </form.AppField>
 
-                <form.Field name="name">
-                  {(field) => {
-                    const isInvalid =
-                      field.state.meta.isTouched && !field.state.meta.isValid
-                    return (
-                      <Field data-invalid={isInvalid}>
-                        <FieldLabel htmlFor={field.name}>Name</FieldLabel>
-                        <Input
-                          id={field.name}
-                          name={field.name}
-                          value={field.state.value}
-                          onBlur={field.handleBlur}
-                          onChange={(e) => field.handleChange(e.target.value)}
-                          aria-invalid={isInvalid}
-                          placeholder="Name"
-                          autoComplete="off"
-                        />
-                        {isInvalid && (
-                          <FieldError errors={field.state.meta.errors} />
-                        )}
-                      </Field>
-                    )
-                  }}
-                </form.Field>
-                <form.Field name="name_subtext">
-                  {(field) => {
-                    const isInvalid =
-                      field.state.meta.isTouched && !field.state.meta.isValid
-                    return (
-                      <Field data-invalid={isInvalid}>
-                        <FieldLabel htmlFor={field.name}>Sub Text</FieldLabel>
-                        <Input
-                          id={field.name}
-                          name={field.name}
-                          value={field.state.value}
-                          onBlur={field.handleBlur}
-                          onChange={(e) => field.handleChange(e.target.value)}
-                          aria-invalid={isInvalid}
-                          placeholder="Sub Text"
-                          autoComplete="off"
-                        />
-                        {isInvalid && (
-                          <FieldError errors={field.state.meta.errors} />
-                        )}
-                      </Field>
-                    )
-                  }}
-                </form.Field>
+                <form.AppField name="name_subtext">
+                  {(field) => <field.Input label="Sub Text" />}
+                </form.AppField>
+
                 <form.Field name="hero_description">
                   {(field) => {
                     const isInvalid =
@@ -229,132 +190,25 @@ export function CreateHeroSheet() {
                     )
                   }}
                 </form.Field>
-                <form.Field name="email">
-                  {(field) => {
-                    const isInvalid =
-                      field.state.meta.isTouched && !field.state.meta.isValid
-                    return (
-                      <Field data-invalid={isInvalid}>
-                        <FieldLabel htmlFor={field.name}>Email</FieldLabel>
-                        <Input
-                          id={field.name}
-                          name={field.name}
-                          value={field.state.value}
-                          onBlur={field.handleBlur}
-                          onChange={(e) => field.handleChange(e.target.value)}
-                          aria-invalid={isInvalid}
-                          placeholder="something@gmail.com"
-                          autoComplete="off"
-                        />
-                        {isInvalid && (
-                          <FieldError errors={field.state.meta.errors} />
-                        )}
-                      </Field>
-                    )
-                  }}
-                </form.Field>
-                <form.Field name="github_url">
-                  {(field) => {
-                    const isInvalid =
-                      field.state.meta.isTouched && !field.state.meta.isValid
-                    return (
-                      <Field data-invalid={isInvalid}>
-                        <FieldLabel htmlFor={field.name}>GitHub URL</FieldLabel>
-                        <Input
-                          id={field.name}
-                          name={field.name}
-                          value={field.state.value}
-                          onBlur={field.handleBlur}
-                          onChange={(e) => field.handleChange(e.target.value)}
-                          aria-invalid={isInvalid}
-                          placeholder="something URL"
-                          autoComplete="off"
-                        />
-                        {isInvalid && (
-                          <FieldError errors={field.state.meta.errors} />
-                        )}
-                      </Field>
-                    )
-                  }}
-                </form.Field>
-                <form.Field name="linked_in_url">
-                  {(field) => {
-                    const isInvalid =
-                      field.state.meta.isTouched && !field.state.meta.isValid
-                    return (
-                      <Field data-invalid={isInvalid}>
-                        <FieldLabel htmlFor={field.name}>
-                          LinkedIn URL
-                        </FieldLabel>
-                        <Input
-                          id={field.name}
-                          name={field.name}
-                          value={field.state.value}
-                          onBlur={field.handleBlur}
-                          onChange={(e) => field.handleChange(e.target.value)}
-                          aria-invalid={isInvalid}
-                          placeholder="something URL"
-                          autoComplete="off"
-                        />
-                        {isInvalid && (
-                          <FieldError errors={field.state.meta.errors} />
-                        )}
-                      </Field>
-                    )
-                  }}
-                </form.Field>
-                <form.Field name="instagram_url">
-                  {(field) => {
-                    const isInvalid =
-                      field.state.meta.isTouched && !field.state.meta.isValid
-                    return (
-                      <Field data-invalid={isInvalid}>
-                        <FieldLabel htmlFor={field.name}>
-                          Instagram URL
-                        </FieldLabel>
-                        <Input
-                          id={field.name}
-                          name={field.name}
-                          value={field.state.value}
-                          onBlur={field.handleBlur}
-                          onChange={(e) => field.handleChange(e.target.value)}
-                          aria-invalid={isInvalid}
-                          placeholder="something URL"
-                          autoComplete="off"
-                        />
-                        {isInvalid && (
-                          <FieldError errors={field.state.meta.errors} />
-                        )}
-                      </Field>
-                    )
-                  }}
-                </form.Field>
-                <form.Field name="resume_pdf_cloudinary_id">
-                  {(field) => {
-                    const isInvalid =
-                      field.state.meta.isTouched && !field.state.meta.isValid
-                    return (
-                      <Field data-invalid={isInvalid}>
-                        <FieldLabel htmlFor={field.name}>
-                          Resume PDF Cloudinary ID
-                        </FieldLabel>
-                        <Input
-                          id={field.name}
-                          name={field.name}
-                          value={field.state.value}
-                          onBlur={field.handleBlur}
-                          onChange={(e) => field.handleChange(e.target.value)}
-                          aria-invalid={isInvalid}
-                          placeholder="something URL"
-                          autoComplete="off"
-                        />
-                        {isInvalid && (
-                          <FieldError errors={field.state.meta.errors} />
-                        )}
-                      </Field>
-                    )
-                  }}
-                </form.Field>
+                <form.AppField name="email">
+                  {(field) => <field.Input label="Email" />}
+                </form.AppField>
+
+                <form.AppField name="github_url">
+                  {(field) => <field.Input label="GitHub URL" />}
+                </form.AppField>
+
+                <form.AppField name="linked_in_url">
+                  {(field) => <field.Input label="LinkedIn URL" />}
+                </form.AppField>
+
+                <form.AppField name="instagram_url">
+                  {(field) => <field.Input label="Instagram URL" />}
+                </form.AppField>
+
+                <form.AppField name="resume_pdf_cloudinary_id">
+                  {(field) => <field.Input label="Resume PDF Cloudinary ID" />}
+                </form.AppField>
               </FieldGroup>
             </div>
             <SheetFooter>
