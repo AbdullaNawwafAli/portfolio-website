@@ -12,20 +12,20 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/ui/shadcn/sheet"
-import { SquarePen } from "lucide-react"
-import { useForm } from "@tanstack/react-form"
 import { toast } from "sonner"
 import * as z from "zod"
-import {
-  InputGroup,
-  InputGroupTextarea,
-  InputGroupAddon,
-  InputGroupText,
-} from "@/ui/shadcn/input-group"
 import { updateBioApi } from "@/lib/api-calls/bio"
 import Image from "next/image"
 import { useEffect, useState } from "react"
 import { useAppForm } from "../TanstackForm/hooks"
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupInput,
+  InputGroupText,
+} from "@/ui/shadcn/input-group"
+import { X } from "lucide-react"
 
 const formSchema = z.object({
   hero_photo: z.instanceof(File),
@@ -125,22 +125,40 @@ export function CreateHeroSheet() {
                     return (
                       <Field data-invalid={isInvalid}>
                         <FieldLabel htmlFor={field.name}>Hero Photo</FieldLabel>
-                        <Input
-                          id={field.name}
-                          type={"file"}
-                          name={field.name}
-                          onBlur={field.handleBlur}
-                          onChange={(e) => {
-                            const file = e.target.files?.[0]
-                            field.handleChange(file)
+                        <InputGroup>
+                          <InputGroupInput
+                            id={field.name}
+                            type={"file"}
+                            name={field.name}
+                            onBlur={field.handleBlur}
+                            onChange={(e) => {
+                              const file = e.target.files?.[0]
+                              field.handleChange(file)
 
-                            // Clean up previous object URL to avoid memory leaks
-                            if (preview) URL.revokeObjectURL(preview)
-                            setPreview(file ? URL.createObjectURL(file) : null)
-                          }}
-                          aria-invalid={isInvalid}
-                          autoComplete="off"
-                        />
+                              // Clean up previous object URL to avoid memory leaks
+                              if (preview) URL.revokeObjectURL(preview)
+                              setPreview(
+                                file ? URL.createObjectURL(file) : null
+                              )
+                            }}
+                            aria-invalid={isInvalid}
+                            autoComplete="off"
+                          />
+                          {preview && (
+                            <InputGroupAddon
+                              align="inline-end"
+                              onClick={() => {
+                                if (preview) URL.revokeObjectURL(preview)
+                                setPreview(null)
+                                field.handleChange(undefined)
+                              }}
+                            >
+                              <InputGroupButton variant={"outline"}>
+                                <X />
+                              </InputGroupButton>
+                            </InputGroupAddon>
+                          )}
+                        </InputGroup>
                         {isInvalid && (
                           <FieldError errors={field.state.meta.errors} />
                         )}
