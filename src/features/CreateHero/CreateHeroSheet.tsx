@@ -23,8 +23,11 @@ import {
   InputGroupText,
 } from "@/ui/shadcn/input-group"
 import { updateBioApi } from "@/lib/api-calls/bio"
+import Image from "next/image"
+import { useEffect, useState } from "react"
 
 const formSchema = z.object({
+  hero_photo: z.instanceof(File),
   name: z
     .string()
     .min(5, "Name must be at least 5 characters.")
@@ -53,6 +56,7 @@ const formSchema = z.object({
 export function CreateHeroSheet() {
   const form = useForm({
     defaultValues: {
+      hero_photo: undefined as File | undefined,
       name: "",
       name_subtext: "",
       hero_description: "",
@@ -70,6 +74,13 @@ export function CreateHeroSheet() {
       console.log(res)
     },
   })
+
+  const [preview, setPreview] = useState<string | null>(null)
+  useEffect(() => {
+    return () => {
+      if (preview) URL.revokeObjectURL(preview)
+    }
+  }, [preview])
 
   return (
     <div className="flex flex-wrap gap-2">
@@ -98,6 +109,44 @@ export function CreateHeroSheet() {
             </SheetHeader>
             <div className="no-scrollbar overflow-y-auto p-4">
               <FieldGroup>
+                {preview && (
+                  <Image
+                    src={preview}
+                    alt="Hero photo preview"
+                    width={500}
+                    height={500}
+                  />
+                )}
+                <form.Field name="hero_photo">
+                  {(field) => {
+                    const isInvalid =
+                      field.state.meta.isTouched && !field.state.meta.isValid
+                    return (
+                      <Field data-invalid={isInvalid}>
+                        <FieldLabel htmlFor={field.name}>Hero Photo</FieldLabel>
+                        <Input
+                          id={field.name}
+                          type={"file"}
+                          name={field.name}
+                          onBlur={field.handleBlur}
+                          onChange={(e) => {
+                            const file = e.target.files?.[0]
+                            field.handleChange(file)
+                            // Clean up previous object URL to avoid memory leaks
+                            if (preview) URL.revokeObjectURL(preview)
+                            setPreview(file ? URL.createObjectURL(file) : null)
+                          }}
+                          aria-invalid={isInvalid}
+                          autoComplete="off"
+                        />
+                        {isInvalid && (
+                          <FieldError errors={field.state.meta.errors} />
+                        )}
+                      </Field>
+                    )
+                  }}
+                </form.Field>
+
                 <form.Field name="name">
                   {(field) => {
                     const isInvalid =
@@ -314,7 +363,11 @@ export function CreateHeroSheet() {
                   <Button
                     type="button"
                     variant="outline"
-                    onClick={() => form.reset()}
+                    onClick={() => {
+                      form.reset()
+                      if (preview) URL.revokeObjectURL(preview)
+                      setPreview(null)
+                    }}
                     className="w-full"
                   >
                     Reset
