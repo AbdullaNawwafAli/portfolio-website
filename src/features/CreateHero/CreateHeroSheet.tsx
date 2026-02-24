@@ -1,7 +1,6 @@
 "use client"
 import { Button } from "@/ui/shadcn/button"
-import { FieldGroup, Field, FieldLabel, FieldError } from "@/ui/shadcn/field"
-import { Input } from "@/ui/shadcn/input"
+import { FieldGroup } from "@/ui/shadcn/field"
 import {
   Sheet,
   SheetClose,
@@ -18,14 +17,8 @@ import { updateBioApi } from "@/lib/api-calls/bio"
 import Image from "next/image"
 import { useEffect, useState } from "react"
 import { useAppForm } from "../TanstackForm/hooks"
-import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupButton,
-  InputGroupInput,
-  InputGroupText,
-} from "@/ui/shadcn/input-group"
-import { X } from "lucide-react"
+import { convertToBase64 } from "@/lib/utils/fileUtils"
+import { uploadFileToCloudinaryApi } from "@/lib/api-calls/cloudinary"
 
 const formSchema = z.object({
   hero_photo: z.instanceof(File, {
@@ -51,9 +44,9 @@ const formSchema = z.object({
     .string()
     .min(1, "LinkedIn URL must be at least 1 character."),
   github_url: z.string().min(1, "GitHub URL must be at least 1 character."),
-  resume_pdf_cloudinary_id: z
-    .string()
-    .min(1, "Resume PDF Cloudinary ID must be at least 1 character."),
+  resume_pdf: z.instanceof(File, {
+    message: "Resume is required",
+  }),
 })
 
 export function CreateHeroSheet() {
@@ -67,14 +60,25 @@ export function CreateHeroSheet() {
       instagram_url: "",
       linked_in_url: "",
       github_url: "",
-      resume_pdf_cloudinary_id: "",
+      resume_pdf: undefined as File | undefined,
     },
     validators: {
       onChange: formSchema,
     },
     onSubmit: async ({ value }) => {
-      const res = updateBioApi({ id: "", updatedData: value })
-      console.log(res)
+      // const res = updateBioApi({ id: "", updatedData: value })
+      if (value.hero_photo) {
+        const profilePicBase64 = await convertToBase64(value.hero_photo)
+        const pb = await uploadFileToCloudinaryApi(profilePicBase64)
+        console.log(pb, "pfp")
+      }
+      if (value.resume_pdf) {
+        const profilePicBase64 = await convertToBase64(value.resume_pdf)
+        const pb = await uploadFileToCloudinaryApi(profilePicBase64)
+        console.log(pb, "pdf")
+      }
+
+      console.log(value)
     },
   })
 
@@ -83,7 +87,7 @@ export function CreateHeroSheet() {
     return () => {
       if (preview) URL.revokeObjectURL(preview)
     }
-  }, [])
+  })
 
   return (
     <div className="flex flex-wrap gap-2">
@@ -136,9 +140,7 @@ export function CreateHeroSheet() {
                     },
                   }}
                 >
-                  {(field) => {
-                    return <field.FileInput label="Hero Photo" />
-                  }}
+                  {(field) => <field.FileInput label="Hero Photo" />}
                 </form.AppField>
                 <form.AppField name="name">
                   {(field) => <field.Input label="Name" />}
@@ -169,8 +171,8 @@ export function CreateHeroSheet() {
                   {(field) => <field.Input label="Instagram URL" />}
                 </form.AppField>
 
-                <form.AppField name="resume_pdf_cloudinary_id">
-                  {(field) => <field.Input label="Resume PDF Cloudinary ID" />}
+                <form.AppField name="resume_pdf">
+                  {(field) => <field.FileInput label="Resume PDF" />}
                 </form.AppField>
               </FieldGroup>
             </div>
