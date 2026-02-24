@@ -68,17 +68,14 @@ export function CreateHeroSheet() {
     onSubmit: async ({ value }) => {
       // const res = updateBioApi({ id: "", updatedData: value })
       if (value.hero_photo) {
-        const profilePicBase64 = await convertToBase64(value.hero_photo)
-        const pb = await uploadFileToCloudinaryApi(profilePicBase64)
-        console.log(pb, "pfp")
+        const heroPicBase64 = await convertToBase64(value.hero_photo)
+        const heroPicPublicId = await uploadFileToCloudinaryApi(heroPicBase64)
       }
       if (value.resume_pdf) {
-        const profilePicBase64 = await convertToBase64(value.resume_pdf)
-        const pb = await uploadFileToCloudinaryApi(profilePicBase64)
-        console.log(pb, "pdf")
+        const resumePdfBase64 = await convertToBase64(value.resume_pdf)
+        const resumePdfPublicId =
+          await uploadFileToCloudinaryApi(resumePdfBase64)
       }
-
-      console.log(value)
     },
   })
 
