@@ -3,6 +3,7 @@ import { ReactNode } from "react"
 export interface FormControlProps {
   label: string
   description?: string
+  type?: string
 }
 
 export interface FormBaseProps extends FormControlProps {
