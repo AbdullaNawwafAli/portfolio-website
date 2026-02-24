@@ -28,7 +28,9 @@ import {
 import { X } from "lucide-react"
 
 const formSchema = z.object({
-  hero_photo: z.instanceof(File),
+  hero_photo: z.instanceof(File, {
+    message: "Hero photo is required",
+  }),
   name: z
     .string()
     .min(5, "Name must be at least 5 characters.")
@@ -40,7 +42,7 @@ const formSchema = z.object({
   hero_description: z
     .string()
     .min(20, "Hero description must be at least 20 characters.")
-    .max(200, "Hero description must be at most 100 characters."),
+    .max(200, "Hero description must be at most 200 characters."),
   email: z.email(),
   instagram_url: z
     .string()
@@ -114,10 +116,11 @@ export function CreateHeroSheet() {
                   <Image
                     src={preview}
                     alt="Hero photo preview"
-                    width={500}
-                    height={500}
+                    width={400}
+                    height={400}
                   />
                 )}
+
                 <form.AppField
                   name="hero_photo"
                   validators={{
