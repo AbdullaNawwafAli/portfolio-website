@@ -81,7 +81,7 @@ export function CreateHeroSheet() {
     return () => {
       if (preview) URL.revokeObjectURL(preview)
     }
-  }, [preview])
+  }, [])
 
   return (
     <div className="flex flex-wrap gap-2">
@@ -118,54 +118,25 @@ export function CreateHeroSheet() {
                     height={500}
                   />
                 )}
-                <form.Field name="hero_photo">
-                  {(field) => {
-                    const isInvalid =
-                      field.state.meta.isTouched && !field.state.meta.isValid
-                    return (
-                      <Field data-invalid={isInvalid}>
-                        <FieldLabel htmlFor={field.name}>Hero Photo</FieldLabel>
-                        <InputGroup>
-                          <InputGroupInput
-                            id={field.name}
-                            type={"file"}
-                            name={field.name}
-                            onBlur={field.handleBlur}
-                            onChange={(e) => {
-                              const file = e.target.files?.[0]
-                              field.handleChange(file)
-
-                              // Clean up previous object URL to avoid memory leaks
-                              if (preview) URL.revokeObjectURL(preview)
-                              setPreview(
-                                file ? URL.createObjectURL(file) : null
-                              )
-                            }}
-                            aria-invalid={isInvalid}
-                            autoComplete="off"
-                          />
-                          {preview && (
-                            <InputGroupAddon
-                              align="inline-end"
-                              onClick={() => {
-                                if (preview) URL.revokeObjectURL(preview)
-                                setPreview(null)
-                                field.handleChange(undefined)
-                              }}
-                            >
-                              <InputGroupButton variant={"outline"}>
-                                <X />
-                              </InputGroupButton>
-                            </InputGroupAddon>
-                          )}
-                        </InputGroup>
-                        {isInvalid && (
-                          <FieldError errors={field.state.meta.errors} />
-                        )}
-                      </Field>
-                    )
+                <form.AppField
+                  name="hero_photo"
+                  validators={{
+                    onChange: ({ value }) => {
+                      if (value) {
+                        if (preview) URL.revokeObjectURL(preview)
+                        const objectUrl = URL.createObjectURL(value)
+                        setPreview(objectUrl)
+                      } else {
+                        if (preview) URL.revokeObjectURL(preview)
+                        setPreview(null)
+                      }
+                    },
                   }}
-                </form.Field>
+                >
+                  {(field) => {
+                    return <field.FileInput label="Hero Photo" />
+                  }}
+                </form.AppField>
                 <form.AppField name="name">
                   {(field) => <field.Input label="Name" />}
                 </form.AppField>
