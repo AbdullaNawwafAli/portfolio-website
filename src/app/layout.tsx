@@ -4,6 +4,7 @@ import Navbar from "@/features/Shell/components/Navbar"
 import Footer from "@/features/Shell/components/Footer"
 import { cinzel, raleway } from "@/lib/fonts"
 import QueryProvider from "@/features/TanStackQuery/QueryProvider"
+import { Toaster } from "@/ui/shadcn/sonner"
 
 export const metadata: Metadata = {
   title: "Nawwaf's Portfolio Website",
@@ -27,6 +28,7 @@ export default function RootLayout({
           </div>
 
           {/*Content */}
+          <Toaster />
           <div className="content">
             <Navbar>
               {children}
