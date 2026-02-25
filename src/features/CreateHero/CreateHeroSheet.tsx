@@ -15,11 +15,13 @@ import { toast } from "sonner"
 import * as z from "zod"
 import { createBioApi, updateBioApi } from "@/lib/api-calls/bio"
 import Image from "next/image"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useAppForm } from "../TanstackForm/hooks"
 import { convertToBase64 } from "@/lib/utils/fileUtils"
 import { uploadFileToCloudinaryApi } from "@/lib/api-calls/cloudinary"
 import { createBioDataDto } from "@/types/bioData"
+import { QueryClient, useMutation, useQueryClient } from "@tanstack/react-query"
+import createBioQueryOptions from "@/lib/TanstackQueries/createBioQueryOptions"
 
 const formSchema = z.object({
   hero_photo: z.instanceof(File, {
@@ -50,7 +52,62 @@ const formSchema = z.object({
   }),
 })
 
+interface testPayload {
+  hero_photo: File
+  name: string
+  name_subtext: string
+  hero_description: string
+  email: string
+  instagram_url: string
+  linked_in_url: string
+  github_url: string
+  resume_pdf: File
+}
+
+const bioUpdate = async (value: testPayload) => {
+  if (value.hero_photo && value.resume_pdf) {
+    const heroPicBase64 = await convertToBase64(value.hero_photo)
+    const resumePdfBase64 = await convertToBase64(value.resume_pdf)
+
+    const [{ publicId: heroPicPublicId }, { publicId: resumePdfPublicId }] =
+      await Promise.all([
+        uploadFileToCloudinaryApi(heroPicBase64),
+        uploadFileToCloudinaryApi(resumePdfBase64),
+      ])
+
+    let createBioData: createBioDataDto = {
+      name: value.name,
+      name_subtext: value.name_subtext,
+      hero_description: value.hero_description,
+      email: value.email,
+      bio_picture_cloudinary_id: heroPicPublicId,
+      resume_pdf_cloudinary_id: resumePdfPublicId,
+      instagram_url: value.instagram_url,
+      linked_in_url: value.linked_in_url,
+      github_url: value.github_url,
+    }
+    const result = await createBioApi(createBioData)
+    return result
+  }
+}
+
 export function CreateHeroSheet() {
+  const [preview, setPreview] = useState<string | null>(null)
+  const [open, setOpen] = useState(false)
+  const shouldInvalidate = useRef(false)
+
+  const queryClient = useQueryClient()
+
+  const { mutate, isPending } = useMutation({
+    mutationFn: (createBioData: testPayload) => bioUpdate(createBioData),
+    onSuccess: (data, variables, context) => {
+      shouldInvalidate.current = true
+      setOpen(false)
+      if (preview) URL.revokeObjectURL(preview)
+      setPreview(null)
+    },
+  })
+
   const form = useAppForm({
     defaultValues: {
       hero_photo: undefined as File | undefined,
@@ -67,34 +124,10 @@ export function CreateHeroSheet() {
       onChange: formSchema,
     },
     onSubmit: async ({ value }) => {
-      // const res = updateBioApi({ id: "", updatedData: value })
-      if (value.hero_photo && value.resume_pdf) {
-        const heroPicBase64 = await convertToBase64(value.hero_photo)
-        const resumePdfBase64 = await convertToBase64(value.resume_pdf)
-        const [{ publicId: heroPicPublicId }, { publicId: resumePdfPublicId }] =
-          await Promise.all([
-            uploadFileToCloudinaryApi(heroPicBase64),
-            uploadFileToCloudinaryApi(resumePdfBase64),
-          ])
-        let createBioData: createBioDataDto = {
-          name: value.name,
-          name_subtext: value.name_subtext,
-          hero_description: value.hero_description,
-          email: value.email,
-          bio_picture_cloudinary_id: heroPicPublicId,
-          resume_pdf_cloudinary_id: resumePdfPublicId,
-          instagram_url: value.instagram_url,
-          linked_in_url: value.linked_in_url,
-          github_url: value.github_url,
-        }
-
-        const res = await createBioApi(createBioData)
-        console.log(res)
-      }
+      await mutate(value as testPayload)
     },
   })
 
-  const [preview, setPreview] = useState<string | null>(null)
   useEffect(() => {
     return () => {
       if (preview) URL.revokeObjectURL(preview)
@@ -103,7 +136,7 @@ export function CreateHeroSheet() {
 
   return (
     <div className="flex flex-wrap gap-2">
-      <Sheet>
+      <Sheet open={open} onOpenChange={setOpen}>
         <form
           id="bio-form"
           onSubmit={(e) => {
@@ -117,6 +150,14 @@ export function CreateHeroSheet() {
           <SheetContent
             side={"right"}
             className="data-[side=bottom]:max-h-[50vh] data-[side=top]:max-h-[50vh]"
+            onCloseAutoFocus={() => {
+              if (shouldInvalidate.current) {
+                shouldInvalidate.current = false
+                queryClient.invalidateQueries({
+                  queryKey: createBioQueryOptions().queryKey,
+                })
+              }
+            }}
           >
             <SheetHeader>
               <SheetTitle>Edit Bio</SheetTitle>
@@ -210,12 +251,12 @@ export function CreateHeroSheet() {
                     type="submit"
                     form="bio-form"
                     className="w-full"
+                    disabled={isPending}
                   >
-                    Submit
+                    {isPending ? "Submitting..." : "Submit"}
                   </Button>
                 </div>
               </div>
-
               <SheetClose asChild>
                 <Button variant="outline">Cancel</Button>
               </SheetClose>
