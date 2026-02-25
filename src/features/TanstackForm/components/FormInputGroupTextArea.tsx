@@ -27,7 +27,7 @@ const FormInputGroupTextArea = (props: FormControlProps) => {
         />
         <InputGroupAddon align="block-end">
           <InputGroupText className="tabular-nums">
-            {field.state.value.length}/100 characters
+            {field.state.value.length}/200 characters
           </InputGroupText>
         </InputGroupAddon>
       </InputGroup>
