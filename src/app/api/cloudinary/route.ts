@@ -14,7 +14,6 @@ export async function POST(request: Request) {
     const result = await cloudinary.uploader.upload(base64File, {
       folder: "nextjs_uploads",
     })
-    console.log("not")
 
     return NextResponse.json({ publicId: result.public_id })
   } catch (error) {
