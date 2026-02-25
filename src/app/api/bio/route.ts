@@ -1,4 +1,4 @@
-import { getBioDb, updateBioDb } from "@/server/db/queries/bio"
+import { createBioDb, getBioDb, updateBioDb } from "@/server/db/queries/bio"
 import { NextRequest, NextResponse } from "next/server"
 
 export async function GET() {
@@ -10,6 +10,19 @@ export async function GET() {
     return NextResponse.json(bio)
   } catch (error) {
     return NextResponse.json({ message: "Error fetching bio" }, { status: 500 })
+  }
+}
+
+export async function POST(request: Request) {
+  const body = await request.json()
+
+  try {
+    const { createBioData } = body
+    const result = await createBioDb(createBioData)
+
+    return NextResponse.json({ message: "Bio created successfully" })
+  } catch (error) {
+    return NextResponse.json({ message: "Error creating bio" }, { status: 500 })
   }
 }
 
