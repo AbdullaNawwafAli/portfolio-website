@@ -12,45 +12,17 @@ import {
   SheetTrigger,
 } from "@/ui/shadcn/sheet"
 import { toast } from "sonner"
-import * as z from "zod"
+
 import { createBioApi } from "@/lib/api-calls/bio"
 import Image from "next/image"
 import { useEffect, useState } from "react"
-import { useAppForm } from "../TanstackForm/hooks"
+import { useAppForm } from "../../TanstackForm/hooks"
 import { convertToBase64 } from "@/lib/utils/fileUtils"
 import { uploadFileToCloudinaryApi } from "@/lib/api-calls/cloudinary"
 import { createBioDataDto } from "@/types/bioData"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import createBioQueryOptions from "@/lib/TanstackQueries/createBioQueryOptions"
-
-const formSchema = z.object({
-  hero_photo: z.instanceof(File, {
-    message: "Hero photo is required",
-  }),
-  name: z
-    .string()
-    .min(5, "Name must be at least 5 characters.")
-    .max(32, "Name must be at most 32 characters."),
-  name_subtext: z
-    .string()
-    .min(5, "Name subtext must be at least 5 characters.")
-    .max(32, "Name subtext must be at most 32 characters."),
-  hero_description: z
-    .string()
-    .min(20, "Hero description must be at least 20 characters.")
-    .max(200, "Hero description must be at most 200 characters."),
-  email: z.email(),
-  instagram_url: z
-    .string()
-    .min(1, "Instagram URL must be at least 1 character."),
-  linked_in_url: z
-    .string()
-    .min(1, "LinkedIn URL must be at least 1 character."),
-  github_url: z.string().min(1, "GitHub URL must be at least 1 character."),
-  resume_pdf: z.instanceof(File, {
-    message: "Resume is required",
-  }),
-})
+import { formSchema } from "../schema/CreatHeroSchema"
 
 interface formValues {
   hero_photo: File
@@ -64,7 +36,7 @@ interface formValues {
   resume_pdf: File
 }
 
-const bioCreate = async (value: formValues) => {
+const heroCreate = async (value: formValues) => {
   if (value.hero_photo && value.resume_pdf) {
     const heroPicBase64 = await convertToBase64(value.hero_photo)
     const resumePdfBase64 = await convertToBase64(value.resume_pdf)
@@ -99,7 +71,7 @@ export function CreateHeroSheet() {
   const queryClient = useQueryClient()
 
   const { mutate, isPending } = useMutation({
-    mutationFn: (formValues: formValues) => bioCreate(formValues),
+    mutationFn: (formValues: formValues) => heroCreate(formValues),
     onSuccess: () => {
       setOpen(false)
 

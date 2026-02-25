@@ -12,7 +12,7 @@ import CloudinaryImage from "@/ui/CloudinaryImage"
 import { Button } from "@/ui/shadcn/button"
 import { EditHeroSheet } from "@/features/EditHero/EditHeroSheet"
 import { bioData } from "@/types/bioData"
-import { CreateHeroSheet } from "@/features/CreateHero/CreateHeroSheet"
+import { CreateHeroSheet } from "@/features/Hero/components/CreateHeroSheet"
 
 interface AdminHeroProps {
   data?: bioData
