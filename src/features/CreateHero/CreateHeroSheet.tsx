@@ -13,7 +13,7 @@ import {
 } from "@/ui/shadcn/sheet"
 import { toast } from "sonner"
 import * as z from "zod"
-feaimport { createBioApi } from "@/lib/api-calls/bio"
+import { createBioApi } from "@/lib/api-calls/bio"
 import Image from "next/image"
 import { useEffect, useState } from "react"
 import { useAppForm } from "../TanstackForm/hooks"
