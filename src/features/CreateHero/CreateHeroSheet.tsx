@@ -13,14 +13,14 @@ import {
 } from "@/ui/shadcn/sheet"
 import { toast } from "sonner"
 import * as z from "zod"
-import { createBioApi, updateBioApi } from "@/lib/api-calls/bio"
+feaimport { createBioApi } from "@/lib/api-calls/bio"
 import Image from "next/image"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 import { useAppForm } from "../TanstackForm/hooks"
 import { convertToBase64 } from "@/lib/utils/fileUtils"
 import { uploadFileToCloudinaryApi } from "@/lib/api-calls/cloudinary"
 import { createBioDataDto } from "@/types/bioData"
-import { QueryClient, useMutation, useQueryClient } from "@tanstack/react-query"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 import createBioQueryOptions from "@/lib/TanstackQueries/createBioQueryOptions"
 
 const formSchema = z.object({
@@ -64,7 +64,7 @@ interface testPayload {
   resume_pdf: File
 }
 
-const bioUpdate = async (value: testPayload) => {
+const bioCreate = async (value: testPayload) => {
   if (value.hero_photo && value.resume_pdf) {
     const heroPicBase64 = await convertToBase64(value.hero_photo)
     const resumePdfBase64 = await convertToBase64(value.resume_pdf)
@@ -75,7 +75,7 @@ const bioUpdate = async (value: testPayload) => {
         uploadFileToCloudinaryApi(resumePdfBase64),
       ])
 
-    let createBioData: createBioDataDto = {
+    const createBioData: createBioDataDto = {
       name: value.name,
       name_subtext: value.name_subtext,
       hero_description: value.hero_description,
@@ -86,6 +86,7 @@ const bioUpdate = async (value: testPayload) => {
       linked_in_url: value.linked_in_url,
       github_url: value.github_url,
     }
+
     const result = await createBioApi(createBioData)
     return result
   }
@@ -94,15 +95,15 @@ const bioUpdate = async (value: testPayload) => {
 export function CreateHeroSheet() {
   const [preview, setPreview] = useState<string | null>(null)
   const [open, setOpen] = useState(false)
-  const shouldInvalidate = useRef(false)
 
   const queryClient = useQueryClient()
 
   const { mutate, isPending } = useMutation({
-    mutationFn: (createBioData: testPayload) => bioUpdate(createBioData),
-    onSuccess: (data, variables, context) => {
-      shouldInvalidate.current = true
+    mutationFn: (createBioData: testPayload) => bioCreate(createBioData),
+    onSuccess: () => {
       setOpen(false)
+
+      toast("Hero Set up Successfully")
       if (preview) URL.revokeObjectURL(preview)
       setPreview(null)
     },
@@ -151,12 +152,9 @@ export function CreateHeroSheet() {
             side={"right"}
             className="data-[side=bottom]:max-h-[50vh] data-[side=top]:max-h-[50vh]"
             onCloseAutoFocus={() => {
-              if (shouldInvalidate.current) {
-                shouldInvalidate.current = false
-                queryClient.invalidateQueries({
-                  queryKey: createBioQueryOptions().queryKey,
-                })
-              }
+              queryClient.invalidateQueries({
+                queryKey: createBioQueryOptions().queryKey,
+              })
             }}
           >
             <SheetHeader>
