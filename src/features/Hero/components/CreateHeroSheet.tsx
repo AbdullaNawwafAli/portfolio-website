@@ -22,7 +22,7 @@ import { uploadFileToCloudinaryApi } from "@/lib/api-calls/cloudinary"
 import { createBioDataDto } from "@/types/bioData"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import createBioQueryOptions from "@/lib/TanstackQueries/createBioQueryOptions"
-import { formSchema } from "../schema/CreatHeroSchema"
+import { createHeroFormSchema } from "../lib/zod/CreateHeroSchema"
 
 interface formValues {
   hero_photo: File
@@ -94,7 +94,7 @@ export function CreateHeroSheet() {
       resume_pdf: undefined as File | undefined,
     },
     validators: {
-      onChange: formSchema,
+      onChange: createHeroFormSchema,
     },
     onSubmit: async ({ value }) => {
       await mutate(value as formValues)
