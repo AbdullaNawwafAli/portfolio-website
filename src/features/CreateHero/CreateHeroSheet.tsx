@@ -52,7 +52,7 @@ const formSchema = z.object({
   }),
 })
 
-interface testPayload {
+interface formValues {
   hero_photo: File
   name: string
   name_subtext: string
@@ -64,7 +64,7 @@ interface testPayload {
   resume_pdf: File
 }
 
-const bioCreate = async (value: testPayload) => {
+const bioCreate = async (value: formValues) => {
   if (value.hero_photo && value.resume_pdf) {
     const heroPicBase64 = await convertToBase64(value.hero_photo)
     const resumePdfBase64 = await convertToBase64(value.resume_pdf)
@@ -99,7 +99,7 @@ export function CreateHeroSheet() {
   const queryClient = useQueryClient()
 
   const { mutate, isPending } = useMutation({
-    mutationFn: (createBioData: testPayload) => bioCreate(createBioData),
+    mutationFn: (formValues: formValues) => bioCreate(formValues),
     onSuccess: () => {
       setOpen(false)
 
@@ -125,7 +125,7 @@ export function CreateHeroSheet() {
       onChange: formSchema,
     },
     onSubmit: async ({ value }) => {
-      await mutate(value as testPayload)
+      await mutate(value as formValues)
     },
   })
 
