@@ -13,12 +13,13 @@ import {
 } from "@/ui/shadcn/sheet"
 import { toast } from "sonner"
 import * as z from "zod"
-import { updateBioApi } from "@/lib/api-calls/bio"
+import { createBioApi, updateBioApi } from "@/lib/api-calls/bio"
 import Image from "next/image"
 import { useEffect, useState } from "react"
 import { useAppForm } from "../TanstackForm/hooks"
 import { convertToBase64 } from "@/lib/utils/fileUtils"
 import { uploadFileToCloudinaryApi } from "@/lib/api-calls/cloudinary"
+import { createBioDataDto } from "@/types/bioData"
 
 const formSchema = z.object({
   hero_photo: z.instanceof(File, {
@@ -67,14 +68,28 @@ export function CreateHeroSheet() {
     },
     onSubmit: async ({ value }) => {
       // const res = updateBioApi({ id: "", updatedData: value })
-      if (value.hero_photo) {
+      if (value.hero_photo && value.resume_pdf) {
         const heroPicBase64 = await convertToBase64(value.hero_photo)
-        const heroPicPublicId = await uploadFileToCloudinaryApi(heroPicBase64)
-      }
-      if (value.resume_pdf) {
         const resumePdfBase64 = await convertToBase64(value.resume_pdf)
-        const resumePdfPublicId =
-          await uploadFileToCloudinaryApi(resumePdfBase64)
+        const [{ publicId: heroPicPublicId }, { publicId: resumePdfPublicId }] =
+          await Promise.all([
+            uploadFileToCloudinaryApi(heroPicBase64),
+            uploadFileToCloudinaryApi(resumePdfBase64),
+          ])
+        let createBioData: createBioDataDto = {
+          name: value.name,
+          name_subtext: value.name_subtext,
+          hero_description: value.hero_description,
+          email: value.email,
+          bio_picture_cloudinary_id: heroPicPublicId,
+          resume_pdf_cloudinary_id: resumePdfPublicId,
+          instagram_url: value.instagram_url,
+          linked_in_url: value.linked_in_url,
+          github_url: value.github_url,
+        }
+
+        const res = await createBioApi(createBioData)
+        console.log(res)
       }
     },
   })
