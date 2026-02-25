@@ -24,32 +24,7 @@ import {
 } from "@/ui/shadcn/input-group"
 import { updateBioApi } from "@/lib/api-calls/bio"
 import { bioData } from "@/types/bioData"
-
-const formSchema = z.object({
-  name: z
-    .string()
-    .min(5, "Name must be at least 5 characters.")
-    .max(32, "Name must be at most 32 characters."),
-  name_subtext: z
-    .string()
-    .min(5, "Name subtext must be at least 5 characters.")
-    .max(32, "Name subtext must be at most 32 characters."),
-  hero_description: z
-    .string()
-    .min(20, "Hero description must be at least 20 characters.")
-    .max(200, "Hero description must be at most 100 characters."),
-  email: z.email(),
-  instagram_url: z
-    .string()
-    .min(1, "Instagram URL must be at least 1 character."),
-  linked_in_url: z
-    .string()
-    .min(1, "LinkedIn URL must be at least 1 character."),
-  github_url: z.string().min(1, "GitHub URL must be at least 1 character."),
-  resume_pdf_cloudinary_id: z
-    .string()
-    .min(1, "Resume PDF Cloudinary ID must be at least 1 character."),
-})
+import { EditHeroFormSchema } from "../lib/zod/EditHeroSchema"
 
 interface EditHeroSheetProps {
   data: bioData
@@ -68,7 +43,7 @@ export function EditHeroSheet({ data }: EditHeroSheetProps) {
       resume_pdf_cloudinary_id: data.resume_pdf_cloudinary_id,
     },
     validators: {
-      onChange: formSchema,
+      onChange: EditHeroFormSchema,
     },
     onSubmit: async ({ value }) => {
       const res = updateBioApi({ id: data.id, updatedData: value })
