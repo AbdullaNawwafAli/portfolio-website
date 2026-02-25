@@ -40,7 +40,7 @@ export function EditHeroSheet({ data }: EditHeroSheetProps) {
       instagram_url: data.instagram_url,
       linked_in_url: data.linked_in_url,
       github_url: data.github_url,
-      resume_pdf_cloudinary_id: data.resume_pdf_cloudinary_id,
+      resume_pdf: undefined as File | undefined,
     },
     validators: {
       onChange: EditHeroFormSchema,
