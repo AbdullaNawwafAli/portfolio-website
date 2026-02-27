@@ -21,7 +21,4 @@ export const EditHeroFormSchema = z.object({
     .string()
     .min(1, "LinkedIn URL must be at least 1 character."),
   github_url: z.string().min(1, "GitHub URL must be at least 1 character."),
-  resume_pdf: z.instanceof(File, {
-    message: "Resume is required",
-  }),
 })
