@@ -40,7 +40,6 @@ export function EditHeroSheet({ data }: EditHeroSheetProps) {
       instagram_url: data.instagram_url,
       linked_in_url: data.linked_in_url,
       github_url: data.github_url,
-      resume_pdf: undefined as File | undefined,
     },
     validators: {
       onChange: EditHeroFormSchema,
@@ -243,32 +242,6 @@ export function EditHeroSheet({ data }: EditHeroSheetProps) {
                       <Field data-invalid={isInvalid}>
                         <FieldLabel htmlFor={field.name}>
                           Instagram URL
-                        </FieldLabel>
-                        <Input
-                          id={field.name}
-                          name={field.name}
-                          value={field.state.value}
-                          onBlur={field.handleBlur}
-                          onChange={(e) => field.handleChange(e.target.value)}
-                          aria-invalid={isInvalid}
-                          placeholder="something URL"
-                          autoComplete="off"
-                        />
-                        {isInvalid && (
-                          <FieldError errors={field.state.meta.errors} />
-                        )}
-                      </Field>
-                    )
-                  }}
-                </form.Field>
-                <form.Field name="resume_pdf_cloudinary_id">
-                  {(field) => {
-                    const isInvalid =
-                      field.state.meta.isTouched && !field.state.meta.isValid
-                    return (
-                      <Field data-invalid={isInvalid}>
-                        <FieldLabel htmlFor={field.name}>
-                          Resume PDF Cloudinary ID
                         </FieldLabel>
                         <Input
                           id={field.name}

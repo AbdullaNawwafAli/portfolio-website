@@ -16,7 +16,6 @@ export async function updateBioDb({ id, updatedData }: updateBioDataDto) {
       name_subtext: updatedData.name_subtext,
       hero_description: updatedData.hero_description,
       email: updatedData.email,
-      resume_pdf_cloudinary_id: updatedData.resume_pdf_cloudinary_id,
       instagram_url: updatedData.instagram_url,
       linked_in_url: updatedData.linked_in_url,
       github_url: updatedData.github_url,
