@@ -13,6 +13,7 @@ import { Button } from "@/ui/shadcn/button"
 import { EditHeroSheet } from "@/features/Hero/components/EditHeroSheet"
 import { bioData } from "@/types/bioData"
 import { CreateHeroSheet } from "@/features/Hero/components/CreateHeroSheet"
+import ChangePhotoSheet from "./ChangePhotoSheet"
 
 interface AdminHeroProps {
   data?: bioData
@@ -44,8 +45,9 @@ const AdminHero = ({ data }: AdminHeroProps) => {
                 className="w-full h-auto object-cover transition-opacity duration-300 group-hover:opacity-30"
               />
               <div className=" flex gap-2 duration-300 opacity-0 absolute top-1/2 left-1/2  group-hover:opacity-100 transition-all color-bg  text-center -translate-x-1/2 -translate-y-1/2">
-                Edit
-                <SquarePen />
+                <ChangePhotoSheet
+                  bio_picture_cloudinary_id={data.bio_picture_cloudinary_id}
+                />
               </div>
             </div>
           </div>
