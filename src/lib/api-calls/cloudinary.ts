@@ -4,7 +4,37 @@ export async function uploadFileToCloudinaryApi(base64File: string) {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ base64File: base64File }),
+    body: JSON.stringify({
+      base64File: base64File,
+      params: { folder: "nextjs_uploads" },
+    }),
+  })
+  const data = await res.json()
+  return data
+}
+
+export interface OverWriteFileToCloudinaryApiType {
+  base64File: string
+  bio_picture_cloudinary_id: string
+}
+
+export async function OverWriteFileToCloudinaryApi({
+  base64File,
+  bio_picture_cloudinary_id,
+}: OverWriteFileToCloudinaryApiType) {
+  const res = await fetch("http://localhost:3000/api/cloudinary", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      base64File: base64File,
+      params: {
+        public_id: bio_picture_cloudinary_id,
+        overwrite: true,
+        invalidate: true,
+      },
+    }),
   })
   const data = await res.json()
   return data
