@@ -1,7 +1,6 @@
 "use client"
 import { Button } from "@/ui/shadcn/button"
-import { FieldGroup, Field, FieldLabel, FieldError } from "@/ui/shadcn/field"
-import { Input } from "@/ui/shadcn/input"
+import { FieldGroup } from "@/ui/shadcn/field"
 import {
   Sheet,
   SheetClose,
@@ -13,25 +12,27 @@ import {
   SheetTrigger,
 } from "@/ui/shadcn/sheet"
 import { SquarePen } from "lucide-react"
-import { useForm } from "@tanstack/react-form"
 import { toast } from "sonner"
-import * as z from "zod"
-import {
-  InputGroup,
-  InputGroupTextarea,
-  InputGroupAddon,
-  InputGroupText,
-} from "@/ui/shadcn/input-group"
 import { updateBioApi } from "@/lib/api-calls/bio"
-import { bioData } from "@/types/bioData"
+import { bioData, updateBioDataDto } from "@/types/bioData"
 import { EditHeroFormSchema } from "../lib/zod/EditHeroSchema"
+import { useMutation } from "@tanstack/react-query"
+import { useAppForm } from "@/features/TanstackForm/hooks"
 
 interface EditHeroSheetProps {
   data: bioData
 }
 
 export function EditHeroSheet({ data }: EditHeroSheetProps) {
-  const form = useForm({
+  const { mutate, isPending } = useMutation({
+    mutationFn: ({ id, updatedData }: updateBioDataDto) =>
+      updateBioApi({ id, updatedData }),
+    onSuccess: () => {
+      toast("Hero Set up Successfully")
+    },
+  })
+
+  const form = useAppForm({
     defaultValues: {
       name: data.name,
       name_subtext: data.name_subtext,
@@ -45,8 +46,7 @@ export function EditHeroSheet({ data }: EditHeroSheetProps) {
       onChange: EditHeroFormSchema,
     },
     onSubmit: async ({ value }) => {
-      const res = updateBioApi({ id: data.id, updatedData: value })
-      console.log(res)
+      await mutate({ id: data.id, updatedData: value })
     },
   })
   return (
@@ -78,188 +78,34 @@ export function EditHeroSheet({ data }: EditHeroSheetProps) {
             </SheetHeader>
             <div className="no-scrollbar overflow-y-auto p-4">
               <FieldGroup>
-                <form.Field name="name">
-                  {(field) => {
-                    const isInvalid =
-                      field.state.meta.isTouched && !field.state.meta.isValid
-                    return (
-                      <Field data-invalid={isInvalid}>
-                        <FieldLabel htmlFor={field.name}>Name</FieldLabel>
-                        <Input
-                          id={field.name}
-                          name={field.name}
-                          value={field.state.value}
-                          onBlur={field.handleBlur}
-                          onChange={(e) => field.handleChange(e.target.value)}
-                          aria-invalid={isInvalid}
-                          placeholder="Name"
-                          autoComplete="off"
-                        />
-                        {isInvalid && (
-                          <FieldError errors={field.state.meta.errors} />
-                        )}
-                      </Field>
-                    )
-                  }}
-                </form.Field>
-                <form.Field name="name_subtext">
-                  {(field) => {
-                    const isInvalid =
-                      field.state.meta.isTouched && !field.state.meta.isValid
-                    return (
-                      <Field data-invalid={isInvalid}>
-                        <FieldLabel htmlFor={field.name}>Sub Text</FieldLabel>
-                        <Input
-                          id={field.name}
-                          name={field.name}
-                          value={field.state.value}
-                          onBlur={field.handleBlur}
-                          onChange={(e) => field.handleChange(e.target.value)}
-                          aria-invalid={isInvalid}
-                          placeholder="Sub Text"
-                          autoComplete="off"
-                        />
-                        {isInvalid && (
-                          <FieldError errors={field.state.meta.errors} />
-                        )}
-                      </Field>
-                    )
-                  }}
-                </form.Field>
-                <form.Field name="hero_description">
-                  {(field) => {
-                    const isInvalid =
-                      field.state.meta.isTouched && !field.state.meta.isValid
-                    return (
-                      <Field data-invalid={isInvalid}>
-                        <FieldLabel htmlFor={field.name}>
-                          Hero Description
-                        </FieldLabel>
-                        <InputGroup>
-                          <InputGroupTextarea
-                            id={field.name}
-                            name={field.name}
-                            value={field.state.value}
-                            onBlur={field.handleBlur}
-                            onChange={(e) => field.handleChange(e.target.value)}
-                            placeholder="Description"
-                            rows={6}
-                            className="min-h-24 resize-none"
-                            aria-invalid={isInvalid}
-                          />
-                          <InputGroupAddon align="block-end">
-                            <InputGroupText className="tabular-nums">
-                              {field.state.value.length}/100 characters
-                            </InputGroupText>
-                          </InputGroupAddon>
-                        </InputGroup>
-                        {isInvalid && (
-                          <FieldError errors={field.state.meta.errors} />
-                        )}
-                      </Field>
-                    )
-                  }}
-                </form.Field>
-                <form.Field name="email">
-                  {(field) => {
-                    const isInvalid =
-                      field.state.meta.isTouched && !field.state.meta.isValid
-                    return (
-                      <Field data-invalid={isInvalid}>
-                        <FieldLabel htmlFor={field.name}>Email</FieldLabel>
-                        <Input
-                          id={field.name}
-                          name={field.name}
-                          value={field.state.value}
-                          onBlur={field.handleBlur}
-                          onChange={(e) => field.handleChange(e.target.value)}
-                          aria-invalid={isInvalid}
-                          placeholder="something@gmail.com"
-                          autoComplete="off"
-                        />
-                        {isInvalid && (
-                          <FieldError errors={field.state.meta.errors} />
-                        )}
-                      </Field>
-                    )
-                  }}
-                </form.Field>
-                <form.Field name="github_url">
-                  {(field) => {
-                    const isInvalid =
-                      field.state.meta.isTouched && !field.state.meta.isValid
-                    return (
-                      <Field data-invalid={isInvalid}>
-                        <FieldLabel htmlFor={field.name}>GitHub URL</FieldLabel>
-                        <Input
-                          id={field.name}
-                          name={field.name}
-                          value={field.state.value}
-                          onBlur={field.handleBlur}
-                          onChange={(e) => field.handleChange(e.target.value)}
-                          aria-invalid={isInvalid}
-                          placeholder="something URL"
-                          autoComplete="off"
-                        />
-                        {isInvalid && (
-                          <FieldError errors={field.state.meta.errors} />
-                        )}
-                      </Field>
-                    )
-                  }}
-                </form.Field>
-                <form.Field name="linked_in_url">
-                  {(field) => {
-                    const isInvalid =
-                      field.state.meta.isTouched && !field.state.meta.isValid
-                    return (
-                      <Field data-invalid={isInvalid}>
-                        <FieldLabel htmlFor={field.name}>
-                          LinkedIn URL
-                        </FieldLabel>
-                        <Input
-                          id={field.name}
-                          name={field.name}
-                          value={field.state.value}
-                          onBlur={field.handleBlur}
-                          onChange={(e) => field.handleChange(e.target.value)}
-                          aria-invalid={isInvalid}
-                          placeholder="something URL"
-                          autoComplete="off"
-                        />
-                        {isInvalid && (
-                          <FieldError errors={field.state.meta.errors} />
-                        )}
-                      </Field>
-                    )
-                  }}
-                </form.Field>
-                <form.Field name="instagram_url">
-                  {(field) => {
-                    const isInvalid =
-                      field.state.meta.isTouched && !field.state.meta.isValid
-                    return (
-                      <Field data-invalid={isInvalid}>
-                        <FieldLabel htmlFor={field.name}>
-                          Instagram URL
-                        </FieldLabel>
-                        <Input
-                          id={field.name}
-                          name={field.name}
-                          value={field.state.value}
-                          onBlur={field.handleBlur}
-                          onChange={(e) => field.handleChange(e.target.value)}
-                          aria-invalid={isInvalid}
-                          placeholder="something URL"
-                          autoComplete="off"
-                        />
-                        {isInvalid && (
-                          <FieldError errors={field.state.meta.errors} />
-                        )}
-                      </Field>
-                    )
-                  }}
-                </form.Field>
+                <form.AppField name="name">
+                  {(field) => <field.Input label="Name" />}
+                </form.AppField>
+
+                <form.AppField name="name_subtext">
+                  {(field) => <field.Input label="Sub Text" />}
+                </form.AppField>
+
+                <form.AppField name="hero_description">
+                  {(field) => (
+                    <field.InputGroupTextArea label="Hero Description" />
+                  )}
+                </form.AppField>
+                <form.AppField name="email">
+                  {(field) => <field.Input label="Email" />}
+                </form.AppField>
+
+                <form.AppField name="github_url">
+                  {(field) => <field.Input label="GitHub URL" />}
+                </form.AppField>
+
+                <form.AppField name="linked_in_url">
+                  {(field) => <field.Input label="LinkedIn URL" />}
+                </form.AppField>
+
+                <form.AppField name="instagram_url">
+                  {(field) => <field.Input label="Instagram URL" />}
+                </form.AppField>
               </FieldGroup>
             </div>
             <SheetFooter>
@@ -280,8 +126,9 @@ export function EditHeroSheet({ data }: EditHeroSheetProps) {
                     type="submit"
                     form="bio-form"
                     className="w-full"
+                    disabled={isPending}
                   >
-                    Submit
+                    {isPending ? "Submitting..." : "Submit"}
                   </Button>
                 </div>
               </div>
