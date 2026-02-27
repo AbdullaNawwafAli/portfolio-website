@@ -17,10 +17,16 @@ import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { changeHeroPhotoSchema } from "../lib/zod/changeHeroPhotoSchema"
 import { useAppForm } from "@/features/TanstackForm/hooks"
 import { toast } from "sonner"
+import { convertToBase64 } from "@/lib/utils/fileUtils"
+import {
+  OverWriteFileToCloudinaryApi,
+  OverWriteFileToCloudinaryApiType,
+} from "@/lib/api-calls/cloudinary"
 
 interface ChangeHeroPhotoSheetProps {
   bio_picture_cloudinary_id: string
 }
+
 const ChangePhotoSheet = ({
   bio_picture_cloudinary_id,
 }: ChangeHeroPhotoSheetProps) => {
@@ -34,14 +40,21 @@ const ChangePhotoSheet = ({
 
   const queryClient = useQueryClient()
 
-  //   const { mutate, isPending } = useMutation({
-  //     mutationFn: (formValues: formValues) => heroCreate(formValues),
-  //     onSuccess: () => {
-  //       toast("Hero Set up Successfully")
-  //       if (preview) URL.revokeObjectURL(preview)
-  //       setPreview(null)
-  //     },
-  //   })
+  const { mutate, isPending } = useMutation({
+    mutationFn: ({
+      bio_picture_cloudinary_id,
+      base64File,
+    }: OverWriteFileToCloudinaryApiType) =>
+      OverWriteFileToCloudinaryApi({
+        bio_picture_cloudinary_id,
+        base64File,
+      }),
+    onSuccess: () => {
+      toast("Hero Set up Successfully")
+      if (preview) URL.revokeObjectURL(preview)
+      setPreview(null)
+    },
+  })
 
   const form = useAppForm({
     defaultValues: {
@@ -51,8 +64,10 @@ const ChangePhotoSheet = ({
       onChange: changeHeroPhotoSchema,
     },
     onSubmit: async ({ value }) => {
-      //   await mutate(value)
-      console.log("here")
+      if (value.hero_photo) {
+        const heroPicBase64 = await convertToBase64(value.hero_photo)
+        await mutate({ bio_picture_cloudinary_id, base64File: heroPicBase64 })
+      }
     },
   })
   return (
@@ -120,7 +135,7 @@ const ChangePhotoSheet = ({
                     className="w-full"
                     disabled={true}
                   >
-                    {true ? "Submitting..." : "Submit"}
+                    {isPending ? "Submitting..." : "Submit"}
                   </Button>
                 </div>
               </div>
