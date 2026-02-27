@@ -8,11 +8,11 @@ cloudinary.config({
 })
 
 export async function POST(request: Request) {
-  const { base64File } = await request.json()
+  const { base64File, params } = await request.json()
 
   try {
     const result = await cloudinary.uploader.upload(base64File, {
-      folder: "nextjs_uploads",
+      ...params,
     })
 
     return NextResponse.json({ publicId: result.public_id })
