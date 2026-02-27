@@ -15,7 +15,7 @@ import { SquarePen } from "lucide-react"
 import { toast } from "sonner"
 import { updateBioApi } from "@/lib/api-calls/bio"
 import { bioData, updateBioDataDto } from "@/types/bioData"
-import { EditHeroFormSchema } from "../lib/zod/EditHeroSchema"
+import { editHeroFormSchema } from "../lib/zod/editHeroSchema"
 import { useMutation } from "@tanstack/react-query"
 import { useAppForm } from "@/features/TanstackForm/hooks"
 
@@ -43,7 +43,7 @@ export function EditHeroSheet({ data }: EditHeroSheetProps) {
       github_url: data.github_url,
     },
     validators: {
-      onChange: EditHeroFormSchema,
+      onChange: editHeroFormSchema,
     },
     onSubmit: async ({ value }) => {
       await mutate({ id: data.id, updatedData: value })
