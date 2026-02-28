@@ -21,7 +21,7 @@ import { convertToBase64 } from "@/lib/utils/fileUtils"
 import { uploadFileToCloudinaryApi } from "@/lib/api-calls/cloudinary"
 import { createBioDataDto } from "@/types/bioData"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import createBioQueryOptions from "@/lib/TanstackQueries/createBioQueryOptions"
+import createBioQueryOptions from "@/lib/tanstack-queries/createBioQueryOptions"
 import { createHeroFormSchema } from "../lib/zod/createHeroSchema"
 
 interface formValues {
