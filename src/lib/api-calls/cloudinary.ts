@@ -1,3 +1,5 @@
+import { OverWriteFileToCloudinaryApiType } from "@/types/cloudinaryData"
+
 export async function uploadFileToCloudinaryApi(base64File: string) {
   const res = await fetch("http://localhost:3000/api/cloudinary", {
     method: "POST",
@@ -11,11 +13,6 @@ export async function uploadFileToCloudinaryApi(base64File: string) {
   })
   const data = await res.json()
   return data
-}
-
-export interface OverWriteFileToCloudinaryApiType {
-  base64File: string
-  bio_picture_cloudinary_id: string
 }
 
 export async function OverWriteFileToCloudinaryApi({
