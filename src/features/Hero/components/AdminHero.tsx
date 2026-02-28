@@ -6,7 +6,6 @@ import {
   Instagram,
   Linkedin,
   Mail,
-  SquarePen,
 } from "lucide-react"
 import CloudinaryImage from "@/ui/CloudinaryImage"
 import { Button } from "@/ui/shadcn/button"
@@ -14,12 +13,15 @@ import { EditHeroSheet } from "@/features/Hero/components/EditHeroSheet"
 import { bioData } from "@/types/bioData"
 import { CreateHeroSheet } from "@/features/Hero/components/CreateHeroSheet"
 import ChangePhotoSheet from "./ChangePhotoSheet"
+import { useState } from "react"
 
 interface AdminHeroProps {
   data?: bioData
 }
 
 const AdminHero = ({ data }: AdminHeroProps) => {
+  const [imgVersion, setImgVersion] = useState(() => Date.now())
+
   if (!data)
     return (
       <div className="hero-container">
@@ -43,10 +45,14 @@ const AdminHero = ({ data }: AdminHeroProps) => {
                 width={500}
                 height={500}
                 className="w-full h-auto object-cover transition-opacity duration-300 group-hover:opacity-30"
+                version={imgVersion}
               />
               <div className=" flex gap-2 duration-300 opacity-0 absolute top-1/2 left-1/2  group-hover:opacity-100 transition-all color-bg  text-center -translate-x-1/2 -translate-y-1/2">
                 <ChangePhotoSheet
                   bio_picture_cloudinary_id={data.bio_picture_cloudinary_id}
+                  onUploadSuccess={() => {
+                    setImgVersion(Date.now())
+                  }}
                 />
               </div>
             </div>

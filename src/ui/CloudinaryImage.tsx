@@ -7,6 +7,7 @@ export interface CloudinaryImageProps {
   width: number
   height: number
   className?: string
+  version?: number
 }
 
 const CloudinaryImage = ({
@@ -15,6 +16,7 @@ const CloudinaryImage = ({
   width,
   height,
   className,
+  version,
 }: CloudinaryImageProps) => {
   return (
     <CldImage
@@ -23,6 +25,7 @@ const CloudinaryImage = ({
       width={width}
       height={height}
       className={className}
+      version={version}
     />
   )
 }

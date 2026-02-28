@@ -4,7 +4,6 @@ import {
   Sheet,
   SheetClose,
   SheetContent,
-  SheetDescription,
   SheetFooter,
   SheetHeader,
   SheetTitle,
@@ -13,7 +12,7 @@ import {
 import { SquarePen } from "lucide-react"
 import { useEffect, useState } from "react"
 import Image from "next/image"
-import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { useMutation } from "@tanstack/react-query"
 import { changeHeroPhotoSchema } from "../lib/zod/changeHeroPhotoSchema"
 import { useAppForm } from "@/features/TanstackForm/hooks"
 import { toast } from "sonner"
@@ -25,10 +24,12 @@ import {
 
 interface ChangeHeroPhotoSheetProps {
   bio_picture_cloudinary_id: string
+  onUploadSuccess: () => void
 }
 
 const ChangePhotoSheet = ({
   bio_picture_cloudinary_id,
+  onUploadSuccess,
 }: ChangeHeroPhotoSheetProps) => {
   const [preview, setPreview] = useState<string | null>(null)
 
@@ -37,8 +38,6 @@ const ChangePhotoSheet = ({
       if (preview) URL.revokeObjectURL(preview)
     }
   })
-
-  const queryClient = useQueryClient()
 
   const { mutate, isPending } = useMutation({
     mutationFn: ({
@@ -51,8 +50,10 @@ const ChangePhotoSheet = ({
       }),
     onSuccess: () => {
       toast("Hero Set up Successfully")
+
       if (preview) URL.revokeObjectURL(preview)
       setPreview(null)
+      onUploadSuccess()
     },
   })
 
@@ -133,7 +134,7 @@ const ChangePhotoSheet = ({
                     type="submit"
                     form="hero-photo-form"
                     className="w-full"
-                    disabled={true}
+                    disabled={isPending}
                   >
                     {isPending ? "Submitting..." : "Submit"}
                   </Button>
@@ -141,7 +142,15 @@ const ChangePhotoSheet = ({
               </div>
 
               <SheetClose asChild>
-                <Button variant="outline">Cancel</Button>
+                <Button
+                  variant="outline"
+                  onClick={() => {
+                    if (preview) URL.revokeObjectURL(preview)
+                    setPreview(null)
+                  }}
+                >
+                  Cancel
+                </Button>
               </SheetClose>
             </SheetFooter>
           </SheetContent>
