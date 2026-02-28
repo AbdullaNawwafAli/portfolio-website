@@ -25,7 +25,7 @@ interface ChangeHeroPhotoSheetProps {
   onUploadSuccess: () => void
 }
 
-const ChangePhotoSheet = ({
+const ChangeHeroPhotoSheet = ({
   bio_picture_cloudinary_id,
   onUploadSuccess,
 }: ChangeHeroPhotoSheetProps) => {
@@ -158,4 +158,4 @@ const ChangePhotoSheet = ({
   )
 }
 
-export default ChangePhotoSheet
+export default ChangeHeroPhotoSheet

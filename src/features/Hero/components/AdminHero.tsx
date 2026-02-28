@@ -12,7 +12,7 @@ import { Button } from "@/ui/shadcn/button"
 import { EditHeroSheet } from "@/features/Hero/components/EditHeroSheet"
 import { bioData } from "@/types/bioData"
 import { CreateHeroSheet } from "@/features/Hero/components/CreateHeroSheet"
-import ChangePhotoSheet from "./ChangePhotoSheet"
+import ChangeHeroPhotoSheet from "./ChangeHeroPhotoSheet"
 import { useState } from "react"
 
 interface AdminHeroProps {
@@ -48,7 +48,7 @@ const AdminHero = ({ data }: AdminHeroProps) => {
                 version={imgVersion}
               />
               <div className=" flex gap-2 duration-300 opacity-0 absolute top-1/2 left-1/2  group-hover:opacity-100 transition-all color-bg  text-center -translate-x-1/2 -translate-y-1/2">
-                <ChangePhotoSheet
+                <ChangeHeroPhotoSheet
                   bio_picture_cloudinary_id={data.bio_picture_cloudinary_id}
                   onUploadSuccess={() => {
                     setImgVersion(Date.now())
