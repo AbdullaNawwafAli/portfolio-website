@@ -38,7 +38,7 @@ const AdminHero = ({ data }: AdminHeroProps) => {
         <div className="hero-inner">
           {/*Hero Image*/}
           <div className="hero-image-container">
-            <div className="w-full h-full relative  hover:cursor-pointer group">
+            <div className="w-full h-full relative  group">
               <CloudinaryImage
                 src={data.bio_picture_cloudinary_id}
                 alt="Hero Image"
