@@ -1,7 +1,7 @@
 import z from "zod"
 
-export const changeHeroPhotoSchema = z.object({
-  hero_photo: z.instanceof(File, {
-    message: "Hero photo is required",
+export const changeResumePdfSchema = z.object({
+  resume_pdf: z.instanceof(File, {
+    message: "resume PDF is required",
   }),
 })

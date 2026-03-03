@@ -14,6 +14,7 @@ import { bioData } from "@/types/bioData"
 import { CreateHeroSheet } from "@/features/Hero/components/CreateHeroSheet"
 import ChangeHeroPhotoSheet from "./ChangeHeroPhotoSheet"
 import { useState } from "react"
+import ChangeResumePDFSheet from "./ChangeResumePDFSheet"
 
 interface AdminHeroProps {
   data?: bioData
@@ -121,9 +122,9 @@ const AdminHero = ({ data }: AdminHeroProps) => {
                     </Button>
                   </div>
                   <div className="hero-nav-button">
-                    <Button variant={"ghost"}>
-                      Resume <ArrowDownToLine />
-                    </Button>
+                    <ChangeResumePDFSheet
+                      resume_pdf_cloudinary_id={data.resume_pdf_cloudinary_id}
+                    />
                   </div>
                   {[...Array(4).keys()].map((key) => (
                     <div key={key} className="hero-spacer" />
