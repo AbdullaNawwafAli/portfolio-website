@@ -8,7 +8,7 @@ export async function uploadFileToCloudinaryApi(base64File: string) {
     },
     body: JSON.stringify({
       base64File: base64File,
-      params: { folder: "nextjs_uploads" },
+      params: { folder: "nextjs_uploads", resource_type: "image" },
     }),
   })
   const data = await res.json()
