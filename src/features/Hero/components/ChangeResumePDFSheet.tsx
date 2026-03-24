@@ -9,26 +9,23 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/ui/shadcn/sheet"
-import { ArrowDownToLine, SquarePen } from "lucide-react"
+import { SquarePen } from "lucide-react"
 import { useEffect, useState } from "react"
 import Image from "next/image"
 import { useMutation } from "@tanstack/react-query"
-import { changeResumePdfSchema } from "../lib/zod/changeHeroPhotoSchema"
+import { changeResumePdfSchema } from "../lib/zod/changeResumePdfSchema"
 import { useAppForm } from "@/features/TanstackForm/hooks"
 import { toast } from "sonner"
 import { convertToBase64 } from "@/lib/utils/fileUtils"
 import { OverWriteFileToCloudinaryApi } from "@/lib/api-calls/cloudinary"
 import { OverWriteFileToCloudinaryApiType } from "@/types/cloudinaryData"
-import CloudinaryImage from "@/ui/CloudinaryImage"
 
 interface ChangeResumePDFSheetProps {
   resume_pdf_cloudinary_id: string
-  onUploadSuccess?: () => void
 }
 
 const ChangeResumePDFSheet = ({
   resume_pdf_cloudinary_id,
-  onUploadSuccess,
 }: ChangeResumePDFSheetProps) => {
   const [preview, setPreview] = useState<string | null>(null)
 
@@ -38,23 +35,22 @@ const ChangeResumePDFSheet = ({
     }
   })
 
-  //   const { mutate, isPending } = useMutation({
-  //     mutationFn: ({
-  //       bio_picture_cloudinary_id,
-  //       base64File,
-  //     }: OverWriteFileToCloudinaryApiType) =>
-  //       OverWriteFileToCloudinaryApi({
-  //         bio_picture_cloudinary_id,
-  //         base64File,
-  //       }),
-  //     onSuccess: () => {
-  //       toast("Hero Set up Successfully")
+  const { mutate, isPending } = useMutation({
+    mutationFn: ({
+      resume_pdf_cloudinary_id,
+      base64File,
+    }: OverWriteFileToCloudinaryApiType) =>
+      OverWriteFileToCloudinaryApi({
+        resume_pdf_cloudinary_id,
+        base64File,
+      }),
+    onSuccess: () => {
+      toast("Hero Set up Successfully")
 
-  //       if (preview) URL.revokeObjectURL(preview)
-  //       setPreview(null)
-  //       onUploadSuccess()
-  //     },
-  //   })
+      if (preview) URL.revokeObjectURL(preview)
+      setPreview(null)
+    },
+  })
 
   const form = useAppForm({
     defaultValues: {
@@ -64,9 +60,10 @@ const ChangeResumePDFSheet = ({
       onChange: changeResumePdfSchema,
     },
     onSubmit: async ({ value }) => {
+      console.log(value)
       if (value.resume_pdf) {
         const heroPicBase64 = await convertToBase64(value.resume_pdf)
-        // await mutate({ resume_pdf_cloudinary_id, base64File: heroPicBase64 })
+        await mutate({ resume_pdf_cloudinary_id, base64File: heroPicBase64 })
       }
     },
   })
@@ -74,7 +71,6 @@ const ChangeResumePDFSheet = ({
     <div className="flex flex-wrap gap-2">
       <Sheet>
         <form
-          id="hero-photo-form"
           onSubmit={(e) => {
             e.preventDefault()
             form.handleSubmit()
@@ -85,7 +81,7 @@ const ChangeResumePDFSheet = ({
               variant="ghost"
               className="capitalize font-sans hover:bg-transparent"
             >
-              Resume <ArrowDownToLine />
+              Edit <SquarePen />
             </Button>
           </SheetTrigger>
           <SheetContent
@@ -97,12 +93,6 @@ const ChangeResumePDFSheet = ({
             </SheetHeader>
             <div className="no-scrollbar overflow-y-auto p-4">
               <FieldGroup>
-                <Image
-                  src={resume_pdf_cloudinary_id}
-                  alt="test"
-                  width={400}
-                  height={400}
-                />
                 {preview && (
                   <Image
                     src={preview}
@@ -113,7 +103,7 @@ const ChangeResumePDFSheet = ({
                 )}
 
                 <form.AppField name="resume_pdf">
-                  {(field) => <field.FileInput label="Resume PDF" />}
+                  {(field) => <field.FileInput label="Hero Photo" />}
                 </form.AppField>
               </FieldGroup>
             </div>
@@ -123,11 +113,10 @@ const ChangeResumePDFSheet = ({
                   <Button
                     variant="outline"
                     type="submit"
-                    form="hero-photo-form"
                     className="w-full"
-                    disabled={false /*isPending*/}
+                    disabled={isPending}
                   >
-                    {false /*isPending*/ ? "Submitting..." : "Submit"}
+                    {isPending ? "Submitting..." : "Submit"}
                   </Button>
                 </div>
               </div>
