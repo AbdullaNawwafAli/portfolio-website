@@ -71,6 +71,7 @@ const ChangeResumePDFSheet = ({
     <div className="flex flex-wrap gap-2">
       <Sheet>
         <form
+          id="change-resume-form"
           onSubmit={(e) => {
             e.preventDefault()
             form.handleSubmit()
@@ -112,6 +113,7 @@ const ChangeResumePDFSheet = ({
                 <div className="w-full">
                   <Button
                     variant="outline"
+                    form="change-resume-form"
                     type="submit"
                     className="w-full"
                     disabled={isPending}
