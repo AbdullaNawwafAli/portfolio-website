@@ -1,22 +1,38 @@
 import { eq } from "drizzle-orm"
 import { db } from "../drizzle"
 import { workTable } from "../drizzle/schema"
+import { createWorkDataDto, updateWorkDataDto } from "@/types/workData"
 
 export async function getWorkDb() {
   const work = await db.query.workTable.findFirst()
   return work
 }
 
-export async function updateWorkDb({ id, updatedData }) {
-  const work = await db.update(workTable).set({}).where(eq(workTable.id, id))
+export async function updateWorkDb({ id, updatedData }: updateWorkDataDto) {
+  const work = await db
+    .update(workTable)
+    .set({
+      company_name: updatedData.company_name,
+      job_title: updatedData.job_title,
+      startDate: updatedData.startDate,
+      finishDate: updatedData.finishDate,
+      responsibilities: updatedData.responsibilities,
+    })
+    .where(eq(workTable.id, id))
 
   return work
 }
 
-export async function createWorkDb(createWorkData) {
+export async function createWorkDb(createWorkData: createWorkDataDto) {
   const work = await db
     .insert(workTable)
-    .values({})
+    .values({
+      company_name: createWorkData.company_name,
+      job_title: createWorkData.job_title,
+      startDate: createWorkData.startDate,
+      finishDate: createWorkData.finishDate,
+      responsibilities: createWorkData.responsibilities,
+    })
     .returning({ id: workTable.id })
   return work
 }
