@@ -9,6 +9,7 @@ import {
 import CloudinaryImage from "../../../ui/CloudinaryImage"
 import { Button } from "../../../ui/shadcn/button"
 import { bioData } from "@/types/bioData"
+import WorkSheet from "./WorkSheet"
 
 interface HeroProps {
   data: bioData
@@ -75,9 +76,7 @@ const Hero = ({ data }: HeroProps) => {
                 {/* Bottom Buttons Row */}
                 <div className="hero-bottom-row">
                   <div className="hero-nav-button">
-                    <Button variant={"ghost"}>
-                      Work <ChevronRight />
-                    </Button>
+                    <WorkSheet />
                   </div>
                   <div className="hero-nav-button">
                     <Button variant={"ghost"}>
