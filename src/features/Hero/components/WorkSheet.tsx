@@ -14,8 +14,10 @@ import {
 import { useQuery } from "@tanstack/react-query"
 import { ChevronRight } from "lucide-react"
 import WorkCard from "./WorkCard"
+import { useState } from "react"
 
 const WorkSheet = () => {
+  const [addNewEntry, setAddNewEntry] = useState(false)
   const { data, isPending } = useQuery(createWorkQueryOptions())
 
   return (
@@ -39,9 +41,25 @@ const WorkSheet = () => {
             ))}
           </div>
           <SheetFooter>
-            <SheetClose asChild>
-              <Button variant="outline">Close</Button>
-            </SheetClose>
+            {addNewEntry ? (
+              <>
+                <Button variant="outline" onClick={() => setAddNewEntry(true)}>
+                  Save
+                </Button>
+                <Button variant="outline" onClick={() => setAddNewEntry(true)}>
+                  Cancel
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button variant="outline" onClick={() => setAddNewEntry(true)}>
+                  New Entry
+                </Button>
+                <SheetClose asChild>
+                  <Button variant="outline">Close</Button>
+                </SheetClose>
+              </>
+            )}
           </SheetFooter>
         </SheetContent>
       </Sheet>
