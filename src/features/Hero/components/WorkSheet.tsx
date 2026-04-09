@@ -39,14 +39,15 @@ const WorkSheet = () => {
             {data?.map((work) => (
               <WorkCard data={work} />
             ))}
+            {addNewEntry && <WorkCard form={true} />}
           </div>
           <SheetFooter>
             {addNewEntry ? (
               <>
-                <Button variant="outline" onClick={() => setAddNewEntry(true)}>
+                <Button variant="outline" onClick={() => setAddNewEntry(false)}>
                   Save
                 </Button>
-                <Button variant="outline" onClick={() => setAddNewEntry(true)}>
+                <Button variant="outline" onClick={() => setAddNewEntry(false)}>
                   Cancel
                 </Button>
               </>

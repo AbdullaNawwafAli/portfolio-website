@@ -10,15 +10,30 @@ import {
 } from "@/ui/shadcn/card"
 
 interface WorkCardProps {
-  data: WorkData
+  data?: WorkData
+  form?: boolean
 }
-const WorkCard = ({ data }: WorkCardProps) => {
-  console.log(data, "work card data")
+const WorkCard = ({ data, form }: WorkCardProps) => {
+  if (form) {
+    return (
+      <Card>
+        <CardHeader>
+          <CardTitle></CardTitle>
+          <CardDescription>{data?.job_title}</CardDescription>
+          <CardAction>Card Action</CardAction>
+        </CardHeader>
+        <CardContent>
+          <p>Form Content</p>
+        </CardContent>
+        <CardFooter>Form Footer</CardFooter>
+      </Card>
+    )
+  }
   return (
     <Card>
       <CardHeader>
-        <CardTitle>{data.company_name}</CardTitle>
-        <CardDescription>{data.job_title}</CardDescription>
+        <CardTitle>{data?.company_name}</CardTitle>
+        <CardDescription>{data?.job_title}</CardDescription>
         <CardAction>Card Action</CardAction>
       </CardHeader>
       <CardContent>
