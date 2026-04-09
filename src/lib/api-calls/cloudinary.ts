@@ -31,7 +31,7 @@ export async function OverWriteFileToCloudinaryApi({
     body: JSON.stringify({
       base64File: base64File,
       params: {
-        public_id: { public_id },
+        public_id: public_id,
         overwrite: true,
         invalidate: true,
       },
