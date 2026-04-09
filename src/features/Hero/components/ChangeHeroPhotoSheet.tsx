@@ -30,6 +30,7 @@ const ChangeHeroPhotoSheet = ({
   onUploadSuccess,
 }: ChangeHeroPhotoSheetProps) => {
   const [preview, setPreview] = useState<string | null>(null)
+  const [open, setOpen] = useState(false)
 
   useEffect(() => {
     return () => {
@@ -52,6 +53,7 @@ const ChangeHeroPhotoSheet = ({
       if (preview) URL.revokeObjectURL(preview)
       setPreview(null)
       onUploadSuccess()
+      setOpen(false)
     },
   })
 
@@ -71,7 +73,16 @@ const ChangeHeroPhotoSheet = ({
   })
   return (
     <div className="flex flex-wrap gap-2">
-      <Sheet>
+      <Sheet
+        open={open}
+        onOpenChange={(val) => {
+          if (!val && preview) {
+            URL.revokeObjectURL(preview)
+            setPreview(null)
+          }
+          setOpen(val)
+        }}
+      >
         <form
           id="hero-photo-form"
           onSubmit={(e) => {

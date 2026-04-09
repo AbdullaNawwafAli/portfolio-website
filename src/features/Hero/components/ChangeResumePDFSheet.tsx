@@ -10,8 +10,7 @@ import {
   SheetTrigger,
 } from "@/ui/shadcn/sheet"
 import { SquarePen } from "lucide-react"
-import { useEffect, useState } from "react"
-import Image from "next/image"
+import { useState } from "react"
 import { useMutation } from "@tanstack/react-query"
 import { changeResumePdfSchema } from "../lib/zod/changeResumePdfSchema"
 import { useAppForm } from "@/features/TanstackForm/hooks"
@@ -27,6 +26,7 @@ interface ChangeResumePDFSheetProps {
 const ChangeResumePDFSheet = ({
   resume_pdf_cloudinary_id,
 }: ChangeResumePDFSheetProps) => {
+  const [open, setOpen] = useState(false)
   const { mutate, isPending } = useMutation({
     mutationFn: ({
       resume_pdf_cloudinary_id,
@@ -38,6 +38,7 @@ const ChangeResumePDFSheet = ({
       }),
     onSuccess: () => {
       toast("Resume PDF changed Successfully")
+      setOpen(false)
     },
   })
 
@@ -57,7 +58,7 @@ const ChangeResumePDFSheet = ({
   })
   return (
     <div className="flex flex-wrap gap-2">
-      <Sheet>
+      <Sheet open={open} onOpenChange={() => setOpen(true)}>
         <form
           id="change-resume-form"
           onSubmit={(e) => {
