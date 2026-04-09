@@ -12,7 +12,6 @@ import {
   SheetTrigger,
 } from "@/ui/shadcn/sheet"
 import { toast } from "sonner"
-
 import { createBioApi } from "@/lib/api-calls/bio"
 import Image from "next/image"
 import { useEffect, useState } from "react"
@@ -24,47 +23,8 @@ import { useMutation, useQueryClient } from "@tanstack/react-query"
 import createBioQueryOptions from "@/lib/tanstack-queries/createBioQueryOptions"
 import { createHeroFormSchema } from "../lib/zod/createHeroSchema"
 
-interface formValues {
-  hero_photo: File
-  name: string
-  name_subtext: string
-  hero_description: string
-  email: string
-  instagram_url: string
-  linked_in_url: string
-  github_url: string
-  resume_pdf: File
-}
-
-const heroCreate = async (value: formValues) => {
-  if (value.hero_photo && value.resume_pdf) {
-    const heroPicBase64 = await convertToBase64(value.hero_photo)
-    const resumePdfBase64 = await convertToBase64(value.resume_pdf)
-
-    const [{ publicId: heroPicPublicId }, { publicId: resumePdfPublicId }] =
-      await Promise.all([
-        uploadFileToCloudinaryApi(heroPicBase64),
-        uploadFileToCloudinaryApi(resumePdfBase64),
-      ])
-
-    const createBioData: createBioDataDto = {
-      name: value.name,
-      name_subtext: value.name_subtext,
-      hero_description: value.hero_description,
-      email: value.email,
-      bio_picture_cloudinary_id: heroPicPublicId,
-      resume_pdf_cloudinary_id: resumePdfPublicId,
-      instagram_url: value.instagram_url,
-      linked_in_url: value.linked_in_url,
-      github_url: value.github_url,
-    }
-
-    const result = await createBioApi(createBioData)
-    return result
-  }
-}
-
 export function CreateHeroSheet() {
+  //TODO: fix the drawer closing suddenly instead of sliding  when the successfully created
   const [preview, setPreview] = useState<string | null>(null)
   const [open, setOpen] = useState(false)
 
@@ -78,6 +38,10 @@ export function CreateHeroSheet() {
       toast("Hero Set up Successfully")
       if (preview) URL.revokeObjectURL(preview)
       setPreview(null)
+      setOpen(false)
+      queryClient.invalidateQueries({
+        queryKey: createBioQueryOptions().queryKey,
+      })
     },
   })
 
@@ -123,11 +87,6 @@ export function CreateHeroSheet() {
           <SheetContent
             side={"right"}
             className="data-[side=bottom]:max-h-[50vh] data-[side=top]:max-h-[50vh]"
-            onCloseAutoFocus={() => {
-              queryClient.invalidateQueries({
-                queryKey: createBioQueryOptions().queryKey,
-              })
-            }}
           >
             <SheetHeader>
               <SheetTitle>Edit Bio</SheetTitle>
@@ -236,4 +195,44 @@ export function CreateHeroSheet() {
       </Sheet>
     </div>
   )
+}
+
+interface formValues {
+  hero_photo: File
+  name: string
+  name_subtext: string
+  hero_description: string
+  email: string
+  instagram_url: string
+  linked_in_url: string
+  github_url: string
+  resume_pdf: File
+}
+
+const heroCreate = async (value: formValues) => {
+  if (value.hero_photo && value.resume_pdf) {
+    const heroPicBase64 = await convertToBase64(value.hero_photo)
+    const resumePdfBase64 = await convertToBase64(value.resume_pdf)
+
+    const [{ publicId: heroPicPublicId }, { publicId: resumePdfPublicId }] =
+      await Promise.all([
+        uploadFileToCloudinaryApi(heroPicBase64),
+        uploadFileToCloudinaryApi(resumePdfBase64),
+      ])
+
+    const createBioData: createBioDataDto = {
+      name: value.name,
+      name_subtext: value.name_subtext,
+      hero_description: value.hero_description,
+      email: value.email,
+      bio_picture_cloudinary_id: heroPicPublicId,
+      resume_pdf_cloudinary_id: resumePdfPublicId,
+      instagram_url: value.instagram_url,
+      linked_in_url: value.linked_in_url,
+      github_url: value.github_url,
+    }
+
+    const result = await createBioApi(createBioData)
+    return result
+  }
 }

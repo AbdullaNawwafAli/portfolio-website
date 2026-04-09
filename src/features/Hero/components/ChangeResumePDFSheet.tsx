@@ -58,7 +58,7 @@ const ChangeResumePDFSheet = ({
   })
   return (
     <div className="flex flex-wrap gap-2">
-      <Sheet open={open} onOpenChange={() => setOpen(true)}>
+      <Sheet open={open} onOpenChange={setOpen}>
         <form
           id="change-resume-form"
           onSubmit={(e) => {
