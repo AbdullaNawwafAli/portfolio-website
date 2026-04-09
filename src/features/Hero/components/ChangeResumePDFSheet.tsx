@@ -27,14 +27,6 @@ interface ChangeResumePDFSheetProps {
 const ChangeResumePDFSheet = ({
   resume_pdf_cloudinary_id,
 }: ChangeResumePDFSheetProps) => {
-  const [preview, setPreview] = useState<string | null>(null)
-
-  useEffect(() => {
-    return () => {
-      if (preview) URL.revokeObjectURL(preview)
-    }
-  })
-
   const { mutate, isPending } = useMutation({
     mutationFn: ({
       resume_pdf_cloudinary_id,
@@ -45,10 +37,7 @@ const ChangeResumePDFSheet = ({
         base64File,
       }),
     onSuccess: () => {
-      toast("Hero Set up Successfully")
-
-      if (preview) URL.revokeObjectURL(preview)
-      setPreview(null)
+      toast("Resume PDF changed Successfully")
     },
   })
 
@@ -60,7 +49,6 @@ const ChangeResumePDFSheet = ({
       onChange: changeResumePdfSchema,
     },
     onSubmit: async ({ value }) => {
-      console.log(value)
       if (value.resume_pdf) {
         const heroPicBase64 = await convertToBase64(value.resume_pdf)
         await mutate({ resume_pdf_cloudinary_id, base64File: heroPicBase64 })
@@ -82,7 +70,7 @@ const ChangeResumePDFSheet = ({
               variant="ghost"
               className="capitalize font-sans hover:bg-transparent"
             >
-              Edit <SquarePen />
+              Resume <SquarePen />
             </Button>
           </SheetTrigger>
           <SheetContent
@@ -90,21 +78,12 @@ const ChangeResumePDFSheet = ({
             className="data-[side=bottom]:max-h-[50vh] data-[side=top]:max-h-[50vh]"
           >
             <SheetHeader>
-              <SheetTitle>Change Hero Photo</SheetTitle>
+              <SheetTitle>Change Resume PDF</SheetTitle>
             </SheetHeader>
             <div className="no-scrollbar overflow-y-auto p-4">
               <FieldGroup>
-                {preview && (
-                  <Image
-                    src={preview}
-                    alt="Hero photo preview"
-                    width={400}
-                    height={400}
-                  />
-                )}
-
                 <form.AppField name="resume_pdf">
-                  {(field) => <field.FileInput label="Hero Photo" />}
+                  {(field) => <field.FileInput label="Resume PDF" />}
                 </form.AppField>
               </FieldGroup>
             </div>
@@ -124,15 +103,7 @@ const ChangeResumePDFSheet = ({
               </div>
 
               <SheetClose asChild>
-                <Button
-                  variant="outline"
-                  onClick={() => {
-                    if (preview) URL.revokeObjectURL(preview)
-                    setPreview(null)
-                  }}
-                >
-                  Cancel
-                </Button>
+                <Button variant="outline">Cancel</Button>
               </SheetClose>
             </SheetFooter>
           </SheetContent>
