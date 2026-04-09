@@ -15,6 +15,7 @@ import { CreateHeroSheet } from "@/features/Hero/components/CreateHeroSheet"
 import ChangeHeroPhotoSheet from "./ChangeHeroPhotoSheet"
 import { useState } from "react"
 import ChangeResumePDFSheet from "./ChangeResumePDFSheet"
+import WorkSheet from "./WorkSheet"
 
 interface AdminHeroProps {
   data?: bioData
@@ -107,9 +108,7 @@ const AdminHero = ({ data }: AdminHeroProps) => {
                 {/* Bottom Buttons Row */}
                 <div className="hero-bottom-row">
                   <div className="hero-nav-button">
-                    <Button variant={"ghost"}>
-                      Work <ChevronRight />
-                    </Button>
+                    <WorkSheet />
                   </div>
                   <div className="hero-nav-button">
                     <Button variant={"ghost"}>
