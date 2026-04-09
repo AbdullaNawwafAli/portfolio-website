@@ -4,7 +4,7 @@ import { workTable } from "../drizzle/schema"
 import { createWorkDataDto, updateWorkDataDto } from "@/types/workData"
 
 export async function getWorkDb() {
-  const work = await db.query.workTable.findFirst()
+  const work = await db.query.workTable.findMany()
   return work
 }
 
