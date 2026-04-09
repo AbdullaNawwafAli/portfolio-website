@@ -47,7 +47,7 @@ const ChangeHeroPhotoSheet = ({
         base64File,
       }),
     onSuccess: () => {
-      toast("Hero Set up Successfully")
+      toast("Hero Photo Changed Successfully")
 
       if (preview) URL.revokeObjectURL(preview)
       setPreview(null)
