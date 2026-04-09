@@ -24,9 +24,6 @@ const WorkCard = ({ data }: WorkCardProps) => {
       <CardContent>
         <p>Card Content</p>
       </CardContent>
-      <CardFooter>
-        <p>Card Footer</p>
-      </CardFooter>
     </Card>
   )
 }
