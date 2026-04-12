@@ -5,5 +5,5 @@ export const createWorkSchema = z.object({
   job_title: z.string().min(1, "Job title is required"),
   startDate: z.date(),
   finishDate: z.date(),
-  responsibilities: z.array(z.string()).optional(),
+  responsibilities: z.array(z.string()),
 })

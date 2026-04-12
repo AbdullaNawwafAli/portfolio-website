@@ -39,7 +39,7 @@ const WorkSheet = () => {
             {data?.map((work) => (
               <WorkCard data={work} />
             ))}
-            {addNewEntry && <WorkCard form={true} />}
+            {addNewEntry && <WorkCard formMode={true} />}
           </div>
           <SheetFooter>
             {addNewEntry ? (
