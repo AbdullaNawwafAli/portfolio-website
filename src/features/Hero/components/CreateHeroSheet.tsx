@@ -21,7 +21,7 @@ import { uploadFileToCloudinaryApi } from "@/lib/api-calls/cloudinary"
 import { createBioDataDto } from "@/types/bioData"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import createBioQueryOptions from "@/lib/tanstack-queries/createBioQueryOptions"
-import { createHeroFormSchema } from "../lib/zod/createHeroSchema"
+import { createHeroSchema } from "../lib/zod/createHeroSchema"
 
 export function CreateHeroSheet() {
   //TODO: fix the drawer closing suddenly instead of sliding  when the successfully created
@@ -58,7 +58,7 @@ export function CreateHeroSheet() {
       resume_pdf: undefined as File | undefined,
     },
     validators: {
-      onChange: createHeroFormSchema,
+      onChange: createHeroSchema,
     },
     onSubmit: async ({ value }) => {
       await mutate(value as formValues)
