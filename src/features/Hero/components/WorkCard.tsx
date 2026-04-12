@@ -1,3 +1,4 @@
+import { useAppForm } from "@/features/TanstackForm/hooks"
 import { WorkData } from "@/types/workData"
 import {
   Card,
@@ -8,12 +9,23 @@ import {
   CardHeader,
   CardTitle,
 } from "@/ui/shadcn/card"
+import { createWorkSchema } from "../lib/zod/createWorkSchema"
 
 interface WorkCardProps {
   data?: WorkData
-  form?: boolean
+  formMode?: boolean
 }
-const WorkCard = ({ data, form }: WorkCardProps) => {
+const WorkCard = ({ data, formMode }: WorkCardProps) => {
+  const form = useAppForm({
+    defaultValues: {},
+    validators: {
+      onChange: createWorkSchema,
+    },
+    onSubmit: async ({ value }) => {
+      console.log("value", value)
+    },
+  })
+
   if (form) {
     return (
       <Card>
