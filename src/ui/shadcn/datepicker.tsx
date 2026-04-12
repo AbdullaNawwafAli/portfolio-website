@@ -1,34 +1,38 @@
 "use client"
 
 import * as React from "react"
-import { format } from "date-fns"
 import { Field, FieldLabel } from "./field"
-import { PopoverTrigger, PopoverContent, Popover } from "./popover"
+import { Popover, PopoverContent, PopoverTrigger } from "./popover"
 import { Button } from "./button"
 import { Calendar } from "./calendar"
 
 export function DatePicker() {
-  const [date, setDate] = React.useState<Date>()
+  const [open, setOpen] = React.useState(false)
+  const [date, setDate] = React.useState<Date | undefined>(undefined)
 
   return (
     <Field className="mx-auto w-44">
-      <FieldLabel htmlFor="date-picker-simple">Date</FieldLabel>
-      <Popover>
+      <FieldLabel htmlFor="date">Date of birth</FieldLabel>
+      <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button
             variant="outline"
-            id="date-picker-simple"
+            id="date"
             className="justify-start font-normal"
           >
-            {date ? format(date, "PPP") : <span>Pick a date</span>}
+            {date ? date.toLocaleDateString() : "Select date"}
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-auto p-0" align="start">
+        <PopoverContent className="w-auto overflow-hidden p-0" align="start">
           <Calendar
             mode="single"
             selected={date}
-            onSelect={setDate}
             defaultMonth={date}
+            captionLayout="dropdown"
+            onSelect={(date: React.SetStateAction<Date | undefined>) => {
+              setDate(date)
+              setOpen(false)
+            }}
           />
         </PopoverContent>
       </Popover>
