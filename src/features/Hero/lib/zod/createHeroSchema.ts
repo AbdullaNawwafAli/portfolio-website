@@ -1,6 +1,6 @@
 import z from "zod"
 
-export const createHeroFormSchema = z.object({
+export const createHeroSchema = z.object({
   hero_photo: z.instanceof(File, {
     message: "Hero photo is required",
   }),
