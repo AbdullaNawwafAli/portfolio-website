@@ -1,5 +1,5 @@
 import { useAppForm } from "@/features/TanstackForm/hooks"
-import { WorkData } from "@/types/workData"
+import { createWorkDataDto, WorkData } from "@/types/workData"
 import {
   Card,
   CardAction,
@@ -27,12 +27,24 @@ import {
 } from "@/ui/shadcn/input-group"
 import { XIcon } from "lucide-react"
 import { Button } from "@/ui/shadcn/button"
+import { createWorkApi } from "@/lib/api-calls/work"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 
 interface WorkCardProps {
   data?: WorkData
   formMode?: boolean
+  onSaved?: () => void
 }
-const WorkCard = ({ data, formMode }: WorkCardProps) => {
+const WorkCard = ({ data, formMode, onSaved }: WorkCardProps) => {
+  const queryClient = useQueryClient()
+  const { mutate } = useMutation({
+    mutationFn: (value: createWorkDataDto) => createWorkApi(value),
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ["work"] })
+      onSaved?.()
+    },
+  })
+
   const form = useAppForm({
     defaultValues: {
       company_name: "",
@@ -45,7 +57,7 @@ const WorkCard = ({ data, formMode }: WorkCardProps) => {
       onChange: createWorkSchema,
     },
     onSubmit: async ({ value }) => {
-      console.log("value", value)
+      await mutate(value as createWorkDataDto)
     },
   })
 
@@ -106,55 +118,9 @@ const WorkCard = ({ data, formMode }: WorkCardProps) => {
                             key={index}
                             name={`responsibilities[${index}]`}
                           >
-                            {(innerField) => {
-                              const isInvalid =
-                                innerField.state.meta.isTouched &&
-                                !innerField.state.meta.isValid
-                              return (
-                                <Field
-                                  orientation="horizontal"
-                                  data-invalid={isInvalid}
-                                >
-                                  <FieldContent>
-                                    <InputGroup>
-                                      <InputGroupInput
-                                        id={innerField.name}
-                                        aria-invalid={isInvalid}
-                                        aria-label={`User ${index + 1} email`}
-                                        type="email"
-                                        onBlur={innerField.handleBlur}
-                                        onChange={(e) =>
-                                          innerField.handleChange(
-                                            e.target.value
-                                          )
-                                        }
-                                        value={innerField.state.value}
-                                      />
-                                      {field.state.value.length > 1 && (
-                                        <InputGroupAddon align="inline-end">
-                                          <InputGroupButton
-                                            type="button"
-                                            variant="ghost"
-                                            size="icon-xs"
-                                            onClick={() =>
-                                              field.removeValue(index)
-                                            }
-                                            aria-label={`Remove User ${index + 1}`}
-                                          >
-                                            <XIcon />
-                                          </InputGroupButton>
-                                        </InputGroupAddon>
-                                      )}
-                                    </InputGroup>
-                                    {isInvalid && (
-                                      <FieldError
-                                        errors={innerField.state.meta.errors}
-                                      />
-                                    )}
-                                  </FieldContent>
-                                </Field>
-                              )
-                            }}
+                            {(innerField) => (
+                              <innerField.InputGroupTextArea label="Responsibility" />
+                            )}
                           </form.AppField>
                         ))}
                       </FieldGroup>

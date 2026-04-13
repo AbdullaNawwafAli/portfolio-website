@@ -35,16 +35,18 @@ const WorkSheet = () => {
           <SheetHeader>
             <SheetTitle>Work</SheetTitle>
           </SheetHeader>
-          <div className="no-scrollbar  p-4 flex flex-col gap-2">
+          <div className="no-scrollbar  p-4 flex flex-col gap-2 h-full overflow-hidden overflow-y-auto">
             {data?.map((work) => (
               <WorkCard data={work} />
             ))}
-            {addNewEntry && <WorkCard formMode={true} />}
+            {addNewEntry && (
+              <WorkCard formMode={true} onSaved={() => setAddNewEntry(false)} />
+            )}
           </div>
           <SheetFooter>
             {addNewEntry ? (
               <>
-                <Button variant="outline" onClick={() => setAddNewEntry(false)}>
+                <Button variant="outline" type="submit" form="work-form">
                   Save
                 </Button>
                 <Button variant="outline" onClick={() => setAddNewEntry(false)}>
