@@ -35,7 +35,7 @@ const WorkSheet = () => {
           <SheetHeader>
             <SheetTitle>Work</SheetTitle>
           </SheetHeader>
-          <div className="no-scrollbar  p-4">
+          <div className="no-scrollbar  p-4 flex flex-col gap-2">
             {data?.map((work) => (
               <WorkCard data={work} />
             ))}
