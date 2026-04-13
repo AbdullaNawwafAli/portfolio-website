@@ -1,4 +1,4 @@
-import { getWorkDb } from "@/server/db/queries/work"
+import { createWorkDb, getWorkDb } from "@/server/db/queries/work"
 import { NextResponse } from "next/server"
 
 export async function GET() {
@@ -13,5 +13,23 @@ export async function GET() {
       { message: "Error fetching work" },
       { status: 500 }
     )
+  }
+}
+
+export async function POST(req: Request) {
+  try {
+    const body = await req.json()
+
+    const created = await createWorkDb({
+      company_name: body.company_name,
+      job_title: body.job_title,
+      startDate: new Date(body.startDate),
+      finishDate: new Date(body.finishDate),
+      responsibilities: body.responsibilities ?? [],
+    })
+
+    return NextResponse.json(created, { status: 201 })
+  } catch (error) {
+    return NextResponse.json({ message: "Error creating work" }, { status: 500 })
   }
 }
