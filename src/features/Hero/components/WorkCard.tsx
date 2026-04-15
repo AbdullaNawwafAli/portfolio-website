@@ -19,13 +19,7 @@ import {
   FieldLegend,
   FieldSet,
 } from "@/ui/shadcn/field"
-import {
-  InputGroup,
-  InputGroupInput,
-  InputGroupAddon,
-  InputGroupButton,
-} from "@/ui/shadcn/input-group"
-import { XIcon } from "lucide-react"
+import { toast } from "sonner"
 import { Button } from "@/ui/shadcn/button"
 import { createWorkApi } from "@/lib/api-calls/work"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
@@ -42,6 +36,7 @@ const WorkCard = ({ data, formMode, onSaved }: WorkCardProps) => {
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["work"] })
       onSaved?.()
+      toast("Work entry created successfully")
     },
   })
 
