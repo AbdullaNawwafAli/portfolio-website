@@ -36,3 +36,18 @@ export async function createWorkDb(createWorkData: createWorkDataDto) {
     .returning({ id: workTable.id })
   return work
 }
+
+export async function deleteWorkDb({ id, updatedData }: updateWorkDataDto) {
+  const work = await db
+    .update(workTable)
+    .set({
+      company_name: updatedData.company_name,
+      job_title: updatedData.job_title,
+      startDate: updatedData.startDate,
+      finishDate: updatedData.finishDate,
+      responsibilities: updatedData.responsibilities,
+    })
+    .where(eq(workTable.id, id))
+
+  return work
+}
