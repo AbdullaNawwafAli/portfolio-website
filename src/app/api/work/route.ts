@@ -24,12 +24,15 @@ export async function POST(req: Request) {
       company_name: body.company_name,
       job_title: body.job_title,
       startDate: new Date(body.startDate),
-      finishDate: new Date(body.finishDate),
-      responsibilities: body.responsibilities ?? [],
+      finishDate: body.finishDate ? new Date(body.finishDate) : undefined,
+      responsibilities: body.responsibilities,
     })
 
     return NextResponse.json(created, { status: 201 })
   } catch (error) {
-    return NextResponse.json({ message: "Error creating work" }, { status: 500 })
+    return NextResponse.json(
+      { message: "Error creating work" },
+      { status: 500 }
+    )
   }
 }

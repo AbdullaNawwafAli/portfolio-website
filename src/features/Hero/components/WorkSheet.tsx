@@ -37,7 +37,7 @@ const WorkSheet = () => {
           </SheetHeader>
           <div className="no-scrollbar  p-4 flex flex-col gap-2 h-full overflow-hidden overflow-y-auto">
             {data?.map((work) => (
-              <WorkCard data={work} />
+              <WorkCard data={work} key={work.company_name} />
             ))}
             {addNewEntry && (
               <WorkCard formMode={true} onSaved={() => setAddNewEntry(false)} />

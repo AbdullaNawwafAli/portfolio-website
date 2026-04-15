@@ -5,13 +5,11 @@ import {
   CardAction,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/ui/shadcn/card"
 import { createWorkSchema } from "../lib/zod/createWorkSchema"
 import {
-  Field,
   FieldContent,
   FieldDescription,
   FieldError,
@@ -44,12 +42,12 @@ const WorkCard = ({ data, formMode, onSaved }: WorkCardProps) => {
     defaultValues: {
       company_name: "",
       job_title: "",
-      startDate: new Date(),
-      finishDate: new Date(),
-      responsibilities: [] as string[],
+      startDate: undefined as Date | undefined,
+      finishDate: undefined as Date | undefined,
+      responsibilities: undefined as string[] | undefined,
     },
     validators: {
-      onChange: createWorkSchema,
+      onSubmit: createWorkSchema,
     },
     onSubmit: async ({ value }) => {
       await mutate(value as createWorkDataDto)
@@ -74,14 +72,14 @@ const WorkCard = ({ data, formMode, onSaved }: WorkCardProps) => {
               <form.AppField name="job_title">
                 {(field) => <field.Input label="Job Title" />}
               </form.AppField>
-              <div className="flex gap-2">
-                <form.AppField name="startDate">
-                  {(field) => <field.DatePicker label="Start Date" />}
-                </form.AppField>
-                <form.AppField name="finishDate">
-                  {(field) => <field.DatePicker label="Finish Date" />}
-                </form.AppField>
-              </div>
+
+              <form.AppField name="startDate">
+                {(field) => <field.DatePicker label="Start Date" />}
+              </form.AppField>
+              <form.AppField name="finishDate">
+                {(field) => <field.DatePicker label="Finish Date" />}
+              </form.AppField>
+
               <form.Field name="responsibilities" mode="array">
                 {(field) => {
                   return (
@@ -108,7 +106,7 @@ const WorkCard = ({ data, formMode, onSaved }: WorkCardProps) => {
                         </Button>
                       </div>
                       <FieldGroup>
-                        {field.state.value.map((_, index) => (
+                        {(field.state.value ?? []).map((_, index) => (
                           <form.AppField
                             key={index}
                             name={`responsibilities[${index}]`}
