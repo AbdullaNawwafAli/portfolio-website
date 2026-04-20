@@ -30,7 +30,7 @@ export async function createWorkDb(createWorkData: createWorkDataDto) {
       company_name: createWorkData.company_name,
       job_title: createWorkData.job_title,
       startDate: createWorkData.startDate,
-      finishDate: createWorkData.finishDate ?? createWorkData.startDate,
+      finishDate: createWorkData.finishDate,
       responsibilities: createWorkData.responsibilities ?? [],
     })
     .returning({ id: workTable.id })
