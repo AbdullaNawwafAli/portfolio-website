@@ -141,8 +141,8 @@ const WorkCard = ({ data, formMode, onSaved }: WorkCardProps) => {
     <Card>
       <CardHeader>
         <CardTitle>{data?.company_name}</CardTitle>
-        <CardDescription></CardDescription>
         <CardDescription>
+          {data?.city ? data.city + ", " : ""} {data?.country + " | "}
           {(data?.startDate
             ? format(new Date(data.startDate), "dd MMM yyyy")
             : undefined) +
@@ -154,7 +154,11 @@ const WorkCard = ({ data, formMode, onSaved }: WorkCardProps) => {
         <CardAction>{data?.job_title}</CardAction>
       </CardHeader>
       <CardContent>
-        <p>Card Content</p>
+        <ul className="list-disc list-inside space-y-1">
+          {data?.responsibilities.map((resp, index) => (
+            <li key={index}>{resp}</li>
+          ))}
+        </ul>
       </CardContent>
     </Card>
   )
