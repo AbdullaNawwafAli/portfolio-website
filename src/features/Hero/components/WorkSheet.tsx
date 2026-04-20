@@ -21,52 +21,50 @@ const WorkSheet = () => {
   const { data, isPending } = useQuery(createWorkQueryOptions())
 
   return (
-    <div className="flex flex-wrap gap-2">
-      <Sheet>
-        <SheetTrigger asChild>
-          <Button variant={"ghost"}>
-            Work <ChevronRight />
-          </Button>
-        </SheetTrigger>
-        <SheetContent
-          side={"right"}
-          className="data-[side=bottom]:max-h-[50vh] data-[side=top]:max-h-[50vh]"
-        >
-          <SheetHeader>
-            <SheetTitle>Work</SheetTitle>
-          </SheetHeader>
-          <div className="no-scrollbar  p-4 flex flex-col gap-2 h-full overflow-hidden overflow-y-auto">
-            {data?.map((work) => (
-              <WorkCard data={work} key={work.company_name} />
-            ))}
-            {addNewEntry && (
-              <WorkCard formMode={true} onSaved={() => setAddNewEntry(false)} />
-            )}
-          </div>
-          <SheetFooter>
-            {addNewEntry ? (
-              <>
-                <Button variant="outline" type="submit" form="work-form">
-                  Save
-                </Button>
-                <Button variant="outline" onClick={() => setAddNewEntry(false)}>
-                  Cancel
-                </Button>
-              </>
-            ) : (
-              <>
-                <Button variant="outline" onClick={() => setAddNewEntry(true)}>
-                  New Entry
-                </Button>
-                <SheetClose asChild>
-                  <Button variant="outline">Close</Button>
-                </SheetClose>
-              </>
-            )}
-          </SheetFooter>
-        </SheetContent>
-      </Sheet>
-    </div>
+    <Sheet>
+      <SheetTrigger asChild>
+        <Button variant={"ghost"}>
+          Work <ChevronRight />
+        </Button>
+      </SheetTrigger>
+      <SheetContent
+        side={"right"}
+        className="data-[side=bottom]:max-h-[50vh] data-[side=top]:max-h-[50vh] w-1/3  sm:max-w-none"
+      >
+        <SheetHeader>
+          <SheetTitle>Work</SheetTitle>
+        </SheetHeader>
+        <div className="no-scrollbar  p-4 flex flex-col gap-2 h-full overflow-hidden overflow-y-auto">
+          {data?.map((work) => (
+            <WorkCard data={work} key={work.company_name} />
+          ))}
+          {addNewEntry && (
+            <WorkCard formMode={true} onSaved={() => setAddNewEntry(false)} />
+          )}
+        </div>
+        <SheetFooter>
+          {addNewEntry ? (
+            <>
+              <Button variant="outline" type="submit" form="work-form">
+                Save
+              </Button>
+              <Button variant="outline" onClick={() => setAddNewEntry(false)}>
+                Cancel
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button variant="outline" onClick={() => setAddNewEntry(true)}>
+                New Entry
+              </Button>
+              <SheetClose asChild>
+                <Button variant="outline">Close</Button>
+              </SheetClose>
+            </>
+          )}
+        </SheetFooter>
+      </SheetContent>
+    </Sheet>
   )
 }
 
