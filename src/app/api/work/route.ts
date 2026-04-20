@@ -1,4 +1,4 @@
-import { createWorkDb, getWorkDb } from "@/server/db/queries/work"
+import { createWorkDb, deleteWorkDb, getWorkDb } from "@/server/db/queries/work"
 import { NextResponse } from "next/server"
 
 export async function GET() {
@@ -34,6 +34,31 @@ export async function POST(req: Request) {
   } catch (error) {
     return NextResponse.json(
       { message: "Error creating work" },
+      { status: 500 }
+    )
+  }
+}
+
+export async function DELETE(req: Request) {
+  try {
+    const body = await req.json()
+
+    const { id } = body
+    if (!id) {
+      return NextResponse.json({
+        message: "Missing id  in request",
+      })
+    }
+
+    const deleted = await deleteWorkDb({ id })
+
+    return NextResponse.json({
+      message: "Work entry deleted successfully",
+      item: deleted,
+    })
+  } catch (error) {
+    return NextResponse.json(
+      { message: "Error deleting work" },
       { status: 500 }
     )
   }

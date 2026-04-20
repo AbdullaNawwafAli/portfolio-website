@@ -31,3 +31,7 @@ export interface updateWorkDataDto {
   id: string
   updatedData: updatedWorkData
 }
+
+export interface deleteWorkDataDto {
+  id: string
+}

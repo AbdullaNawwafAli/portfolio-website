@@ -1,7 +1,11 @@
 import { eq } from "drizzle-orm"
 import { db } from "../drizzle"
 import { workTable } from "../drizzle/schema"
-import { createWorkDataDto, updateWorkDataDto } from "@/types/workData"
+import {
+  createWorkDataDto,
+  deleteWorkDataDto,
+  updateWorkDataDto,
+} from "@/types/workData"
 
 export async function getWorkDb() {
   const work = await db.query.workTable.findMany()
@@ -39,17 +43,8 @@ export async function createWorkDb(createWorkData: createWorkDataDto) {
   return work
 }
 
-export async function deleteWorkDb({ id, updatedData }: updateWorkDataDto) {
-  const work = await db
-    .update(workTable)
-    .set({
-      company_name: updatedData.company_name,
-      job_title: updatedData.job_title,
-      startDate: updatedData.startDate,
-      finishDate: updatedData.finishDate,
-      responsibilities: updatedData.responsibilities,
-    })
-    .where(eq(workTable.id, id))
+export async function deleteWorkDb({ id }: deleteWorkDataDto) {
+  const work = await db.delete(workTable).where(eq(workTable.id, id))
 
   return work
 }
