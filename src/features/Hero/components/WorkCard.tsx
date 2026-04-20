@@ -1,10 +1,15 @@
 import { useAppForm } from "@/features/TanstackForm/hooks"
-import { createWorkDataDto, WorkData } from "@/types/workData"
+import {
+  createWorkDataDto,
+  deleteWorkDataDto,
+  WorkData,
+} from "@/types/workData"
 import {
   Card,
   CardAction,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/ui/shadcn/card"
@@ -19,16 +24,24 @@ import {
 } from "@/ui/shadcn/field"
 import { toast } from "sonner"
 import { Button } from "@/ui/shadcn/button"
-import { createWorkApi } from "@/lib/api-calls/work"
+import { createWorkApi, deleteWorkApi } from "@/lib/api-calls/work"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { format } from "date-fns"
+import { Trash } from "lucide-react"
+import { de } from "date-fns/locale"
 
 interface WorkCardProps {
   data?: WorkData
   formMode?: boolean
+  deleteAllowed?: boolean
   onSaved?: () => void
 }
-const WorkCard = ({ data, formMode, onSaved }: WorkCardProps) => {
+const WorkCard = ({
+  data,
+  formMode,
+  deleteAllowed,
+  onSaved,
+}: WorkCardProps) => {
   const queryClient = useQueryClient()
   const { mutate } = useMutation({
     mutationFn: (value: createWorkDataDto) => createWorkApi(value),
@@ -38,6 +51,17 @@ const WorkCard = ({ data, formMode, onSaved }: WorkCardProps) => {
       toast("Work entry created successfully")
     },
   })
+
+  const deleteRecord = async () => {
+    await deleteWorkApi({ id: data?.id } as deleteWorkDataDto)
+      .then(() => {
+        queryClient.invalidateQueries({ queryKey: ["work"] })
+        toast("Work entry deleted successfully")
+      })
+      .catch(() => {
+        toast.error("Failed to delete work entry")
+      })
+  }
 
   const form = useAppForm({
     defaultValues: {
@@ -57,6 +81,7 @@ const WorkCard = ({ data, formMode, onSaved }: WorkCardProps) => {
     },
   })
 
+  //Form mode when creating a new work entry
   if (formMode) {
     return (
       <Card>
@@ -137,6 +162,7 @@ const WorkCard = ({ data, formMode, onSaved }: WorkCardProps) => {
     )
   }
 
+  //default work card
   return (
     <Card>
       <CardHeader>
@@ -160,6 +186,17 @@ const WorkCard = ({ data, formMode, onSaved }: WorkCardProps) => {
           ))}
         </ul>
       </CardContent>
+      {deleteAllowed ? (
+        <CardFooter>
+          <Button
+            variant="destructive"
+            className="w-full"
+            onClick={deleteRecord}
+          >
+            <Trash />
+          </Button>
+        </CardFooter>
+      ) : null}
     </Card>
   )
 }

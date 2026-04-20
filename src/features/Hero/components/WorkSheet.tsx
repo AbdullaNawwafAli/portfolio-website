@@ -19,6 +19,7 @@ import { useState } from "react"
 const WorkSheet = () => {
   const [addNewEntry, setAddNewEntry] = useState(false)
   const { data, isPending } = useQuery(createWorkQueryOptions())
+  const isDataThere = data ? data.length > 0 || addNewEntry : false
 
   return (
     <Sheet>
@@ -35,9 +36,17 @@ const WorkSheet = () => {
           <SheetTitle>Work</SheetTitle>
         </SheetHeader>
         <div className="no-scrollbar  p-4 flex flex-col gap-2 h-full overflow-hidden overflow-y-auto">
-          {data?.map((work) => (
-            <WorkCard data={work} key={work.company_name} />
-          ))}
+          {isDataThere ? (
+            data?.map((work) => (
+              <WorkCard
+                data={work}
+                key={work.company_name}
+                deleteAllowed={true}
+              />
+            ))
+          ) : (
+            <div>You currently have no work experience added</div>
+          )}
           {addNewEntry && (
             <WorkCard formMode={true} onSaved={() => setAddNewEntry(false)} />
           )}
