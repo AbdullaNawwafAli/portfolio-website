@@ -2,13 +2,17 @@ export interface WorkData {
   id: string
   company_name: string
   job_title: string
+  country: string
+  city: string
   startDate: Date
-  finishDate: Date
+  finishDate?: Date
   responsibilities: string[]
 }
 export interface createWorkDataDto {
   company_name: string
   job_title: string
+  country: string
+  city: string
   startDate: Date
   finishDate?: Date
   responsibilities?: string[]
@@ -17,6 +21,8 @@ export interface createWorkDataDto {
 export interface updatedWorkData {
   company_name: string
   job_title: string
+  country: string
+  city: string
   startDate: Date
   finishDate: Date
   responsibilities: string[]

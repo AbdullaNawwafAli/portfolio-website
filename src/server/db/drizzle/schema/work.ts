@@ -4,6 +4,8 @@ import { pgTable, text, timestamp, uuid, varchar } from "drizzle-orm/pg-core"
 export const workTable = pgTable("work", {
   id: uuid("id").primaryKey().defaultRandom(),
   company_name: varchar("company_name", { length: 255 }).notNull(),
+  country: varchar("country", { length: 255 }).notNull(),
+  city: varchar("city", { length: 255 }).notNull(),
   job_title: varchar("job_title", { length: 255 }).notNull(),
   startDate: timestamp("start_date").notNull(),
   finishDate: timestamp("finish_date"),

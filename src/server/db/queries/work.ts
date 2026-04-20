@@ -29,6 +29,8 @@ export async function createWorkDb(createWorkData: createWorkDataDto) {
     .values({
       company_name: createWorkData.company_name,
       job_title: createWorkData.job_title,
+      country: createWorkData.country,
+      city: createWorkData.city,
       startDate: createWorkData.startDate,
       finishDate: createWorkData.finishDate,
       responsibilities: createWorkData.responsibilities ?? [],

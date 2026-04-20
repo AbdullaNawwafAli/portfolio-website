@@ -21,6 +21,7 @@ import { toast } from "sonner"
 import { Button } from "@/ui/shadcn/button"
 import { createWorkApi } from "@/lib/api-calls/work"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { format } from "date-fns"
 
 interface WorkCardProps {
   data?: WorkData
@@ -42,6 +43,8 @@ const WorkCard = ({ data, formMode, onSaved }: WorkCardProps) => {
     defaultValues: {
       company_name: "",
       job_title: "",
+      country: "",
+      city: "",
       startDate: undefined as Date | undefined,
       finishDate: undefined as Date | undefined,
       responsibilities: undefined as string[] | undefined,
@@ -71,6 +74,12 @@ const WorkCard = ({ data, formMode, onSaved }: WorkCardProps) => {
               </form.AppField>
               <form.AppField name="job_title">
                 {(field) => <field.Input label="Job Title" />}
+              </form.AppField>
+              <form.AppField name="country">
+                {(field) => <field.Input label="Country" />}
+              </form.AppField>
+              <form.AppField name="city">
+                {(field) => <field.Input label="City" />}
               </form.AppField>
 
               <form.AppField name="startDate">
@@ -127,12 +136,22 @@ const WorkCard = ({ data, formMode, onSaved }: WorkCardProps) => {
       </Card>
     )
   }
+
   return (
     <Card>
       <CardHeader>
         <CardTitle>{data?.company_name}</CardTitle>
-        <CardDescription>{data?.job_title}</CardDescription>
-        <CardAction>Card Action</CardAction>
+        <CardDescription></CardDescription>
+        <CardDescription>
+          {(data?.startDate
+            ? format(new Date(data.startDate), "dd MMM yyyy")
+            : undefined) +
+            " - " +
+            (data?.finishDate
+              ? format(new Date(data?.finishDate), "dd MMM yyyy")
+              : "present")}
+        </CardDescription>
+        <CardAction>{data?.job_title}</CardAction>
       </CardHeader>
       <CardContent>
         <p>Card Content</p>

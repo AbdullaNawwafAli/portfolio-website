@@ -23,6 +23,8 @@ export async function POST(req: Request) {
     const created = await createWorkDb({
       company_name: body.company_name,
       job_title: body.job_title,
+      country: body.country,
+      city: body.city,
       startDate: new Date(body.startDate),
       finishDate: body.finishDate ? new Date(body.finishDate) : undefined,
       responsibilities: body.responsibilities,
