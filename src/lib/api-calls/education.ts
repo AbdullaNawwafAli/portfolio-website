@@ -1,15 +1,15 @@
 import {
-  createWorkDataDto,
-  deleteWorkDataDto,
-  WorkData,
-} from "@/types/workData"
+  createEducationDataDto,
+  deleteEducationDataDto,
+  EducationData,
+} from "@/types/educationData"
 
-export async function getWorkApi(): Promise<WorkData[]> {
+export async function getEducationApi(): Promise<EducationData[]> {
   const res = await fetch("http://localhost:3000/api/education")
   return res.json()
 }
 
-export async function createWorkApi(value: createWorkDataDto) {
+export async function createEducationApi(value: createEducationDataDto) {
   const res = await fetch("http://localhost:3000/api/education", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -23,7 +23,7 @@ export async function createWorkApi(value: createWorkDataDto) {
   return res.json()
 }
 
-export async function deleteWorkApi(value: deleteWorkDataDto) {
+export async function deleteEducationApi(value: deleteEducationDataDto) {
   const res = await fetch("http://localhost:3000/api/education", {
     method: "DELETE",
     headers: { "Content-Type": "application/json" },
