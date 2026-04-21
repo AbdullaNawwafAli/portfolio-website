@@ -9,13 +9,13 @@ import {
 } from "lucide-react"
 import CloudinaryImage from "@/ui/CloudinaryImage"
 import { Button } from "@/ui/shadcn/button"
-import { EditHeroSheet } from "@/features/Hero/components/EditHeroSheet"
+import { EditHeroSheet } from "./EditHeroSheet"
 import { bioData } from "@/types/bioData"
 import { CreateHeroSheet } from "@/features/Hero/components/CreateHeroSheet"
 import ChangeHeroPhotoSheet from "./ChangeHeroPhotoSheet"
 import { useState } from "react"
 import ChangeResumePDFSheet from "./ChangeResumePDFSheet"
-import WorkSheet from "./WorkSheet"
+import WorkSheet from "../WorkSheet/WorkSheet"
 
 interface AdminHeroProps {
   data?: bioData

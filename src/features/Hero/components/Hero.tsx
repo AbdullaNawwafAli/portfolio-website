@@ -9,7 +9,7 @@ import {
 import CloudinaryImage from "../../../ui/CloudinaryImage"
 import { Button } from "../../../ui/shadcn/button"
 import { bioData } from "@/types/bioData"
-import WorkSheet from "./WorkSheet"
+import WorkSheet from "./WorkSheet/WorkSheet"
 
 interface HeroProps {
   data: bioData
