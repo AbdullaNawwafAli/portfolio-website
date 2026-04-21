@@ -13,7 +13,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/ui/shadcn/card"
-import { createWorkSchema } from "../lib/zod/createWorkSchema"
+import { createWorkSchema } from "../../lib/zod/createWorkSchema"
 import {
   FieldContent,
   FieldDescription,
@@ -28,7 +28,6 @@ import { createWorkApi, deleteWorkApi } from "@/lib/api-calls/work"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { format } from "date-fns"
 import { Trash } from "lucide-react"
-import { de } from "date-fns/locale"
 
 interface WorkCardProps {
   data?: WorkData

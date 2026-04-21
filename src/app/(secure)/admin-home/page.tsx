@@ -1,5 +1,5 @@
 "use client"
-import AdminHero from "@/features/Hero/components/AdminHero"
+import AdminHero from "@/features/Hero/components/AdminHero/AdminHero"
 import createBioQueryOptions from "@/lib/tanstack-queries/createBioQueryOptions"
 import { useQuery } from "@tanstack/react-query"
 
