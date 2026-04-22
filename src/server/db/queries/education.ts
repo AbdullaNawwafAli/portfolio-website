@@ -35,6 +35,7 @@ export async function createEducationDb(
     .insert(educationTable)
     .values({
       institute: createEducationData.institute,
+      country: createEducationData.country,
       startDate: createEducationData.startDate,
       finishDate: createEducationData.finishDate,
     })

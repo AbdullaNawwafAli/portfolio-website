@@ -69,6 +69,7 @@ const EducationCard = ({
   const form = useAppForm({
     defaultValues: {
       institute: "",
+      country: "",
       startDate: undefined as Date | undefined,
       finishDate: undefined as Date | undefined,
     },
@@ -95,6 +96,9 @@ const EducationCard = ({
             <FieldGroup>
               <form.AppField name="institute">
                 {(field) => <field.Input label="Institute" />}
+              </form.AppField>
+              <form.AppField name="country">
+                {(field) => <field.Input label="Country" />}
               </form.AppField>
               <form.AppField name="startDate">
                 {(field) => <field.DatePicker label="Start Date" />}
