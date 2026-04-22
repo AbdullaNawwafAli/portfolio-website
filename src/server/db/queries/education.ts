@@ -8,15 +8,15 @@ import {
 } from "@/types/educationData"
 
 export async function getEducationDb() {
-  const work = await db.query.educationTable.findMany()
-  return work
+  const education = await db.query.educationTable.findMany()
+  return education
 }
 
 export async function updateEducationDb({
   id,
   updatedData,
 }: updateEducationDataDto) {
-  const work = await db
+  const education = await db
     .update(educationTable)
     .set({
       institute: updatedData.institute,
@@ -25,13 +25,13 @@ export async function updateEducationDb({
     })
     .where(eq(educationTable.id, id))
 
-  return work
+  return education
 }
 
 export async function createEducationDb(
   createEducationData: createEducationDataDto
 ) {
-  const work = await db
+  const education = await db
     .insert(educationTable)
     .values({
       institute: createEducationData.institute,
@@ -40,11 +40,13 @@ export async function createEducationDb(
       finishDate: createEducationData.finishDate,
     })
     .returning({ id: educationTable.id })
-  return work
+  return education
 }
 
 export async function deleteEducationDb({ id }: deleteEducationDataDto) {
-  const work = await db.delete(educationTable).where(eq(educationTable.id, id))
+  const education = await db
+    .delete(educationTable)
+    .where(eq(educationTable.id, id))
 
-  return work
+  return education
 }
