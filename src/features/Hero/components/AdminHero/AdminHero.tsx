@@ -16,6 +16,7 @@ import ChangeHeroPhotoSheet from "./ChangeHeroPhotoSheet"
 import { useState } from "react"
 import ChangeResumePDFSheet from "./ChangeResumePDFSheet"
 import WorkSheet from "../WorkSheet/WorkSheet"
+import EducationSheet from "../EducationSheet/EducationSheet"
 
 interface AdminHeroProps {
   data?: bioData
@@ -116,9 +117,7 @@ const AdminHero = ({ data }: AdminHeroProps) => {
                     </Button>
                   </div>
                   <div className="hero-nav-button">
-                    <Button variant={"ghost"}>
-                      Education <ChevronRight />
-                    </Button>
+                    <EducationSheet />
                   </div>
                   <div className="hero-nav-button">
                     <ChangeResumePDFSheet
