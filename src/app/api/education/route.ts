@@ -7,11 +7,11 @@ import { NextResponse } from "next/server"
 
 export async function GET() {
   try {
-    const work = await getEducationDb()
-    if (!work) {
+    const education = await getEducationDb()
+    if (!education) {
       return NextResponse.json(null, { status: 200 })
     }
-    return NextResponse.json(work)
+    return NextResponse.json(education)
   } catch (error) {
     return NextResponse.json(
       { message: "Error fetching education" },
