@@ -17,6 +17,7 @@ import { useState } from "react"
 import ChangeResumePDFSheet from "./ChangeResumePDFSheet"
 import WorkSheet from "../WorkSheet/WorkSheet"
 import EducationSheet from "../EducationSheet/EducationSheet"
+import SkillSheet from "../SkillSheet/SkillsSheet"
 
 interface AdminHeroProps {
   data?: bioData
@@ -112,9 +113,7 @@ const AdminHero = ({ data }: AdminHeroProps) => {
                     <WorkSheet />
                   </div>
                   <div className="hero-nav-button">
-                    <Button variant={"ghost"}>
-                      Skills <ChevronRight />
-                    </Button>
+                    <SkillSheet />
                   </div>
                   <div className="hero-nav-button">
                     <EducationSheet />

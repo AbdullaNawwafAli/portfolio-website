@@ -20,6 +20,8 @@ const SkillSheet = () => {
   const { data, isPending } = useQuery(createSkillsQueryOptions())
   const isDataThere = data ? data.length > 0 || addNewEntry : false
 
+  console.log("Skills data:", data)
+
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -39,7 +41,7 @@ const SkillSheet = () => {
             data?.map((education) => (
               <SkillsCard
                 data={education}
-                key={education.id}
+                key={education.skill_type_name}
                 deleteAllowed={true}
               />
             ))
