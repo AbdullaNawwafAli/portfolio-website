@@ -58,7 +58,7 @@ const EducationCard = ({
   const deleteRecord = async () => {
     await deleteEducationApi({ id: data?.id } as deleteEducationDataDto)
       .then(() => {
-        queryClient.invalidateQueries({ queryKey: ["work"] })
+        queryClient.invalidateQueries({ queryKey: ["education"] })
         toast("Education entry deleted successfully")
       })
       .catch(() => {
