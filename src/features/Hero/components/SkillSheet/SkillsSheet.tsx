@@ -1,7 +1,5 @@
 "use client"
-import createWorkQueryOptions from "@/lib/tanstack-queries/createWorkQueryOptions"
 import { Button } from "@/ui/shadcn/button"
-import { FieldGroup } from "@/ui/shadcn/field"
 import {
   Sheet,
   SheetClose,
@@ -14,12 +12,12 @@ import {
 import { useQuery } from "@tanstack/react-query"
 import { ChevronRight } from "lucide-react"
 import { useState } from "react"
-import createEducationQueryOptions from "@/lib/tanstack-queries/createEducationQueryOptions"
 import SkillsCard from "./SkillsCard"
+import createSkillsQueryOptions from "@/lib/tanstack-queries/createSkillsQueryOptions"
 
 const SkillSheet = () => {
   const [addNewEntry, setAddNewEntry] = useState(false)
-  const { data, isPending } = useQuery(createEducationQueryOptions())
+  const { data, isPending } = useQuery(createSkillsQueryOptions())
   const isDataThere = data ? data.length > 0 || addNewEntry : false
 
   return (
@@ -41,7 +39,7 @@ const SkillSheet = () => {
             data?.map((education) => (
               <SkillsCard
                 data={education}
-                key={education.institute}
+                key={education.id}
                 deleteAllowed={true}
               />
             ))

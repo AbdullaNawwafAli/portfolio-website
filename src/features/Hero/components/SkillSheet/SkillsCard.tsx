@@ -23,9 +23,16 @@ import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { format } from "date-fns"
 import { Trash } from "lucide-react"
 import { createSkillsSchema } from "../../lib/zod/createSkillsSchema"
+import {
+  createSkillsDataDto,
+  deleteSkillsDataDto,
+  Skill,
+  SkillsData,
+} from "@/types/skills"
+import { createSkillsApi, deleteSkillsApi } from "@/lib/api-calls/skills"
 
 interface SkillsCardProps {
-  data?: EducationData
+  data?: SkillsData
   formMode?: boolean
   deleteAllowed?: boolean
   onSaved?: () => void
@@ -38,37 +45,35 @@ const SkillsCard = ({
 }: SkillsCardProps) => {
   const queryClient = useQueryClient()
   const { mutate } = useMutation({
-    mutationFn: (value: createEducationDataDto) => createEducationApi(value),
+    mutationFn: (value: createSkillsDataDto) => createSkillsApi(value),
     onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ["education"] })
+      await queryClient.invalidateQueries({ queryKey: ["skills"] })
       onSaved?.()
       toast("Education entry created successfully")
     },
   })
 
   const deleteRecord = async () => {
-    await deleteEducationApi({ id: data?.id } as deleteEducationDataDto)
+    await deleteSkillsApi({ id: data?.id } as deleteSkillsDataDto)
       .then(() => {
-        queryClient.invalidateQueries({ queryKey: ["work"] })
-        toast("Education entry deleted successfully")
+        queryClient.invalidateQueries({ queryKey: ["skills"] })
+        toast("Skills entry deleted successfully")
       })
       .catch(() => {
-        toast.error("Failed to delete education entry")
+        toast.error("Failed to delete Skills entry")
       })
   }
 
   const form = useAppForm({
     defaultValues: {
-      institute: "",
-      country: "",
-      startDate: undefined as Date | undefined,
-      finishDate: undefined as Date | undefined,
+      skill_type_name: "",
+      skills: [] as Omit<Skill, "id" | "skill_type_id">[],
     },
     validators: {
       onSubmit: createSkillsSchema,
     },
     onSubmit: async ({ value }) => {
-      await mutate(value as createEducationDataDto)
+      await mutate(value as createSkillsDataDto)
     },
   })
 
@@ -89,46 +94,55 @@ const SkillsCard = ({
                 {(field) => <field.Input label="Skill Type" />}
               </form.AppField>
 
-              <form.Field name="responsibilities" mode="array">
-                {(field) => {
-                  return (
-                    <FieldSet>
-                      <div className="flex justify-between gap-2 items-center">
-                        <FieldContent>
-                          <FieldLegend variant="label" className="mb-0">
-                            Skills
-                          </FieldLegend>
-                          <FieldDescription>
-                            Add the skill you had in this type.
-                          </FieldDescription>
-                          {field.state.meta.errors && (
-                            <FieldError errors={field.state.meta.errors} />
-                          )}
-                        </FieldContent>
-                        <Button
-                          type="button"
-                          variant="outline"
-                          size="sm"
-                          onClick={() => field.pushValue("")}
-                        >
-                          Add Responsibility
-                        </Button>
-                      </div>
-                      <FieldGroup>
-                        {(field.state.value ?? []).map((_, index) => (
-                          <form.AppField
-                            key={index}
-                            name={`responsibilities[${index}]`}
-                          >
+              <form.Field name="skills" mode="array">
+                {(field) => (
+                  <FieldSet>
+                    <div className="flex justify-between gap-2 items-center">
+                      <FieldContent>
+                        <FieldLegend variant="label" className="mb-0">
+                          Skills
+                        </FieldLegend>
+                        <FieldDescription>
+                          Add skills under this type.
+                        </FieldDescription>
+                        {field.state.meta.errors && (
+                          <FieldError errors={field.state.meta.errors} />
+                        )}
+                      </FieldContent>
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        onClick={() =>
+                          field.pushValue({
+                            skill_name: "",
+                            skill_logo_cloudinary_id: "",
+                          })
+                        }
+                      >
+                        Add Skill
+                      </Button>
+                    </div>
+                    <FieldGroup>
+                      {(field.state.value ?? []).map((_, index) => (
+                        <FieldSet key={index}>
+                          <form.AppField name={`skills[${index}].skill_name`}>
                             {(innerField) => (
-                              <innerField.InputGroupTextArea label="Responsibility" />
+                              <innerField.Input label="Skill Name" />
                             )}
                           </form.AppField>
-                        ))}
-                      </FieldGroup>
-                    </FieldSet>
-                  )
-                }}
+                          <form.AppField
+                            name={`skills[${index}].skill_logo_cloudinary_id`}
+                          >
+                            {(innerField) => (
+                              <innerField.Input label="Logo Cloudinary ID" />
+                            )}
+                          </form.AppField>
+                        </FieldSet>
+                      ))}
+                    </FieldGroup>
+                  </FieldSet>
+                )}
               </form.Field>
             </FieldGroup>
           </CardContent>
@@ -141,16 +155,8 @@ const SkillsCard = ({
   return (
     <Card>
       <CardHeader>
-        <CardTitle>{data?.institute}</CardTitle>
-        <CardDescription>
-          {(data?.startDate
-            ? format(new Date(data.startDate), "dd MMM yyyy")
-            : undefined) +
-            " - " +
-            (data?.finishDate
-              ? format(new Date(data?.finishDate), "dd MMM yyyy")
-              : "present")}
-        </CardDescription>
+        <CardTitle></CardTitle>
+        <CardDescription></CardDescription>
         <CardAction></CardAction>
       </CardHeader>
       <CardContent></CardContent>
