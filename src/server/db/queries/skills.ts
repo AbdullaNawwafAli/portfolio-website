@@ -7,7 +7,7 @@ import { db } from "../drizzle"
 import { skillInfoTable, skillTypeTable } from "../drizzle/schema"
 import { create } from "domain"
 
-export async function getSkills() {
+export async function getSkillsDb() {
   const skills = await db.query.skillTypeTable.findMany({
     columns: { skill_type_name: true },
     with: {
