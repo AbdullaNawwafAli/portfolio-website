@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${cinzel.variable} ${raleway.variable}`}>
-      <body>
+      <body suppressHydrationWarning>
         <QueryProvider>
           {/* Background columns */}
           <div className="background-columns">
