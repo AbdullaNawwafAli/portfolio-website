@@ -22,9 +22,11 @@ const Navbar = ({ children }: NavBarProps) => {
           <Image
             src={"navBarSVG.svg"}
             alt={"Website logo/text"}
+            loading="eager"
+            priority
             width={175}
             height={100}
-            style={{ minWidth: 175, objectFit: "contain" }}
+            style={{ width: "100%", height: "auto" }}
           />
         </div>
 
