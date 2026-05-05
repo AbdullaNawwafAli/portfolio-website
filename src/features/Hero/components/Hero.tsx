@@ -1,3 +1,4 @@
+"use client"
 import {
   ArrowDownToLine,
   ChevronRight,
@@ -11,12 +12,18 @@ import { Button } from "../../../ui/shadcn/button"
 import { bioData } from "@/types/bioData"
 import WorkSheet from "./WorkSheet/WorkSheet"
 import EducationSheet from "./EducationSheet/EducationSheet"
+import { toast } from "sonner"
 
 interface HeroProps {
   data: bioData
 }
 
 const Hero = ({ data }: HeroProps) => {
+  const handleEmailCopyClick = async (email: string) => {
+    await navigator.clipboard.writeText(email)
+    toast.success("Email copied to clipboard")
+  }
+
   return (
     <div className="hero-container">
       <div className="hero-flex-wrapper">
@@ -46,7 +53,10 @@ const Hero = ({ data }: HeroProps) => {
                   ))}
 
                   <div className="hero-social-button">
-                    <Button variant={"ghost"}>
+                    <Button
+                      variant={"ghost"}
+                      onClick={() => handleEmailCopyClick(data.email)}
+                    >
                       <Mail />
                     </Button>
                   </div>
