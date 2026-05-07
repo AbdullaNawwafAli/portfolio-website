@@ -16,7 +16,11 @@ import { ChevronRight } from "lucide-react"
 import WorkCard from "./WorkCard"
 import { useState } from "react"
 
-const WorkSheet = () => {
+interface WorkSheetProps {
+  displayMode: boolean
+}
+
+const WorkSheet = ({ displayMode }: WorkSheetProps) => {
   const [addNewEntry, setAddNewEntry] = useState(false)
   const { data, isPending } = useQuery(createWorkQueryOptions())
   const isDataThere = data ? data.length > 0 || addNewEntry : false
@@ -41,7 +45,7 @@ const WorkSheet = () => {
               <WorkCard
                 data={work}
                 key={work.company_name}
-                deleteAllowed={true}
+                deleteAllowed={!displayMode}
               />
             ))
           ) : (
@@ -63,9 +67,12 @@ const WorkSheet = () => {
             </>
           ) : (
             <>
-              <Button variant="outline" onClick={() => setAddNewEntry(true)}>
-                New Entry
-              </Button>
+              {!displayMode && (
+                <Button variant="outline" onClick={() => setAddNewEntry(true)}>
+                  New Entry
+                </Button>
+              )}
+
               <SheetClose asChild>
                 <Button variant="outline">Close</Button>
               </SheetClose>

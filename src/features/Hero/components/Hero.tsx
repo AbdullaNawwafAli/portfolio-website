@@ -95,7 +95,7 @@ const Hero = ({ data }: HeroProps) => {
                 {/* Bottom Buttons Row */}
                 <div className="hero-bottom-row">
                   <div className="hero-nav-button">
-                    <WorkSheet />
+                    <WorkSheet displayMode />
                   </div>
                   <div className="hero-nav-button">
                     <Button variant={"ghost"}>
