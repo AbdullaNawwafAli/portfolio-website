@@ -13,6 +13,7 @@ import { bioData } from "@/types/bioData"
 import WorkSheet from "./WorkSheet/WorkSheet"
 import EducationSheet from "./EducationSheet/EducationSheet"
 import { toast } from "sonner"
+import Link from "next/link"
 
 interface HeroProps {
   data: bioData
@@ -61,18 +62,24 @@ const Hero = ({ data }: HeroProps) => {
                     </Button>
                   </div>
                   <div className="hero-social-button">
-                    <Button variant={"ghost"}>
-                      <Github />
+                    <Button asChild variant={"ghost"}>
+                      <Link href={data.github_url} target="_blank">
+                        <Github />
+                      </Link>
                     </Button>
                   </div>
                   <div className="hero-social-button">
-                    <Button variant={"ghost"}>
-                      <Linkedin />
+                    <Button asChild variant={"ghost"}>
+                      <Link href={data.linked_in_url} target="_blank">
+                        <Linkedin />
+                      </Link>
                     </Button>
                   </div>
                   <div className="hero-social-button">
-                    <Button variant={"ghost"}>
-                      <Instagram />
+                    <Button asChild variant={"ghost"}>
+                      <Link href={data.instagram_url} target="_blank">
+                        <Instagram />
+                      </Link>
                     </Button>
                   </div>
                 </div>
