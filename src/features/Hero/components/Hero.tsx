@@ -105,7 +105,12 @@ const Hero = ({ data }: HeroProps) => {
                     <EducationSheet />
                   </div>
                   <div className="hero-nav-button">
-                    <Button variant={"ghost"}>
+                    <Button
+                      variant={"ghost"}
+                      onClick={() => {
+                        window.location.href = `/api/cloudinary/pdf-download?publicId=${data.resume_pdf_cloudinary_id}`
+                      }}
+                    >
                       Resume <ArrowDownToLine />
                     </Button>
                   </div>
