@@ -57,6 +57,7 @@ const Hero = ({ data }: HeroProps) => {
                     <Button
                       variant={"ghost"}
                       onClick={() => handleEmailCopyClick(data.email)}
+                      className="cursor-pointer"
                     >
                       <Mail />
                     </Button>
