@@ -17,7 +17,11 @@ import { useState } from "react"
 import EducationCard from "./EducationCard"
 import createEducationQueryOptions from "@/lib/tanstack-queries/createEducationQueryOptions"
 
-const EducationSheet = () => {
+interface EducationSheetProps {
+  displayMode: boolean
+}
+
+const EducationSheet = ({ displayMode }: EducationSheetProps) => {
   const [addNewEntry, setAddNewEntry] = useState(false)
   const { data, isPending } = useQuery(createEducationQueryOptions())
   const isDataThere = data ? data.length > 0 || addNewEntry : false
@@ -52,6 +56,7 @@ const EducationSheet = () => {
             <EducationCard
               formMode={true}
               onSaved={() => setAddNewEntry(false)}
+              deleteAllowed={!displayMode}
             />
           )}
         </div>
@@ -67,9 +72,11 @@ const EducationSheet = () => {
             </>
           ) : (
             <>
-              <Button variant="outline" onClick={() => setAddNewEntry(true)}>
-                New Entry
-              </Button>
+              {displayMode && (
+                <Button variant="outline" onClick={() => setAddNewEntry(true)}>
+                  New Entry
+                </Button>
+              )}
               <SheetClose asChild>
                 <Button variant="outline">Close</Button>
               </SheetClose>
