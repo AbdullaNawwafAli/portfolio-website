@@ -15,7 +15,11 @@ import { useState } from "react"
 import SkillsCard from "./SkillsCard"
 import createSkillsQueryOptions from "@/lib/tanstack-queries/createSkillsQueryOptions"
 
-const SkillSheet = () => {
+interface SkillSheetProps {
+  displayMode: boolean
+}
+
+const SkillSheet = ({ displayMode }: SkillSheetProps) => {
   const [addNewEntry, setAddNewEntry] = useState(false)
   const { data, isPending } = useQuery(createSkillsQueryOptions())
   const isDataThere = data ? data.length > 0 || addNewEntry : false
@@ -42,7 +46,7 @@ const SkillSheet = () => {
               <SkillsCard
                 data={education}
                 key={education.skill_type_name}
-                deleteAllowed={true}
+                deleteAllowed={!displayMode}
               />
             ))
           ) : (
@@ -64,9 +68,11 @@ const SkillSheet = () => {
             </>
           ) : (
             <>
-              <Button variant="outline" onClick={() => setAddNewEntry(true)}>
-                New Entry
-              </Button>
+              {displayMode && (
+                <Button variant="outline" onClick={() => setAddNewEntry(true)}>
+                  New Entry
+                </Button>
+              )}
               <SheetClose asChild>
                 <Button variant="outline">Close</Button>
               </SheetClose>
