@@ -1,12 +1,14 @@
 export interface EducationData {
   id: string
   institute: string
+  study: string
   country: string
   startDate: Date
   finishDate: Date
 }
 export interface createEducationDataDto {
   institute: string
+  study: string
   country: string
   startDate: Date
   finishDate: Date
@@ -14,6 +16,7 @@ export interface createEducationDataDto {
 
 export interface updatedEducationData {
   institute: string
+  study: string
   country: string
   startDate: Date
   finishDate: Date

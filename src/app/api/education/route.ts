@@ -26,6 +26,7 @@ export async function POST(req: Request) {
 
     const created = await createEducationDb({
       institute: body.institute,
+      study: body.study,
       country: body.country,
       startDate: new Date(body.startDate),
       finishDate: new Date(body.finishDate),

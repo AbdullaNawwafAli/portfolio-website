@@ -20,6 +20,8 @@ export async function updateEducationDb({
     .update(educationTable)
     .set({
       institute: updatedData.institute,
+      country: updatedData.country,
+      study: updatedData.study,
       startDate: updatedData.startDate,
       finishDate: updatedData.finishDate,
     })
@@ -36,6 +38,7 @@ export async function createEducationDb(
     .values({
       institute: createEducationData.institute,
       country: createEducationData.country,
+      study: createEducationData.study,
       startDate: createEducationData.startDate,
       finishDate: createEducationData.finishDate,
     })
