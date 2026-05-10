@@ -17,7 +17,7 @@ import WorkCard from "./WorkCard"
 import { useState } from "react"
 
 interface WorkSheetProps {
-  displayMode: boolean
+  displayMode?: boolean
 }
 
 const WorkSheet = ({ displayMode }: WorkSheetProps) => {

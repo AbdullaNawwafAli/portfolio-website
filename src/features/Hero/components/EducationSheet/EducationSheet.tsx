@@ -18,7 +18,7 @@ import EducationCard from "./EducationCard"
 import createEducationQueryOptions from "@/lib/tanstack-queries/createEducationQueryOptions"
 
 interface EducationSheetProps {
-  displayMode: boolean
+  displayMode?: boolean
 }
 
 const EducationSheet = ({ displayMode }: EducationSheetProps) => {
@@ -72,7 +72,7 @@ const EducationSheet = ({ displayMode }: EducationSheetProps) => {
             </>
           ) : (
             <>
-              {displayMode && (
+              {!displayMode && (
                 <Button variant="outline" onClick={() => setAddNewEntry(true)}>
                   New Entry
                 </Button>

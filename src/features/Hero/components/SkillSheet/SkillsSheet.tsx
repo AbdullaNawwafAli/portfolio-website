@@ -16,7 +16,7 @@ import SkillsCard from "./SkillsCard"
 import createSkillsQueryOptions from "@/lib/tanstack-queries/createSkillsQueryOptions"
 
 interface SkillSheetProps {
-  displayMode: boolean
+  displayMode?: boolean
 }
 
 const SkillSheet = ({ displayMode }: SkillSheetProps) => {
@@ -68,7 +68,7 @@ const SkillSheet = ({ displayMode }: SkillSheetProps) => {
             </>
           ) : (
             <>
-              {displayMode && (
+              {!displayMode && (
                 <Button variant="outline" onClick={() => setAddNewEntry(true)}>
                   New Entry
                 </Button>
