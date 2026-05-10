@@ -1,4 +1,4 @@
-import { getSkillsDb } from "@/server/db/queries/skills"
+import { createSkillsDb, getSkillsDb } from "@/server/db/queries/skills"
 import { NextResponse } from "next/server"
 
 export async function GET() {
@@ -16,28 +16,23 @@ export async function GET() {
   }
 }
 
-// export async function POST(req: Request) {
-//   try {
-//     const body = await req.json()
+export async function POST(req: Request) {
+  try {
+    const body = await req.json()
 
-//     const created = await createSkillsDb({
-//       company_name: body.company_name,
-//       job_title: body.job_title,
-//       country: body.country,
-//       city: body.city,
-//       startDate: new Date(body.startDate),
-//       finishDate: body.finishDate ? new Date(body.finishDate) : undefined,
-//       responsibilities: body.responsibilities,
-//     })
+    const created = await createSkillsDb({
+      skill_type_name: body.skill_type_name,
+      skills: body.skills,
+    })
 
-//     return NextResponse.json(created, { status: 201 })
-//   } catch (error) {
-//     return NextResponse.json(
-//       { message: "Error creating skills" },
-//       { status: 500 }
-//     )
-//   }
-// }
+    return NextResponse.json(created, { status: 201 })
+  } catch (error) {
+    return NextResponse.json(
+      { message: "Error creating skills" },
+      { status: 500 }
+    )
+  }
+}
 
 // export async function DELETE(req: Request) {
 //   try {

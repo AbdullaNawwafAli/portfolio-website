@@ -24,8 +24,6 @@ const SkillSheet = ({ displayMode }: SkillSheetProps) => {
   const { data, isPending } = useQuery(createSkillsQueryOptions())
   const isDataThere = data ? data.length > 0 || addNewEntry : false
 
-  console.log("Skills data:", data)
-
   return (
     <Sheet>
       <SheetTrigger asChild>

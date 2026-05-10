@@ -30,6 +30,9 @@ import {
   SkillsData,
 } from "@/types/skills"
 import { createSkillsApi, deleteSkillsApi } from "@/lib/api-calls/skills"
+import { convertToBase64 } from "@/lib/utils/fileUtils"
+import { uploadFileToCloudinaryApi } from "@/lib/api-calls/cloudinary"
+import { CldImage } from "next-cloudinary"
 
 interface SkillsCardProps {
   data?: SkillsData
@@ -67,13 +70,31 @@ const SkillsCard = ({
   const form = useAppForm({
     defaultValues: {
       skill_type_name: "",
-      skills: [] as Omit<Skill, "id" | "skill_type_id">[],
+      skills: [] as { skill_name: string; skill_logo: File }[],
     },
     validators: {
       onSubmit: createSkillsSchema,
     },
     onSubmit: async ({ value }) => {
-      await mutate(value as createSkillsDataDto)
+      if (value.skills) {
+        const skills = await Promise.all(
+          value.skills.map(async (skill) => {
+            const base64 = await convertToBase64(skill.skill_logo)
+            const { publicId: cloudinaryResponse } =
+              await uploadFileToCloudinaryApi(base64)
+
+            return {
+              skill_name: skill.skill_name,
+              skill_logo_cloudinary_id: cloudinaryResponse,
+            }
+          })
+        )
+
+        await mutate({
+          skill_type_name: value.skill_type_name,
+          skills,
+        } as createSkillsDataDto)
+      }
     },
   })
 
@@ -116,7 +137,7 @@ const SkillsCard = ({
                         onClick={() =>
                           field.pushValue({
                             skill_name: "",
-                            skill_logo_cloudinary_id: "",
+                            skill_logo: new File([], ""),
                           })
                         }
                       >
@@ -131,11 +152,9 @@ const SkillsCard = ({
                               <innerField.Input label="Skill Name" />
                             )}
                           </form.AppField>
-                          <form.AppField
-                            name={`skills[${index}].skill_logo_cloudinary_id`}
-                          >
+                          <form.AppField name={`skills[${index}].skill_logo`}>
                             {(innerField) => (
-                              <innerField.Input label="Logo Cloudinary ID" />
+                              <innerField.FileInput label="Skill Logo" />
                             )}
                           </form.AppField>
                         </FieldSet>
@@ -155,11 +174,23 @@ const SkillsCard = ({
   return (
     <Card>
       <CardHeader>
-        <CardTitle></CardTitle>
+        <CardTitle>{data?.skill_type_name}</CardTitle>
         <CardDescription></CardDescription>
         <CardAction></CardAction>
       </CardHeader>
-      <CardContent></CardContent>
+      <CardContent>
+        {data?.skill_info.map((skill) => (
+          <div>
+            <CldImage
+              src={skill.skill_logo_cloudinary_id as string}
+              alt="Skill Logo"
+              width={30}
+              height={30}
+            />
+            <div>{skill.skill_name}</div>
+          </div>
+        ))}
+      </CardContent>
       {deleteAllowed ? (
         <CardFooter>
           <Button

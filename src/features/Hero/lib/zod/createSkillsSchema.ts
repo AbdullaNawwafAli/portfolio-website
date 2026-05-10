@@ -6,7 +6,9 @@ export const createSkillsSchema = z.object({
     .array(
       z.object({
         skill_name: z.string().min(1, "Skill name is required."),
-        skill_logo_cloudinary_id: z.string(),
+        skill_logo: z.instanceof(File, {
+          message: "Skill Logo is required",
+        }),
       })
     )
     .min(1, "Add at least one skill."),

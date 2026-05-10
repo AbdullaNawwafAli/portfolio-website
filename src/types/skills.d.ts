@@ -1,7 +1,7 @@
 export interface SkillsData {
   id: string
   skill_type_name: string
-  skills: Skill[]
+  skill_info: Skill[]
 }
 
 export interface Skill {
