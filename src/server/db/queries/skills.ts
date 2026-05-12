@@ -13,6 +13,7 @@ export async function getSkillsDb() {
     with: {
       skill_info: {
         columns: {
+          id: true,
           skill_type_id: true,
           skill_name: true,
           skill_logo_cloudinary_id: true,
