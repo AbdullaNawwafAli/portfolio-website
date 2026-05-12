@@ -33,24 +33,28 @@ import { createSkillsApi, deleteSkillsApi } from "@/lib/api-calls/skills"
 import { convertToBase64 } from "@/lib/utils/fileUtils"
 import { uploadFileToCloudinaryApi } from "@/lib/api-calls/cloudinary"
 import { CldImage } from "next-cloudinary"
+import { set } from "zod"
 
 interface SkillsCardProps {
   data?: SkillsData
   formMode?: boolean
-  deleteAllowed?: boolean
+  setIsFormSubmitting?: (isFormSubmitting: boolean) => void
   onSaved?: () => void
+  deleteAllowed?: boolean
 }
 const SkillsCard = ({
   data,
   formMode,
   deleteAllowed,
   onSaved,
+  setIsFormSubmitting,
 }: SkillsCardProps) => {
   const queryClient = useQueryClient()
   const { mutate } = useMutation({
     mutationFn: (value: createSkillsDataDto) => createSkillsApi(value),
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["skills"] })
+      setIsFormSubmitting?.(false)
       onSaved?.()
       toast("Education entry created successfully")
     },
@@ -76,6 +80,7 @@ const SkillsCard = ({
       onSubmit: createSkillsSchema,
     },
     onSubmit: async ({ value }) => {
+      setIsFormSubmitting?.(true)
       if (value.skills) {
         const skills = await Promise.all(
           value.skills.map(async (skill) => {

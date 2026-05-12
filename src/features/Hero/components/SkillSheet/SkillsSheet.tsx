@@ -21,6 +21,7 @@ interface SkillSheetProps {
 
 const SkillSheet = ({ displayMode }: SkillSheetProps) => {
   const [addNewEntry, setAddNewEntry] = useState(false)
+  const [isFormSubmitting, setIsFormSubmitting] = useState(false)
   const { data, isPending } = useQuery(createSkillsQueryOptions())
   const isDataThere = data ? data.length > 0 || addNewEntry : false
 
@@ -51,14 +52,23 @@ const SkillSheet = ({ displayMode }: SkillSheetProps) => {
             <div>You currently have no skills added</div>
           )}
           {addNewEntry && (
-            <SkillsCard formMode={true} onSaved={() => setAddNewEntry(false)} />
+            <SkillsCard
+              formMode={true}
+              onSaved={() => setAddNewEntry(false)}
+              setIsFormSubmitting={setIsFormSubmitting}
+            />
           )}
         </div>
         <SheetFooter>
           {addNewEntry ? (
             <>
-              <Button variant="outline" type="submit" form="skills-form">
-                Save
+              <Button
+                variant="outline"
+                type="submit"
+                form="skills-form"
+                disabled={isFormSubmitting}
+              >
+                {isFormSubmitting ? "Saving..." : " Save"}
               </Button>
               <Button variant="outline" onClick={() => setAddNewEntry(false)}>
                 Cancel
