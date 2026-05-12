@@ -82,8 +82,13 @@ const ChangeResumePDFSheet = ({
             <SheetHeader>
               <SheetTitle>Change Resume PDF</SheetTitle>
             </SheetHeader>
-            <div className="no-scrollbar overflow-y-auto p-4">
-              <Button asChild variant={"ghost"}>
+            <div className="no-scrollbar overflow-y-auto p-4 flex flex-col gap-2 ">
+              <FieldGroup>
+                <form.AppField name="resume_pdf">
+                  {(field) => <field.FileInput label="Resume PDF" />}
+                </form.AppField>
+              </FieldGroup>
+              <Button asChild className="w-full" variant={"outline"}>
                 <Link
                   href={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/${resume_pdf_cloudinary_id}.pdf?`}
                   target="_blank"
@@ -91,11 +96,6 @@ const ChangeResumePDFSheet = ({
                   View Current PDF
                 </Link>
               </Button>
-              <FieldGroup>
-                <form.AppField name="resume_pdf">
-                  {(field) => <field.FileInput label="Resume PDF" />}
-                </form.AppField>
-              </FieldGroup>
             </div>
             <SheetFooter>
               <div className="flex justify-between gap-2">
