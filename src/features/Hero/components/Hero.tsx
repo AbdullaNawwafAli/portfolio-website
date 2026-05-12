@@ -14,6 +14,7 @@ import WorkSheet from "./WorkSheet/WorkSheet"
 import EducationSheet from "./EducationSheet/EducationSheet"
 import { toast } from "sonner"
 import Link from "next/link"
+import SkillSheet from "./SkillSheet/SkillsSheet"
 
 interface HeroProps {
   data: bioData
@@ -98,9 +99,7 @@ const Hero = ({ data }: HeroProps) => {
                     <WorkSheet displayMode />
                   </div>
                   <div className="hero-nav-button">
-                    <Button variant={"ghost"}>
-                      Skills <ChevronRight />
-                    </Button>
+                    <SkillSheet displayMode />
                   </div>
                   <div className="hero-nav-button">
                     <EducationSheet />
