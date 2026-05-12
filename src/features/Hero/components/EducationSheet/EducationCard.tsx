@@ -45,6 +45,7 @@ const EducationCard = ({
     mutationFn: (value: createEducationDataDto) => createEducationApi(value),
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["education"] })
+      setIsFormSubmitting?.(false)
       isAddingNewEntry?.(false)
       toast("Education entry created successfully")
     },
@@ -73,6 +74,7 @@ const EducationCard = ({
       onSubmit: createEducationSchema,
     },
     onSubmit: async ({ value }) => {
+      setIsFormSubmitting?.(true)
       await mutate(value as createEducationDataDto)
     },
   })
