@@ -18,6 +18,7 @@ import { toast } from "sonner"
 import { convertToBase64 } from "@/lib/utils/fileUtils"
 import { OverWriteFileToCloudinaryApi } from "@/lib/api-calls/cloudinary"
 import { OverWriteFileToCloudinaryApiType } from "@/types/cloudinaryData"
+import Link from "next/link"
 
 interface ChangeResumePDFSheetProps {
   resume_pdf_cloudinary_id: string
@@ -51,8 +52,8 @@ const ChangeResumePDFSheet = ({
     },
     onSubmit: async ({ value }) => {
       if (value.resume_pdf) {
-        const heroPicBase64 = await convertToBase64(value.resume_pdf)
-        await mutate({ resume_pdf_cloudinary_id, base64File: heroPicBase64 })
+        const ResumePDFBase64 = await convertToBase64(value.resume_pdf)
+        await mutate({ resume_pdf_cloudinary_id, base64File: ResumePDFBase64 })
       }
     },
   })
@@ -82,6 +83,14 @@ const ChangeResumePDFSheet = ({
               <SheetTitle>Change Resume PDF</SheetTitle>
             </SheetHeader>
             <div className="no-scrollbar overflow-y-auto p-4">
+              <Button asChild variant={"ghost"}>
+                <Link
+                  href={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/${resume_pdf_cloudinary_id}.pdf?`}
+                  target="_blank"
+                >
+                  View Current PDF
+                </Link>
+              </Button>
               <FieldGroup>
                 <form.AppField name="resume_pdf">
                   {(field) => <field.FileInput label="Resume PDF" />}
