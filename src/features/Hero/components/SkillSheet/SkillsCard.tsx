@@ -175,19 +175,18 @@ const SkillsCard = ({
     <Card>
       <CardHeader>
         <CardTitle>{data?.skill_type_name}</CardTitle>
-        <CardDescription></CardDescription>
         <CardAction></CardAction>
       </CardHeader>
       <CardContent>
         {data?.skill_info.map((skill) => (
-          <div>
+          <div key={skill.id} className="flex items-center gap-2">
             <CldImage
               src={skill.skill_logo_cloudinary_id as string}
               alt="Skill Logo"
-              width={30}
-              height={30}
+              width={25}
+              height={25}
             />
-            <div>{skill.skill_name}</div>
+            <div className="font-sans text-md">{skill.skill_name}</div>
           </div>
         ))}
       </CardContent>
