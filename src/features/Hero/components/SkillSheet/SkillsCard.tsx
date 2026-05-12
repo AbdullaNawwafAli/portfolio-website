@@ -38,15 +38,15 @@ import { set } from "zod"
 interface SkillsCardProps {
   data?: SkillsData
   formMode?: boolean
+  isAddingNewEntry?: () => void
   setIsFormSubmitting?: (isFormSubmitting: boolean) => void
-  onSaved?: () => void
   deleteAllowed?: boolean
 }
 const SkillsCard = ({
   data,
   formMode,
   deleteAllowed,
-  onSaved,
+  isAddingNewEntry,
   setIsFormSubmitting,
 }: SkillsCardProps) => {
   const queryClient = useQueryClient()
@@ -55,7 +55,7 @@ const SkillsCard = ({
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["skills"] })
       setIsFormSubmitting?.(false)
-      onSaved?.()
+      isAddingNewEntry?.()
       toast("Education entry created successfully")
     },
   })

@@ -54,7 +54,7 @@ const SkillSheet = ({ displayMode }: SkillSheetProps) => {
           {addNewEntry && (
             <SkillsCard
               formMode={true}
-              onSaved={() => setAddNewEntry(false)}
+              isAddingNewEntry={() => setAddNewEntry(false)}
               setIsFormSubmitting={setIsFormSubmitting}
             />
           )}
