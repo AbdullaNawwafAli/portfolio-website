@@ -22,6 +22,7 @@ interface WorkSheetProps {
 
 const WorkSheet = ({ displayMode }: WorkSheetProps) => {
   const [addNewEntry, setAddNewEntry] = useState(false)
+  const [isFormSubmitting, setIsFormSubmitting] = useState(false)
   const { data, isPending } = useQuery(createWorkQueryOptions())
   const isDataThere = data ? data.length > 0 || addNewEntry : false
 
@@ -52,14 +53,23 @@ const WorkSheet = ({ displayMode }: WorkSheetProps) => {
             <div>You currently have no work experience added</div>
           )}
           {addNewEntry && (
-            <WorkCard formMode={true} onSaved={() => setAddNewEntry(false)} />
+            <WorkCard
+              formMode={true}
+              isAddingNewEntry={setAddNewEntry}
+              setIsFormSubmitting={setIsFormSubmitting}
+            />
           )}
         </div>
         <SheetFooter>
           {addNewEntry ? (
             <>
-              <Button variant="outline" type="submit" form="work-form">
-                Save
+              <Button
+                variant="outline"
+                type="submit"
+                form="work-form"
+                disabled={isFormSubmitting}
+              >
+                {isFormSubmitting ? "Saving" : "Save"}
               </Button>
               <Button variant="outline" onClick={() => setAddNewEntry(false)}>
                 Cancel

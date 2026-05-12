@@ -28,25 +28,29 @@ import { createWorkApi, deleteWorkApi } from "@/lib/api-calls/work"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { format } from "date-fns"
 import { Trash } from "lucide-react"
+import { set } from "zod"
 
 interface WorkCardProps {
   data?: WorkData
   formMode?: boolean
+  isAddingNewEntry?: (addNewEntry: boolean) => void
+  setIsFormSubmitting?: (isFormSubmitting: boolean) => void
   deleteAllowed?: boolean
-  onSaved?: () => void
 }
 const WorkCard = ({
   data,
   formMode,
   deleteAllowed,
-  onSaved,
+  isAddingNewEntry,
+  setIsFormSubmitting,
 }: WorkCardProps) => {
   const queryClient = useQueryClient()
   const { mutate } = useMutation({
     mutationFn: (value: createWorkDataDto) => createWorkApi(value),
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["work"] })
-      onSaved?.()
+      setIsFormSubmitting?.(false)
+      isAddingNewEntry?.(false)
       toast("Work entry created successfully")
     },
   })
@@ -76,6 +80,7 @@ const WorkCard = ({
       onSubmit: createWorkSchema,
     },
     onSubmit: async ({ value }) => {
+      setIsFormSubmitting?.(true)
       await mutate(value as createWorkDataDto)
     },
   })
