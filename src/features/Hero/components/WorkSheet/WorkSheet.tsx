@@ -69,7 +69,7 @@ const WorkSheet = ({ displayMode }: WorkSheetProps) => {
                 form="work-form"
                 disabled={isFormSubmitting}
               >
-                {isFormSubmitting ? "Saving" : "Save"}
+                {isFormSubmitting ? "Saving..." : "Save"}
               </Button>
               <Button variant="outline" onClick={() => setAddNewEntry(false)}>
                 Cancel
