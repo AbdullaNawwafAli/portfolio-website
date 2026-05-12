@@ -20,7 +20,6 @@ import {
 import { toast } from "sonner"
 import { Button } from "@/ui/shadcn/button"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { format } from "date-fns"
 import { Trash } from "lucide-react"
 import { createSkillsSchema } from "../../lib/zod/createSkillsSchema"
 import {
@@ -33,7 +32,6 @@ import { createSkillsApi, deleteSkillsApi } from "@/lib/api-calls/skills"
 import { convertToBase64 } from "@/lib/utils/fileUtils"
 import { uploadFileToCloudinaryApi } from "@/lib/api-calls/cloudinary"
 import { CldImage } from "next-cloudinary"
-import { set } from "zod"
 
 interface SkillsCardProps {
   data?: SkillsData
