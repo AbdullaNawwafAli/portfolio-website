@@ -28,6 +28,8 @@ const ChangeResumePDFSheet = ({
   resume_pdf_cloudinary_id,
 }: ChangeResumePDFSheetProps) => {
   const [open, setOpen] = useState(false)
+  const [pdfVersion, setPdfVersion] = useState(() => Date.now())
+
   const { mutate, isPending } = useMutation({
     mutationFn: ({
       resume_pdf_cloudinary_id,
@@ -39,6 +41,7 @@ const ChangeResumePDFSheet = ({
       }),
     onSuccess: () => {
       toast("Resume PDF changed Successfully")
+      setPdfVersion(Date.now())
       setOpen(false)
     },
   })
@@ -90,7 +93,7 @@ const ChangeResumePDFSheet = ({
               </FieldGroup>
               <Button asChild className="w-full" variant={"outline"}>
                 <Link
-                  href={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/${resume_pdf_cloudinary_id}.pdf?`}
+                  href={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/${resume_pdf_cloudinary_id}.pdf?v=${pdfVersion}`}
                   target="_blank"
                 >
                   View Current PDF
