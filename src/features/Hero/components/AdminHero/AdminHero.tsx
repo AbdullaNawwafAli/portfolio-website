@@ -79,22 +79,22 @@ const AdminHero = ({ data }: AdminHeroProps) => {
                   ))}
 
                   <div className="hero-social-button">
-                    <Button variant={"ghost"}>
+                    <Button variant={"ghost"} disabled>
                       <Mail />
                     </Button>
                   </div>
                   <div className="hero-social-button">
-                    <Button variant={"ghost"}>
+                    <Button variant={"ghost"} disabled>
                       <Github />
                     </Button>
                   </div>
                   <div className="hero-social-button">
-                    <Button variant={"ghost"}>
+                    <Button variant={"ghost"} disabled>
                       <Linkedin />
                     </Button>
                   </div>
                   <div className="hero-social-button">
-                    <Button variant={"ghost"}>
+                    <Button variant={"ghost"} disabled>
                       <Instagram />
                     </Button>
                   </div>
