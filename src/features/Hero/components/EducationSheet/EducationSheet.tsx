@@ -23,6 +23,7 @@ interface EducationSheetProps {
 
 const EducationSheet = ({ displayMode }: EducationSheetProps) => {
   const [addNewEntry, setAddNewEntry] = useState(false)
+  const [isFormSubmitting, setIsFormSubmitting] = useState(false)
   const { data, isPending } = useQuery(createEducationQueryOptions())
   const isDataThere = data ? data.length > 0 || addNewEntry : false
 
@@ -46,7 +47,7 @@ const EducationSheet = ({ displayMode }: EducationSheetProps) => {
               <EducationCard
                 data={education}
                 key={education.institute}
-                deleteAllowed={true}
+                deleteAllowed={!displayMode}
               />
             ))
           ) : (
@@ -55,16 +56,21 @@ const EducationSheet = ({ displayMode }: EducationSheetProps) => {
           {addNewEntry && (
             <EducationCard
               formMode={true}
-              onSaved={() => setAddNewEntry(false)}
-              deleteAllowed={!displayMode}
+              isAddingNewEntry={setAddNewEntry}
+              setIsFormSubmitting={setIsFormSubmitting}
             />
           )}
         </div>
         <SheetFooter>
           {addNewEntry ? (
             <>
-              <Button variant="outline" type="submit" form="education-form">
-                Save
+              <Button
+                variant="outline"
+                type="submit"
+                form="education-form"
+                disabled={isFormSubmitting}
+              >
+                {isFormSubmitting ? "Saving..." : "Save"}
               </Button>
               <Button variant="outline" onClick={() => setAddNewEntry(false)}>
                 Cancel

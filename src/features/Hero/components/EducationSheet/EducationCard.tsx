@@ -9,14 +9,7 @@ import {
   CardTitle,
 } from "@/ui/shadcn/card"
 import { createWorkSchema } from "../../lib/zod/createWorkSchema"
-import {
-  FieldContent,
-  FieldDescription,
-  FieldError,
-  FieldGroup,
-  FieldLegend,
-  FieldSet,
-} from "@/ui/shadcn/field"
+import { FieldGroup } from "@/ui/shadcn/field"
 import { toast } from "sonner"
 import { Button } from "@/ui/shadcn/button"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
@@ -36,21 +29,23 @@ import { createEducationSchema } from "../../lib/zod/createEducationSchema"
 interface EducationCardProps {
   data?: EducationData
   formMode?: boolean
+  isAddingNewEntry?: (addNewEntry: boolean) => void
+  setIsFormSubmitting?: (isFormSubmitting: boolean) => void
   deleteAllowed?: boolean
-  onSaved?: () => void
 }
 const EducationCard = ({
   data,
   formMode,
   deleteAllowed,
-  onSaved,
+  isAddingNewEntry,
+  setIsFormSubmitting,
 }: EducationCardProps) => {
   const queryClient = useQueryClient()
   const { mutate } = useMutation({
     mutationFn: (value: createEducationDataDto) => createEducationApi(value),
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["education"] })
-      onSaved?.()
+      isAddingNewEntry?.(false)
       toast("Education entry created successfully")
     },
   })
