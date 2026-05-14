@@ -1,6 +1,8 @@
+"use client"
 import Image from "next/image"
 import { Button } from "../../../ui/shadcn/button"
 import { ReactNode } from "react"
+import { useRouter } from "next/navigation"
 
 interface NavBarProps {
   children: ReactNode
@@ -8,11 +10,10 @@ interface NavBarProps {
 
 const Navbar = ({ children }: NavBarProps) => {
   const navBarButtons = [
+    { label: "Projects", route: "/projects" },
     { label: "Home", route: "/" },
-    { label: "Projects", route: "/" },
-    { label: "Hobbies", route: "/" },
-    { label: "About Me", route: "/" },
   ]
+  const router = useRouter()
 
   return (
     <>
@@ -31,7 +32,7 @@ const Navbar = ({ children }: NavBarProps) => {
         </div>
 
         {/*Invisible columns to pad so that it makes sure Navbar UI elements stay in line with columns in background*/}
-        {[...Array(5).keys()].map((key) => (
+        {[...Array(7).keys()].map((key) => (
           <div className="navbar-button-container" key={key}></div>
         ))}
 
@@ -41,6 +42,7 @@ const Navbar = ({ children }: NavBarProps) => {
             <Button
               variant={"ghost"}
               className="px-0 font-nav font-semibold hover:bg-transparent"
+              onClick={() => router.push(button.route)}
             >
               {button.label}
             </Button>
