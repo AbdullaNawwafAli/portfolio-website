@@ -1,4 +1,8 @@
-import { createSkillsDb, getSkillsDb } from "@/server/db/queries/skills"
+import {
+  createSkillsDb,
+  deleteSkillsDb,
+  getSkillsDb,
+} from "@/server/db/queries/skills"
 import { NextResponse } from "next/server"
 
 export async function GET() {
@@ -34,27 +38,27 @@ export async function POST(req: Request) {
   }
 }
 
-// export async function DELETE(req: Request) {
-//   try {
-//     const body = await req.json()
+export async function DELETE(req: Request) {
+  try {
+    const body = await req.json()
 
-//     const { id } = body
-//     if (!id) {
-//       return NextResponse.json({
-//         message: "Missing id  in request",
-//       })
-//     }
+    const { id } = body
+    if (!id) {
+      return NextResponse.json({
+        message: "Missing id  in request",
+      })
+    }
 
-//     const deleted = await deleteWorkDb({ id })
-
-//     return NextResponse.json({
-//       message: "skills entry deleted successfully",
-//       item: deleted,
-//     })
-//   } catch (error) {
-//     return NextResponse.json(
-//       { message: "Error deleting skills" },
-//       { status: 500 }
-//     )
-//   }
-// }
+    const deleted = await deleteSkillsDb({ id })
+    console.log(deleted, "skills in route")
+    return NextResponse.json({
+      message: "skills entry deleted successfully",
+      item: deleted,
+    })
+  } catch (error) {
+    return NextResponse.json(
+      { message: "Error deleting skills" },
+      { status: 500 }
+    )
+  }
+}
