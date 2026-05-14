@@ -195,13 +195,11 @@ const SkillsCard = ({
       </CardContent>
       {deleteAllowed ? (
         <CardFooter>
-          <Button
-            variant="destructive"
-            className="w-full"
-            onClick={deleteRecord}
-          >
-            <Trash />
-          </Button>
+          <div className="flex items-center justify-center w-full">
+            <Button variant="destructive" onClick={deleteRecord}>
+              <Trash />
+            </Button>
+          </div>
         </CardFooter>
       ) : null}
     </Card>
