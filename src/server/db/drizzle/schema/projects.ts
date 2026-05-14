@@ -43,10 +43,10 @@ export const projectsTagsRelationTable = pgTable(
   "projects_tags_relation_table",
   {
     projectId: uuid("project_id")
-      .references(() => projectsTable.id)
+      .references(() => projectsTable.id, { onDelete: "cascade" })
       .notNull(),
     tagId: uuid("tag_id")
-      .references(() => projectsTagsTable.id)
+      .references(() => projectsTagsTable.id, { onDelete: "cascade" })
       .notNull(),
   },
   //composite KEY
