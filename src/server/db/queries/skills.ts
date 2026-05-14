@@ -4,8 +4,13 @@ import {
   updateSkillsDataDto,
 } from "@/types/skills"
 import { db } from "../drizzle"
-import { skillInfoTable, skillTypeTable } from "../drizzle/schema"
+import {
+  educationTable,
+  skillInfoTable,
+  skillTypeTable,
+} from "../drizzle/schema"
 import { create } from "domain"
+import { eq } from "drizzle-orm"
 
 export async function getSkillsDb() {
   const skills = await db.query.skillTypeTable.findMany({
@@ -56,10 +61,11 @@ export async function createSkillsDb(createSkillsData: createSkillsDataDto) {
   return skills
 }
 
-export async function deleteEducationDb({ id }: deleteSkillsDataDto) {
-  //TODO: when implementing delete functionality
-  // const skills = await db
-  //   .delete(educationTable)
-  //   .where(eq(educationTable.id, id))
-  // return skills
+export async function deleteSkillsDb({ id }: deleteSkillsDataDto) {
+  const skills = await db
+    .delete(skillTypeTable)
+    .where(eq(skillTypeTable.id, id))
+
+  console.log(skills, "skills in db")
+  return skills
 }
