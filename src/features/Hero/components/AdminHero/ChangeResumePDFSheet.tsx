@@ -71,10 +71,7 @@ const ChangeResumePDFSheet = ({
           }}
         >
           <SheetTrigger asChild>
-            <Button
-              variant="ghost"
-              className="capitalize font-sans hover:bg-transparent"
-            >
+            <Button variant="ghost">
               Resume <SquarePen />
             </Button>
           </SheetTrigger>
