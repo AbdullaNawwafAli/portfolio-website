@@ -38,7 +38,10 @@ const Navbar = ({ children }: NavBarProps) => {
         {/*Buttons in invisible columns*/}
         {navBarButtons.map((button) => (
           <div className="navbar-button-container" key={button.label}>
-            <Button variant={"ghost"} className="px-0 font-nav font-semibold">
+            <Button
+              variant={"ghost"}
+              className="px-0 font-nav font-semibold hover:bg-transparent"
+            >
               {button.label}
             </Button>
           </div>
