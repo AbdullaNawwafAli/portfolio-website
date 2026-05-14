@@ -102,7 +102,7 @@ const Hero = ({ data }: HeroProps) => {
                     <SkillSheet displayMode />
                   </div>
                   <div className="hero-nav-button">
-                    <EducationSheet />
+                    <EducationSheet displayMode />
                   </div>
                   <div className="hero-nav-button">
                     <Button
