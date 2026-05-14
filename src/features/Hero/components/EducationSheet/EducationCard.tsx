@@ -118,17 +118,17 @@ const EducationCard = ({
   return (
     <Card>
       <CardHeader>
-        <CardTitle>{data?.institute}</CardTitle>
-        <CardDescription>
+        <CardTitle> {data?.study}</CardTitle>
+        <CardDescription>{data?.institute}</CardDescription>
+        <CardAction>
           {(data?.startDate
-            ? format(new Date(data.startDate), "dd MMM yyyy")
+            ? format(new Date(data.startDate), "MMM yyyy")
             : undefined) +
             " - " +
             (data?.finishDate
-              ? format(new Date(data?.finishDate), "dd MMM yyyy")
-              : "present")}
-        </CardDescription>
-        <CardAction></CardAction>
+              ? format(new Date(data?.finishDate), "MMM yyyy")
+              : "present")}{" "}
+        </CardAction>
       </CardHeader>
       <CardContent></CardContent>
       {deleteAllowed ? (
