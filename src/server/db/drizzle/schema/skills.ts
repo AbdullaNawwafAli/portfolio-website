@@ -9,7 +9,7 @@ export const skillTypeTable = pgTable("skill_type", {
 export const skillInfoTable = pgTable("skill_info", {
   id: uuid("id").primaryKey().defaultRandom(),
   skill_type_id: uuid("skill_type_id")
-    .references(() => skillTypeTable.id)
+    .references(() => skillTypeTable.id, { onDelete: "cascade" })
     .notNull(),
   skill_logo_cloudinary_id: varchar("skill_logo_cloudinary_id", {
     length: 255,
