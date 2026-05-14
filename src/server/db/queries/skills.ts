@@ -9,7 +9,7 @@ import { create } from "domain"
 
 export async function getSkillsDb() {
   const skills = await db.query.skillTypeTable.findMany({
-    columns: { skill_type_name: true },
+    columns: { id: true, skill_type_name: true },
     with: {
       skill_info: {
         columns: {
