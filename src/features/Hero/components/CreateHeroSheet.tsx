@@ -89,11 +89,11 @@ export function CreateHeroSheet() {
             className="data-[side=bottom]:max-h-[50vh] data-[side=top]:max-h-[50vh]"
           >
             <SheetHeader>
-              <SheetTitle>Edit Bio</SheetTitle>
+              <SheetTitle>Create Hero</SheetTitle>
               <SheetDescription>
-                Make changes to your Bio here. Click save when you&apos;re done.
-                You cannot change the profile picture or edit the work, skills
-                and education data here.
+                Set up your initial hero here. Click save when you&apos;re done.
+                You can add the work, skills and education later after this
+                initial set up.
               </SheetDescription>
             </SheetHeader>
             <div className="no-scrollbar overflow-y-auto p-4">
