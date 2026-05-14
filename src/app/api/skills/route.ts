@@ -50,7 +50,7 @@ export async function DELETE(req: Request) {
     }
 
     const deleted = await deleteSkillsDb({ id })
-    console.log(deleted, "skills in route")
+
     return NextResponse.json({
       message: "skills entry deleted successfully",
       item: deleted,

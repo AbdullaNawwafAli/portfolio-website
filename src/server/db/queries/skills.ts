@@ -66,6 +66,5 @@ export async function deleteSkillsDb({ id }: deleteSkillsDataDto) {
     .delete(skillTypeTable)
     .where(eq(skillTypeTable.id, id))
 
-  console.log(skills, "skills in db")
   return skills
 }
