@@ -10,18 +10,21 @@ import Image from "next/image"
 
 const Cards = () => {
   return (
-    <div className="flex justify-between gap-2.5 h-[400px] items-end">
+    <div className="flex justify-between gap-2.5 h-[400px] items-end ">
       {[...Array(5).keys()].map((key) => (
-        <Card key={key} className="w-full flex align-center">
-          <CardHeader className="flex justify-between">
-            <CardTitle className="font-nav font-semibold text-lg text-center">
+        <Card
+          key={key}
+          className="w-full flex align-center bg-transparent border-0 gap-0 shadow-none group"
+        >
+          <CardHeader className="flex justify-between px-1 py-0">
+            <CardTitle className="font-sans font-semibold text-md text-center items-end">
               0{key + 1}
             </CardTitle>
-            <CardTitle className="font-nav font-semibold text-lg text-center">
+            <CardTitle className="font-sans font-semibold text-md text-center">
               Software Project
             </CardTitle>
           </CardHeader>
-          <div className="w-full rounded overflow-hidden">
+          <div className="w-full rounded-t-sm  overflow-hidden">
             <Image
               src={"/stock.jpg"}
               alt={"Website logo/text"}
@@ -30,14 +33,13 @@ const Cards = () => {
               style={{ width: "100%", height: "auto" }}
             />
           </div>
-          <CardContent className="flex justify-center"></CardContent>
-          <CardFooter className="flex justify-between items-center">
-            <span className="font-sans">21 April 2025</span>
+          <CardFooter className="flex overflow-hidden rounded-b-sm max-h-0 bg-primary group-hover:max-h-16 opacity-0 group-hover:opacity-100 transition-all duration-500 ease-in-out justify-between items-center px-1 py-0">
+            <span className="font-sans text-background">21 April 2025</span>
             <Button
               variant={"ghost"}
-              className="px-0 font-sans  text-background"
+              className="px-0 font-sans hover:bg-transparent hover:text-background text-background"
             >
-              Sample Button
+              View
             </Button>
           </CardFooter>
         </Card>
