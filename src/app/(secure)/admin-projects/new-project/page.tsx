@@ -10,7 +10,7 @@ const NewProjectPage = () => {
           New Project
         </span>
         <Link href="/admin-projects">
-          <Button variant="outline" className="capitalize font-sans">
+          <Button variant="default" className="capitalize font-sans">
             Back
           </Button>
         </Link>
