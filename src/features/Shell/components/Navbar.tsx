@@ -21,7 +21,7 @@ const Navbar = ({ children }: NavBarProps) => {
         {/* Logo in invisible column*/}
         <div className="logo-container">
           <Image
-            src={"navBarSVG.svg"}
+            src={"/navBarSVG.svg"}
             alt={"Website logo/text"}
             loading="eager"
             priority
