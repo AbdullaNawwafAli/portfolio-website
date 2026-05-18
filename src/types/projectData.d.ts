@@ -18,7 +18,13 @@ export interface ProjectData {
   finishDate: Date
   order: number
   featured: boolean
+  tags?: ProjectTagData[]
   media?: ProjectMediaData[]
+}
+
+export interface ProjectTagData {
+  id: string
+  text: string
 }
 
 export interface ProjectMediaDto {
