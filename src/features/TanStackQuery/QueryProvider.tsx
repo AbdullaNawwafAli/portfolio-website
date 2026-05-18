@@ -9,6 +9,7 @@ interface QueryProviderProps {
 }
 
 const QueryProvider = ({ children }: QueryProviderProps) => {
+  //TODO: Remove react query dev tools
   const [queryClient] = useState(() => new QueryClient())
 
   return (
