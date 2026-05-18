@@ -1,14 +1,46 @@
-import { Button } from "./shadcn/button"
+"use client"
+import { useQuery } from "@tanstack/react-query"
+import { Button } from "../../../ui/shadcn/button"
 import {
   Card,
   CardHeader,
   CardTitle,
   CardContent,
   CardFooter,
-} from "./shadcn/card"
+} from "../../../ui/shadcn/card"
 import Image from "next/image"
+import createProjectsQueryOptions from "@/lib/tanstack-queries/createProjectsQueryOptions"
+import {
+  Empty,
+  EmptyContent,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from "@/ui/shadcn/empty"
+import { Folder } from "lucide-react"
 
 const Cards = () => {
+  const { data, isPending } = useQuery(createProjectsQueryOptions())
+  console.log(data)
+
+  if (data?.length === 0) {
+    return (
+      <Empty className="m-0 p-0">
+        <EmptyHeader>
+          <EmptyMedia variant="icon">
+            <Folder />
+          </EmptyMedia>
+          <EmptyTitle>No data</EmptyTitle>
+          <EmptyDescription>No data found</EmptyDescription>
+        </EmptyHeader>
+        <EmptyContent>
+          <Button>Add data</Button>
+        </EmptyContent>
+      </Empty>
+    )
+  }
+
   return (
     <div className="flex justify-between gap-2.5 h-[400px] items-end ">
       {[...Array(5).keys()].map((key) => (
