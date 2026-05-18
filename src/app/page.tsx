@@ -1,5 +1,5 @@
 import { getBioApi } from "@/lib/api-calls/bio"
-import Cards from "@/ui/Cards"
+import Cards from "@/features/Projects/components/Cards"
 import Hero from "@/features/Hero/components/Hero"
 
 export default async function Home() {
