@@ -95,7 +95,7 @@ export const projectsTagRelationTableRelations = relations(
         references: [projectsTable.id],
       }),
       tag: one(projectsTagsTable, {
-        fields: [projectsTagsRelationTable.projectId],
+        fields: [projectsTagsRelationTable.tagId],
         references: [projectsTagsTable.id],
       }),
     }
