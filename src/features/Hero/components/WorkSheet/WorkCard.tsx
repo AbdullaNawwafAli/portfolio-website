@@ -45,7 +45,7 @@ const WorkCard = ({
   setIsFormSubmitting,
 }: WorkCardProps) => {
   const queryClient = useQueryClient()
-  const { mutate } = useMutation({
+  const { mutate: createWorkRecord } = useMutation({
     mutationFn: (value: createWorkDataDto) => createWorkApi(value),
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["work"] })
@@ -55,16 +55,17 @@ const WorkCard = ({
     },
   })
 
-  const deleteRecord = async () => {
-    await deleteWorkApi({ id: data?.id } as deleteWorkDataDto)
-      .then(() => {
-        queryClient.invalidateQueries({ queryKey: ["work"] })
-        toast("Work entry deleted successfully")
-      })
-      .catch(() => {
-        toast.error("Failed to delete work entry")
-      })
-  }
+  const { mutate: deleteWorkRecord } = useMutation({
+    mutationFn: (id: string | undefined) =>
+      deleteWorkApi({ id: id } as deleteWorkDataDto),
+    onSuccess: async () => {
+      queryClient.invalidateQueries({ queryKey: ["work"] })
+      toast("Work entry deleted successfully")
+    },
+    onError: () => {
+      toast.error("Failed to delete work entry")
+    },
+  })
 
   const form = useAppForm({
     defaultValues: {
@@ -81,7 +82,7 @@ const WorkCard = ({
     },
     onSubmit: async ({ value }) => {
       setIsFormSubmitting?.(true)
-      await mutate(value as createWorkDataDto)
+      await createWorkRecord(value as createWorkDataDto)
     },
   })
 
@@ -193,7 +194,10 @@ const WorkCard = ({
       {deleteAllowed ? (
         <CardFooter>
           <div className="flex items-center justify-center w-full">
-            <Button variant="destructive" onClick={deleteRecord}>
+            <Button
+              variant="destructive"
+              onClick={() => deleteWorkRecord(data?.id)}
+            >
               <Trash />
             </Button>
           </div>
