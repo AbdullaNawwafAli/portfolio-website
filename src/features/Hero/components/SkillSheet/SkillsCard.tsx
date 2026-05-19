@@ -48,7 +48,7 @@ const SkillsCard = ({
   setIsFormSubmitting,
 }: SkillsCardProps) => {
   const queryClient = useQueryClient()
-  const { mutate } = useMutation({
+  const { mutate: createSkillRecord } = useMutation({
     mutationFn: (value: createSkillsDataDto) => createSkillsApi(value),
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["skills"] })
@@ -58,16 +58,17 @@ const SkillsCard = ({
     },
   })
 
-  const deleteRecord = async () => {
-    await deleteSkillsApi({ id: data?.id } as deleteSkillsDataDto)
-      .then(() => {
-        queryClient.invalidateQueries({ queryKey: ["skills"] })
-        toast("Skills entry deleted successfully")
-      })
-      .catch(() => {
-        toast.error("Failed to delete Skills entry")
-      })
-  }
+  const { mutate: deleteSkillRecord } = useMutation({
+    mutationFn: (id: string | undefined) =>
+      deleteSkillsApi({ id: id } as deleteSkillsDataDto),
+    onSuccess: async () => {
+      queryClient.invalidateQueries({ queryKey: ["skills"] })
+      toast("Skills entry deleted successfully")
+    },
+    onError: () => {
+      toast.error("Failed to delete Skills entry")
+    },
+  })
 
   const form = useAppForm({
     defaultValues: {
@@ -93,7 +94,7 @@ const SkillsCard = ({
           })
         )
 
-        await mutate({
+        await createSkillRecord({
           skill_type_name: value.skill_type_name,
           skills,
         } as createSkillsDataDto)
@@ -196,7 +197,10 @@ const SkillsCard = ({
       {deleteAllowed ? (
         <CardFooter>
           <div className="flex items-center justify-center w-full">
-            <Button variant="destructive" onClick={deleteRecord}>
+            <Button
+              variant="destructive"
+              onClick={() => deleteSkillRecord(data?.id)}
+            >
               <Trash />
             </Button>
           </div>
