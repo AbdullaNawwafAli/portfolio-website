@@ -4,15 +4,15 @@ import { getBioApi } from "@/lib/api-calls/bio"
 import { getEducationApi } from "@/lib/api-calls/education"
 import { getSkillsApi } from "@/lib/api-calls/skills"
 import { getWorkApi } from "@/lib/api-calls/work"
+import createBioQueryOptions from "@/lib/tanstack-queries/createBioQueryOptions"
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query"
 
 const AdminHomePage = async () => {
   const queryClient = getQueryClient()
 
-  await queryClient.prefetchQuery({
-    queryKey: ["bio"],
-    queryFn: () => getBioApi(),
-  })
+  await queryClient.prefetchQuery(
+    createBioQueryOptions({ staleTime: 1000 * 60 * 5 })
+  )
 
   queryClient.prefetchQuery({
     queryKey: ["education"],

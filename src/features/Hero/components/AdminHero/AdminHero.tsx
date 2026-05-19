@@ -22,7 +22,9 @@ import { useQuery } from "@tanstack/react-query"
 import createBioQueryOptions from "@/lib/tanstack-queries/createBioQueryOptions"
 
 const AdminHero = () => {
-  const { data, isPending } = useQuery(createBioQueryOptions())
+  const { data, isPending } = useQuery(
+    createBioQueryOptions({ staleTime: 1000 * 60 * 5 })
+  )
   const [imgVersion, setImgVersion] = useState<number | undefined>(undefined)
 
   if (!data)
