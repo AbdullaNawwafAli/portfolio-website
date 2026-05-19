@@ -41,7 +41,7 @@ const EducationCard = ({
   setIsFormSubmitting,
 }: EducationCardProps) => {
   const queryClient = useQueryClient()
-  const { mutate } = useMutation({
+  const { mutate: createEducationRecord } = useMutation({
     mutationFn: (value: createEducationDataDto) => createEducationApi(value),
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["education"] })
@@ -51,16 +51,17 @@ const EducationCard = ({
     },
   })
 
-  const deleteRecord = async () => {
-    await deleteEducationApi({ id: data?.id } as deleteEducationDataDto)
-      .then(() => {
-        queryClient.invalidateQueries({ queryKey: ["education"] })
-        toast("Education entry deleted successfully")
-      })
-      .catch(() => {
-        toast.error("Failed to delete education entry")
-      })
-  }
+  const { mutate: deleteEducationRecord } = useMutation({
+    mutationFn: (id: string | undefined) =>
+      deleteEducationApi({ id: id } as deleteEducationDataDto),
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ["education"] })
+      toast("Education entry deleted successfully")
+    },
+    onError: () => {
+      toast.error("Failed to delete education entry")
+    },
+  })
 
   const form = useAppForm({
     defaultValues: {
@@ -75,7 +76,7 @@ const EducationCard = ({
     },
     onSubmit: async ({ value }) => {
       setIsFormSubmitting?.(true)
-      await mutate(value as createEducationDataDto)
+      await createEducationRecord(value as createEducationDataDto)
     },
   })
 
@@ -134,7 +135,10 @@ const EducationCard = ({
       {deleteAllowed ? (
         <CardFooter>
           <div className="flex items-center justify-center w-full">
-            <Button variant="destructive" onClick={deleteRecord}>
+            <Button
+              variant="destructive"
+              onClick={() => deleteEducationRecord(data?.id)}
+            >
               <Trash />
             </Button>
           </div>
