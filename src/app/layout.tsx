@@ -5,7 +5,6 @@ import Footer from "@/features/Shell/components/Footer"
 import { cinzel, raleway } from "@/lib/fonts"
 import QueryProvider from "@/features/TanStackQuery/QueryProvider"
 import { Toaster } from "@/ui/shadcn/sonner"
-import { getQueryClient } from "@/features/TanStackQuery/getQueryClient"
 
 export const metadata: Metadata = {
   title: "Nawwaf's Portfolio Website",
