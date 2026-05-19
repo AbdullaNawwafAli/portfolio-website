@@ -17,8 +17,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const queryClient = getQueryClient()
-
   return (
     <html lang="en" className={`${cinzel.variable} ${raleway.variable}`}>
       <body suppressHydrationWarning>
