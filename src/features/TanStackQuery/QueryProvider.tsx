@@ -3,6 +3,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import React, { useState } from "react"
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
+import { getQueryClient } from "./getQueryClient"
 
 interface QueryProviderProps {
   children: React.ReactNode
@@ -10,7 +11,7 @@ interface QueryProviderProps {
 
 const QueryProvider = ({ children }: QueryProviderProps) => {
   //TODO: Remove react query dev tools
-  const [queryClient] = useState(() => new QueryClient())
+  const [queryClient] = useState(getQueryClient())
 
   return (
     <QueryClientProvider client={queryClient}>

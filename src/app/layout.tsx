@@ -5,6 +5,8 @@ import Footer from "@/features/Shell/components/Footer"
 import { cinzel, raleway } from "@/lib/fonts"
 import QueryProvider from "@/features/TanStackQuery/QueryProvider"
 import { Toaster } from "@/ui/shadcn/sonner"
+import { dehydrate, HydrationBoundary } from "@tanstack/react-query"
+import { getQueryClient } from "@/features/TanStackQuery/getQueryClient"
 
 export const metadata: Metadata = {
   title: "Nawwaf's Portfolio Website",
@@ -16,25 +18,29 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const queryClient = getQueryClient()
+
   return (
     <html lang="en" className={`${cinzel.variable} ${raleway.variable}`}>
       <body suppressHydrationWarning>
         <QueryProvider>
-          {/* Background columns */}
-          <div className="background-columns">
-            {[...Array(10).keys()].map((key) => (
-              <div className="column" key={key}></div>
-            ))}
-          </div>
+          <HydrationBoundary state={dehydrate(queryClient)}>
+            {/* Background columns */}
+            <div className="background-columns">
+              {[...Array(10).keys()].map((key) => (
+                <div className="column" key={key}></div>
+              ))}
+            </div>
 
-          {/*Content */}
-          <Toaster />
-          <div className="content">
-            <Navbar>
-              {children}
-              <Footer />
-            </Navbar>
-          </div>
+            {/*Content */}
+            <Toaster />
+            <div className="content">
+              <Navbar>
+                {children}
+                <Footer />
+              </Navbar>
+            </div>
+          </HydrationBoundary>
         </QueryProvider>
       </body>
     </html>

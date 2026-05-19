@@ -18,12 +18,11 @@ import ChangeResumePDFSheet from "./ChangeResumePDFSheet"
 import WorkSheet from "../WorkSheet/WorkSheet"
 import EducationSheet from "../EducationSheet/EducationSheet"
 import SkillSheet from "../SkillSheet/SkillsSheet"
+import { useQuery } from "@tanstack/react-query"
+import createBioQueryOptions from "@/lib/tanstack-queries/createBioQueryOptions"
 
-interface AdminHeroProps {
-  data?: bioData
-}
-
-const AdminHero = ({ data }: AdminHeroProps) => {
+const AdminHero = () => {
+  const { data, isPending } = useQuery(createBioQueryOptions())
   const [imgVersion, setImgVersion] = useState(() => Date.now())
 
   if (!data)
