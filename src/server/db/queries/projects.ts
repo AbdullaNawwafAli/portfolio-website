@@ -78,3 +78,22 @@ export async function createProjectDb(createProjectData: createProjectDataDto) {
 
   return project
 }
+
+export async function getProjectByIdDb(id: string) {
+  const projects = await db.query.projectsTable.findMany({
+    where: eq(projectsTable.id, id),
+    with: {
+      media: true,
+      tags: {
+        with: {
+          tag: true,
+        },
+      },
+    },
+  })
+
+  return projects.map((project) => ({
+    ...project,
+    tags: project.tags.map((t) => ({ id: t.tag.id, text: t.tag.text })),
+  }))[0]
+}
