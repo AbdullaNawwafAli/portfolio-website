@@ -1,4 +1,4 @@
-import NewProjectForm from "@/features/Projects/components/NewProjectForm"
+import NewProjectForm from "@/features/Projects/components/CreateNewProject/NewProjectForm"
 import { Button } from "@/ui/shadcn/button"
 import Link from "next/link"
 
