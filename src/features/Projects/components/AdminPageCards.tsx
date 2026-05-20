@@ -21,7 +21,7 @@ import {
 import { Folder } from "lucide-react"
 import ProjectCard from "./ProjectCard"
 
-const Cards = () => {
+const AdminPageCards = () => {
   const { data, isPending } = useQuery(
     createProjectsQueryOptions({ staleTime: 1000 * 60 * 5 })
   )
@@ -53,4 +53,4 @@ const Cards = () => {
   )
 }
 
-export default Cards
+export default AdminPageCards

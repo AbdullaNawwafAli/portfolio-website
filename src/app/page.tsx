@@ -1,5 +1,5 @@
 import { getBioApi } from "@/lib/api-calls/bio"
-import Cards from "@/features/Projects/components/Cards"
+import AdminPageCards from "@/features/Projects/components/AdminPageCards"
 import Hero from "@/features/Hero/components/Hero"
 
 export default async function Home() {
@@ -9,7 +9,7 @@ export default async function Home() {
     <>
       <div className="flex flex-col gap-2 flex-1 h-full justify-between py-10 w-full">
         <Hero data={bioData} />
-        <Cards />
+        <AdminPageCards />
       </div>
     </>
   )

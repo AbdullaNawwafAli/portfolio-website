@@ -1,4 +1,4 @@
-import Cards from "@/features/Projects/components/Cards"
+import AdminPageCards from "@/features/Projects/components/AdminPageCards"
 import { getQueryClient } from "@/features/TanStackQuery/getQueryClient"
 import createProjectsQueryOptions from "@/lib/tanstack-queries/createProjectsQueryOptions"
 import { Button } from "@/ui/shadcn/button"
@@ -22,7 +22,7 @@ const AdminProjectsPage = async () => {
             <Button className="capitalize font-sans">New Project</Button>
           </Link>
         </div>
-        <Cards />
+        <AdminPageCards />
       </div>
     </HydrationBoundary>
   )
