@@ -17,7 +17,7 @@ import { updateBioApi } from "@/lib/api-calls/bio"
 import { bioData, updateBioDataDto } from "@/types/bioData"
 import { editHeroFormSchema } from "../../lib/zod/editHeroSchema"
 import { useMutation } from "@tanstack/react-query"
-import { useAppForm } from "@/features/TanstackForm/hooks"
+import { useAppForm } from "@/features/TanstackForm/hooks/hooks"
 
 interface EditHeroSheetProps {
   data: bioData

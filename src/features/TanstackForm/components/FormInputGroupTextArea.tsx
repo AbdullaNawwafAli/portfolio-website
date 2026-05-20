@@ -1,6 +1,6 @@
 import React from "react"
-import { useFieldContext } from "../hooks"
-import FormBase, { FormControlProps } from "../FormBase"
+import { useFieldContext } from "../hooks/hooks"
+import FormBase, { FormControlProps } from "./FormBase"
 import {
   InputGroup,
   InputGroupAddon,

@@ -1,5 +1,5 @@
 import AdminHero from "@/features/Hero/components/AdminHero/AdminHero"
-import { getQueryClient } from "@/features/TanStackQuery/getQueryClient"
+import { getQueryClient } from "@/features/TanStackQuery/utils/getQueryClient"
 import { getBioApi } from "@/lib/api-calls/bio"
 import { getEducationApi } from "@/lib/api-calls/education"
 import { getSkillsApi } from "@/lib/api-calls/skills"

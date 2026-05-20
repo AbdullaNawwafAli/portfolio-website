@@ -1,6 +1,6 @@
 import { Input } from "@/ui/shadcn/input"
-import { useFieldContext } from "../hooks"
-import FormBase, { FormControlProps } from "../FormBase"
+import { useFieldContext } from "../hooks/hooks"
+import FormBase, { FormControlProps } from "./FormBase"
 
 const FormInput = (props: FormControlProps) => {
   const field = useFieldContext<string>()
