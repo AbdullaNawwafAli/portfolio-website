@@ -1,4 +1,4 @@
-import { getBioApi } from "@/lib/api-calls/bio"
+import { getBioApi } from "../services/bio"
 import AdminPageCards from "@/features/Projects/components/AdminPageCards"
 import Hero from "@/features/Hero/components/Hero"
 

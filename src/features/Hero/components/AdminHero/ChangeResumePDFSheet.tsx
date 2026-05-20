@@ -16,7 +16,7 @@ import { changeResumePdfSchema } from "../../lib/zod/changeResumePdfSchema"
 import { useAppForm } from "@/features/TanstackForm/hooks/hooks"
 import { toast } from "sonner"
 import { convertToBase64 } from "@/utils/fileUtils"
-import { OverWriteFileToCloudinaryApi } from "@/lib/api-calls/cloudinary"
+import { OverWriteFileToCloudinaryApi } from "../../../../services/cloudinary"
 import { OverWriteFileToCloudinaryApiType } from "@/types/cloudinaryData"
 import Link from "next/link"
 

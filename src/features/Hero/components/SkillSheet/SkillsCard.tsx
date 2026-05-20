@@ -28,9 +28,9 @@ import {
   Skill,
   SkillsData,
 } from "@/types/skills"
-import { createSkillsApi, deleteSkillsApi } from "@/lib/api-calls/skills"
+import { createSkillsApi, deleteSkillsApi } from "../../../../services/skills"
 import { convertToBase64 } from "@/utils/fileUtils"
-import { uploadFileToCloudinaryApi } from "@/lib/api-calls/cloudinary"
+import { uploadFileToCloudinaryApi } from "../../../../services/cloudinary"
 import { CldImage } from "next-cloudinary"
 
 interface SkillsCardProps {

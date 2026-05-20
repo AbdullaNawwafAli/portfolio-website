@@ -2,8 +2,8 @@
 
 import { useAppForm } from "@/features/TanstackForm/hooks/hooks"
 import { createProjectSchema } from "@/features/Projects/lib/zod/createProjectSchema"
-import { createProjectApi } from "@/lib/api-calls/projects"
-import { uploadFileToCloudinaryApi } from "@/lib/api-calls/cloudinary"
+import { createProjectApi } from "../../../../services/projects"
+import { uploadFileToCloudinaryApi } from "../../../../services/cloudinary"
 import { convertToBase64 } from "@/utils/fileUtils"
 import {
   createProjectDataDto,

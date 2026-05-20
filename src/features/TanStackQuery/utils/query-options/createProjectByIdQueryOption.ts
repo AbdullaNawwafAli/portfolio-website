@@ -1,6 +1,6 @@
 import { ProjectData } from "@/types/projectData"
 import { queryOptions, UseQueryOptions } from "@tanstack/react-query"
-import { getProjectByIdApi } from "../../../../lib/api-calls/projects"
+import { getProjectByIdApi } from "../../../../services/projects"
 
 interface params {
   projectId: string

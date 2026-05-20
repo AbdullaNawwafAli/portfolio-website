@@ -23,7 +23,7 @@ import {
 import {
   createEducationApi,
   deleteEducationApi,
-} from "@/lib/api-calls/education"
+} from "../../../../services/education"
 import { createEducationSchema } from "../../lib/zod/createEducationSchema"
 
 interface EducationCardProps {

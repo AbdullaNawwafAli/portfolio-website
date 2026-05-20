@@ -13,7 +13,7 @@ import {
 } from "@/ui/shadcn/sheet"
 import { SquarePen } from "lucide-react"
 import { toast } from "sonner"
-import { updateBioApi } from "@/lib/api-calls/bio"
+import { updateBioApi } from "../../../../services/bio"
 import { bioData, updateBioDataDto } from "@/types/bioData"
 import { editHeroFormSchema } from "../../lib/zod/editHeroSchema"
 import { useMutation } from "@tanstack/react-query"

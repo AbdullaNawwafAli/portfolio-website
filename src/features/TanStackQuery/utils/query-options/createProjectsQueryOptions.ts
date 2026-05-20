@@ -1,6 +1,6 @@
 import { ProjectData } from "@/types/projectData"
 import { queryOptions, UseQueryOptions } from "@tanstack/react-query"
-import { getProjectsApi } from "../../../../lib/api-calls/projects"
+import { getProjectsApi } from "../../../../services/projects"
 
 export default function createProjectsQueryOptions<
   TData = ProjectData[],

@@ -1,9 +1,9 @@
 import AdminHero from "@/features/Hero/components/AdminHero/AdminHero"
 import { getQueryClient } from "@/features/TanStackQuery/utils/getQueryClient"
-import { getBioApi } from "@/lib/api-calls/bio"
-import { getEducationApi } from "@/lib/api-calls/education"
-import { getSkillsApi } from "@/lib/api-calls/skills"
-import { getWorkApi } from "@/lib/api-calls/work"
+import { getBioApi } from "../../../services/bio"
+import { getEducationApi } from "../../../services/education"
+import { getSkillsApi } from "../../../services/skills"
+import { getWorkApi } from "../../../services/work"
 import createBioQueryOptions from "@/features/TanStackQuery/utils/query-options/createBioQueryOptions"
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query"
 

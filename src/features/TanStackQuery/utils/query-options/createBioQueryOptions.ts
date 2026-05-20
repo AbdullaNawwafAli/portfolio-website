@@ -1,5 +1,5 @@
 import { queryOptions, UseQueryOptions } from "@tanstack/react-query"
-import { getBioApi } from "../../../../lib/api-calls/bio"
+import { getBioApi } from "../../../../services/bio"
 import { bioData } from "@/types/bioData"
 
 export default function createBioQueryOptions<TData = bioData, TError = Error>(
