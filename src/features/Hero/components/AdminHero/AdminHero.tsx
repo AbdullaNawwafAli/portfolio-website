@@ -19,7 +19,7 @@ import WorkSheet from "../WorkSheet/WorkSheet"
 import EducationSheet from "../EducationSheet/EducationSheet"
 import SkillSheet from "../SkillSheet/SkillsSheet"
 import { useQuery } from "@tanstack/react-query"
-import createBioQueryOptions from "@/features/TanStackQuery/utils/query-options/createBioQueryOptions"
+import createBioQueryOptions from "@/features/TanStackQuery/hooks/createBioQueryOptions"
 
 const AdminHero = () => {
   const { data, isPending } = useQuery(

@@ -13,7 +13,7 @@ import { useQuery } from "@tanstack/react-query"
 import { ChevronRight } from "lucide-react"
 import { useState } from "react"
 import SkillsCard from "./SkillsCard"
-import createSkillsQueryOptions from "@/features/TanStackQuery/utils/query-options/createSkillsQueryOptions"
+import createSkillsQueryOptions from "@/features/TanStackQuery/hooks/createSkillsQueryOptions"
 
 interface SkillSheetProps {
   displayMode?: boolean

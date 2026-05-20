@@ -1,6 +1,6 @@
 import { WorkData } from "@/types/workData"
 import { queryOptions, UseQueryOptions } from "@tanstack/react-query"
-import { getWorkApi } from "../../../../services/work"
+import { getWorkApi } from "../../../services/work"
 
 export default function createWorkQueryOptions<
   TData = WorkData[],

@@ -1,5 +1,5 @@
 "use client"
-import createWorkQueryOptions from "@/features/TanStackQuery/utils/query-options/createWorkQueryOptions"
+import createWorkQueryOptions from "@/features/TanStackQuery/hooks/createWorkQueryOptions"
 import { Button } from "@/ui/shadcn/button"
 import { FieldGroup } from "@/ui/shadcn/field"
 import {
@@ -15,7 +15,7 @@ import { useQuery } from "@tanstack/react-query"
 import { ChevronRight } from "lucide-react"
 import { useState } from "react"
 import EducationCard from "./EducationCard"
-import createEducationQueryOptions from "@/features/TanStackQuery/utils/query-options/createEducationQueryOptions"
+import createEducationQueryOptions from "@/features/TanStackQuery/hooks/createEducationQueryOptions"
 
 interface EducationSheetProps {
   displayMode?: boolean

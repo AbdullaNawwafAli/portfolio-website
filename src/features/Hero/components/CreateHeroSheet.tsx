@@ -20,7 +20,7 @@ import { convertToBase64 } from "@/utils/fileUtils"
 import { uploadFileToCloudinaryApi } from "../../../services/cloudinary"
 import { createBioDataDto } from "@/types/bioData"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import createBioQueryOptions from "@/features/TanStackQuery/utils/query-options/createBioQueryOptions"
+import createBioQueryOptions from "@/features/TanStackQuery/hooks/createBioQueryOptions"
 import { createHeroSchema } from "../lib/zod/createHeroSchema"
 
 export function CreateHeroSheet() {

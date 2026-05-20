@@ -1,10 +1,10 @@
 import AdminHero from "@/features/Hero/components/AdminHero/AdminHero"
-import { getQueryClient } from "@/features/TanStackQuery/utils/getQueryClient"
+import { getQueryClient } from "@/features/TanStackQuery/lib/getQueryClient"
 import { getBioApi } from "../../../services/bio"
 import { getEducationApi } from "../../../services/education"
 import { getSkillsApi } from "../../../services/skills"
 import { getWorkApi } from "../../../services/work"
-import createBioQueryOptions from "@/features/TanStackQuery/utils/query-options/createBioQueryOptions"
+import createBioQueryOptions from "@/features/TanStackQuery/hooks/createBioQueryOptions"
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query"
 
 const AdminHomePage = async () => {

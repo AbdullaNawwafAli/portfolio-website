@@ -1,5 +1,5 @@
 "use client"
-import createWorkQueryOptions from "@/features/TanStackQuery/utils/query-options/createWorkQueryOptions"
+import createWorkQueryOptions from "@/features/TanStackQuery/hooks/createWorkQueryOptions"
 import { Button } from "@/ui/shadcn/button"
 import { FieldGroup } from "@/ui/shadcn/field"
 import {
