@@ -9,7 +9,7 @@ import {
   CardFooter,
 } from "../../../ui/shadcn/card"
 import Image from "next/image"
-import createProjectsQueryOptions from "@/lib/tanstack-queries/createProjectsQueryOptions"
+import createProjectsQueryOptions from "@/features/TanStackQuery/utils/query-options/createProjectsQueryOptions"
 import {
   Empty,
   EmptyContent,

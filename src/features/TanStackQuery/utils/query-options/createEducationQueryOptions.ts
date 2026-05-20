@@ -1,6 +1,6 @@
 import { queryOptions, UseQueryOptions } from "@tanstack/react-query"
 import { EducationData } from "@/types/educationData"
-import { getEducationApi } from "../api-calls/education"
+import { getEducationApi } from "../../../../lib/api-calls/education"
 
 export default function createEducationQueryOptions<
   TData = EducationData[],

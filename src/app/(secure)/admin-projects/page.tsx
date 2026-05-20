@@ -1,6 +1,6 @@
 import AdminPageCards from "@/features/Projects/components/AdminPageCards"
 import { getQueryClient } from "@/features/TanStackQuery/utils/getQueryClient"
-import createProjectsQueryOptions from "@/lib/tanstack-queries/createProjectsQueryOptions"
+import createProjectsQueryOptions from "@/features/TanStackQuery/utils/query-options/createProjectsQueryOptions"
 import { Button } from "@/ui/shadcn/button"
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query"
 import Link from "next/link"

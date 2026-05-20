@@ -4,7 +4,7 @@ import { getBioApi } from "@/lib/api-calls/bio"
 import { getEducationApi } from "@/lib/api-calls/education"
 import { getSkillsApi } from "@/lib/api-calls/skills"
 import { getWorkApi } from "@/lib/api-calls/work"
-import createBioQueryOptions from "@/lib/tanstack-queries/createBioQueryOptions"
+import createBioQueryOptions from "@/features/TanStackQuery/utils/query-options/createBioQueryOptions"
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query"
 
 const AdminHomePage = async () => {
