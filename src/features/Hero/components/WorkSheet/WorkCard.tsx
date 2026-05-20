@@ -28,7 +28,6 @@ import { createWorkApi, deleteWorkApi } from "@/lib/api-calls/work"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { format } from "date-fns"
 import { Trash } from "lucide-react"
-import { set } from "zod"
 
 interface WorkCardProps {
   data?: WorkData
