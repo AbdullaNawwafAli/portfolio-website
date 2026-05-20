@@ -25,7 +25,6 @@ const AdminPageCards = () => {
   const { data, isPending } = useQuery(
     createProjectsQueryOptions({ staleTime: 1000 * 60 * 5 })
   )
-  console.log(data)
 
   if (data?.length === 0) {
     return (
