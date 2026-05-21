@@ -31,14 +31,13 @@ const ProjectCard = ({ data }: ProjectCardProps) => {
       <div className="h-10">
         <CardFooter className="flex overflow-hidden rounded-b-sm h-full max-h-0 bg-primary group-hover:max-h-16 opacity-0 group-hover:opacity-100 transition-all duration-500 ease-in-out justify-between items-center px-1 py-0">
           <span className="font-sans text-background">21 April 2025</span>
-          <Link href={`/admin-projects/${data.id}`}>
-            <Button
-              variant={"ghost"}
-              className="px-0 font-sans hover:bg-transparent hover:text-background text-background"
-            >
-              View
-            </Button>
-          </Link>
+          <Button
+            asChild
+            variant={"ghost"}
+            className="px-0 font-sans hover:bg-transparent hover:text-background text-background"
+          >
+            <Link href={`/admin-projects/${data.id}`}>View</Link>
+          </Button>
         </CardFooter>
       </div>
     </Card>

@@ -232,15 +232,15 @@ const NewProjectForm = () => {
           </FieldGroup>
         </CardContent>
         <CardFooter className="flex gap-2 justify-end pt-10">
-          <Link href="/admin-projects">
-            <Button
-              variant="outline"
-              type="button"
-              className="capitalize font-sans"
-            >
-              Cancel
-            </Button>
-          </Link>
+          <Button
+            variant="outline"
+            type="button"
+            className="capitalize font-sans"
+            asChild
+          >
+            <Link href="/admin-projects">Cancel</Link>
+          </Button>
+
           <Button
             type="submit"
             id="new-project-form"

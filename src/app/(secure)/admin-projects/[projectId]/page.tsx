@@ -27,11 +27,10 @@ const AdminViewProjectPage = async ({ params }: AdminViewProjectPageProps) => {
       <PageLayoutWrapper>
         <div className="flex justify-between items-center">
           <PageHeaderTypography>Project Details</PageHeaderTypography>
-          <Link href="/admin-projects">
-            <Button variant="default" className="capitalize font-sans">
-              Back
-            </Button>
-          </Link>
+
+          <Button asChild variant="default" className="capitalize font-sans">
+            <Link href="/admin-projects">Back</Link>
+          </Button>
         </div>
         <div className="w-full h-full"></div>
       </PageLayoutWrapper>

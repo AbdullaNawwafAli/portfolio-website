@@ -18,9 +18,10 @@ const AdminProjectsPage = async () => {
       <PageLayoutWrapper>
         <div className="flex justify-between">
           <PageHeaderTypography>My Projects</PageHeaderTypography>
-          <Link href={"/admin-projects/new-project"}>
-            <Button className="capitalize font-sans">New Project</Button>
-          </Link>
+
+          <Button asChild className="capitalize font-sans">
+            <Link href={"/admin-projects/new-project"}>New Project </Link>
+          </Button>
         </div>
         <AdminPageCards />
       </PageLayoutWrapper>

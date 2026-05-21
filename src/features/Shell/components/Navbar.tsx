@@ -37,14 +37,13 @@ const Navbar = ({ children }: NavBarProps) => {
         {/*Buttons in invisible columns*/}
         {navBarButtons.map((button) => (
           <div className="navbar-button-container" key={button.label}>
-            <Link href={button.route}>
-              <Button
-                variant={"ghost"}
-                className="px-0 font-nav font-semibold hover:bg-transparent"
-              >
-                {button.label}
-              </Button>
-            </Link>
+            <Button
+              variant={"ghost"}
+              className="px-0 font-nav font-semibold hover:bg-transparent"
+              asChild
+            >
+              <Link href={button.route}>{button.label}</Link>
+            </Button>
           </div>
         ))}
       </div>
@@ -55,11 +54,13 @@ const Navbar = ({ children }: NavBarProps) => {
       <div className="navbar-container">
         {navBarButtons.map((button) => (
           <div className="mobile-navbar-button-container" key={button.label}>
-            <Link href={button.route}>
-              <Button variant={"ghost"} className="px-0 font-nav font-semibold">
-                {button.label}
-              </Button>
-            </Link>
+            <Button
+              variant={"ghost"}
+              className="px-0 font-nav font-semibold"
+              asChild
+            >
+              <Link href={button.route}>{button.label}</Link>
+            </Button>
           </div>
         ))}
       </div>

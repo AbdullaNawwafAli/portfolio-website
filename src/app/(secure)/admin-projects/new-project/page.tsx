@@ -9,11 +9,9 @@ const NewProjectPage = () => {
     <PageLayoutWrapper>
       <div className="flex justify-between items-center">
         <PageHeaderTypography>New Project</PageHeaderTypography>
-        <Link href="/admin-projects">
-          <Button variant="default" className="capitalize font-sans">
-            Back
-          </Button>
-        </Link>
+        <Button variant="default" className="capitalize font-sans" asChild>
+          <Link href="/admin-projects">Back</Link>
+        </Button>
       </div>
       <div className="w-full h-full">
         <NewProjectForm />
