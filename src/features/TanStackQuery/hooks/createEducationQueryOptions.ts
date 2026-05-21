@@ -1,6 +1,6 @@
+import { getEducationApi } from "@/features/Hero/features/EducationSheet/services/education"
+import { EducationData } from "@/features/Hero/features/EducationSheet/types/educationData"
 import { queryOptions, UseQueryOptions } from "@tanstack/react-query"
-import { EducationData } from "@/features/EducationSheet/types/educationData"
-import { getEducationApi } from "../../EducationSheet/services/education"
 
 export default function createEducationQueryOptions<
   TData = EducationData[],

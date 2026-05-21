@@ -1,12 +1,12 @@
 import { eq } from "drizzle-orm"
 import { createProjectDataDto } from "@/types/projectData"
-import { db } from "../drizzle"
+import { db } from "@/server/db/drizzle"
 import {
-  projectsMediaTable,
   projectsTable,
-  projectsTagsRelationTable,
+  projectsMediaTable,
   projectsTagsTable,
-} from "../drizzle/schema"
+  projectsTagsRelationTable,
+} from "@/server/db/drizzle/schema"
 
 export async function getProjectsDb() {
   const projects = await db.query.projectsTable.findMany({
