@@ -1,7 +1,6 @@
 "use client"
 import createWorkQueryOptions from "../hooks/createWorkQueryOptions"
 import { Button } from "@/ui/shadcn/button"
-import { FieldGroup } from "@/ui/shadcn/field"
 import {
   Sheet,
   SheetClose,
