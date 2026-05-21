@@ -1,5 +1,5 @@
 "use client"
-import createWorkQueryOptions from "@/features/TanStackQuery/hooks/createWorkQueryOptions"
+import createWorkQueryOptions from "../hooks/createWorkQueryOptions"
 import { Button } from "@/ui/shadcn/button"
 import { FieldGroup } from "@/ui/shadcn/field"
 import {
@@ -23,7 +23,9 @@ interface WorkSheetProps {
 const WorkSheet = ({ displayMode }: WorkSheetProps) => {
   const [addNewEntry, setAddNewEntry] = useState(false)
   const [isFormSubmitting, setIsFormSubmitting] = useState(false)
-  const { data, isPending } = useQuery(createWorkQueryOptions())
+  const { data, isPending } = useQuery(
+    createWorkQueryOptions({ staleTime: 1000 * 60 * 5 })
+  )
   const isDataThere = data ? data.length > 0 || addNewEntry : false
 
   return (

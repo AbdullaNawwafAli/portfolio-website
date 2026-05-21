@@ -13,7 +13,7 @@ import { useQuery } from "@tanstack/react-query"
 import { ChevronRight } from "lucide-react"
 import { useState } from "react"
 import SkillsCard from "./SkillsCard"
-import createSkillsQueryOptions from "@/features/TanStackQuery/hooks/createSkillsQueryOptions"
+import createSkillsQueryOptions from "../hooks/createSkillsQueryOptions"
 
 interface SkillSheetProps {
   displayMode?: boolean
@@ -22,7 +22,9 @@ interface SkillSheetProps {
 const SkillSheet = ({ displayMode }: SkillSheetProps) => {
   const [addNewEntry, setAddNewEntry] = useState(false)
   const [isFormSubmitting, setIsFormSubmitting] = useState(false)
-  const { data, isPending } = useQuery(createSkillsQueryOptions())
+  const { data, isPending } = useQuery(
+    createSkillsQueryOptions({ staleTime: 1000 * 60 * 5 })
+  )
   const isDataThere = data ? data.length > 0 || addNewEntry : false
 
   return (

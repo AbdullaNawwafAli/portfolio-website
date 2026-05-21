@@ -22,7 +22,9 @@ interface EducationSheetProps {
 const EducationSheet = ({ displayMode }: EducationSheetProps) => {
   const [addNewEntry, setAddNewEntry] = useState(false)
   const [isFormSubmitting, setIsFormSubmitting] = useState(false)
-  const { data, isPending } = useQuery(createEducationQueryOptions())
+  const { data, isPending } = useQuery(
+    createEducationQueryOptions({ staleTime: 1000 * 60 * 5 })
+  )
   const isDataThere = data ? data.length > 0 || addNewEntry : false
 
   return (

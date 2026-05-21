@@ -5,6 +5,9 @@ import { getSkillsApi } from "../../../features/Hero/features/SkillSheet/service
 import { getWorkApi } from "../../../features/Hero/features/WorkSheet/services/work"
 import createBioQueryOptions from "@/features/Hero/hooks/createBioQueryOptions"
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query"
+import createEducationQueryOptions from "@/features/Hero/features/EducationSheet/hooks/createEducationQueryOptions"
+import createSkillsQueryOptions from "@/features/Hero/features/SkillSheet/hooks/createSkillsQueryOptions"
+import createWorkQueryOptions from "@/features/Hero/features/WorkSheet/hooks/createWorkQueryOptions"
 
 const AdminHomePage = async () => {
   const queryClient = getQueryClient()
@@ -13,20 +16,17 @@ const AdminHomePage = async () => {
     createBioQueryOptions({ staleTime: 1000 * 60 * 5 })
   )
 
-  queryClient.prefetchQuery({
-    queryKey: ["education"],
-    queryFn: () => getEducationApi(),
-  })
+  queryClient.prefetchQuery(
+    createEducationQueryOptions({ staleTime: 1000 * 60 * 5 })
+  )
 
-  queryClient.prefetchQuery({
-    queryKey: ["skills"],
-    queryFn: () => getSkillsApi(),
-  })
+  queryClient.prefetchQuery(
+    createSkillsQueryOptions({ staleTime: 1000 * 60 * 5 })
+  )
 
-  queryClient.prefetchQuery({
-    queryKey: ["work"],
-    queryFn: () => getWorkApi(),
-  })
+  queryClient.prefetchQuery(
+    createWorkQueryOptions({ staleTime: 1000 * 60 * 5 })
+  )
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
