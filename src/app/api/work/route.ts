@@ -1,4 +1,8 @@
-import { createWorkDb, deleteWorkDb, getWorkDb } from "@/server/db/queries/work"
+import {
+  getWorkDb,
+  createWorkDb,
+  deleteWorkDb,
+} from "@/features/Hero/features/WorkSheet/server/queries/work"
 import { NextResponse } from "next/server"
 
 export async function GET() {

@@ -1,11 +1,11 @@
 import { eq } from "drizzle-orm"
-import { db } from "../drizzle"
-import { workTable } from "../drizzle/schema"
 import {
   createWorkDataDto,
   deleteWorkDataDto,
   updateWorkDataDto,
 } from "@/features/Hero/features/WorkSheet/types/workData"
+import { db } from "@/server/db/drizzle"
+import { workTable } from "@/server/db/drizzle/schema"
 
 export async function getWorkDb() {
   const work = await db.query.workTable.findMany()
