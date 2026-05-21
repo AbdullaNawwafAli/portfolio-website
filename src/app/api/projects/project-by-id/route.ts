@@ -1,4 +1,4 @@
-import { getProjectByIdDb } from "@/server/db/queries/projects"
+import { getProjectByIdDb } from "@/features/Projects/queries/projects"
 import { NextRequest, NextResponse } from "next/server"
 
 export async function GET(request: NextRequest) {
