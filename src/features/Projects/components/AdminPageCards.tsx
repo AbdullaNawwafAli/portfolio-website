@@ -1,15 +1,7 @@
 "use client"
 import { useQuery } from "@tanstack/react-query"
 import { Button } from "../../../ui/shadcn/button"
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardContent,
-  CardFooter,
-} from "../../../ui/shadcn/card"
-import Image from "next/image"
-import createProjectsQueryOptions from "@/features/TanStackQuery/hooks/createProjectsQueryOptions"
+import createProjectsQueryOptions from "../hooks/createProjectsQueryOptions"
 import {
   Empty,
   EmptyContent,
@@ -19,7 +11,7 @@ import {
   EmptyTitle,
 } from "@/ui/shadcn/empty"
 import { Folder } from "lucide-react"
-import ProjectCard from "./ProjectCard"
+import ProjectCard from "../features/ProjectCard/ProjectCard"
 
 const AdminPageCards = () => {
   const { data, isPending } = useQuery(

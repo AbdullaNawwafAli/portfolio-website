@@ -1,15 +1,15 @@
 "use client"
 
 import { useAppForm } from "@/features/TanstackForm/hooks/hooks"
-import { createProjectSchema } from "@/features/Projects/lib/zod/createProjectSchema"
-import { createProjectApi } from "../../../../services/projects"
-import { uploadFileToCloudinaryApi } from "../../../../services/cloudinary"
+import { createProjectSchema } from "@/features/Projects/features/ProjectCreateForm/schemas/createProjectSchema"
+import { createProjectApi } from "../../../services/projects"
+import { uploadFileToCloudinaryApi } from "../../../../../services/cloudinary"
 import { convertToBase64 } from "@/utils/fileUtils"
 import {
   createProjectDataDto,
   ProjectMediaDto,
   ProjectMediaType,
-} from "@/types/projectData"
+} from "@/features/Projects/types/projectData"
 import { Button } from "@/ui/shadcn/button"
 import {
   Card,

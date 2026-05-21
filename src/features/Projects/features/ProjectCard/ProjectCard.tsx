@@ -1,4 +1,4 @@
-import { ProjectData } from "@/types/projectData"
+import { ProjectData } from "@/features/Projects/types/projectData"
 import CloudinaryImage from "@/ui/CloudinaryImage"
 import { Button } from "@/ui/shadcn/button"
 import { Card, CardFooter, CardHeader, CardTitle } from "@/ui/shadcn/card"

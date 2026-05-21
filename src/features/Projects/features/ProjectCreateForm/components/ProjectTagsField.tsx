@@ -1,6 +1,6 @@
 "use client"
 
-import { projectTagSchema } from "@/features/Projects/lib/zod/createProjectSchema"
+import { projectTagSchema } from "@/features/Projects/features/ProjectCreateForm/schemas/createProjectSchema"
 import { Badge } from "@/ui/shadcn/badge"
 import { Button } from "@/ui/shadcn/button"
 import {

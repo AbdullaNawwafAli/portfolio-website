@@ -1,5 +1,5 @@
 import { eq } from "drizzle-orm"
-import { createProjectDataDto } from "@/types/projectData"
+import { createProjectDataDto } from "@/features/Projects/types/projectData"
 import { db } from "@/server/db/drizzle"
 import {
   projectsTable,

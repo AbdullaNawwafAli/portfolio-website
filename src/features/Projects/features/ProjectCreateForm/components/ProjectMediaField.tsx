@@ -1,7 +1,7 @@
 "use client"
 
-import { projectMediaDraftSchema } from "@/features/Projects/lib/zod/createProjectSchema"
-import { ProjectMediaType } from "@/types/projectData"
+import { projectMediaDraftSchema } from "@/features/Projects/features/ProjectCreateForm/schemas/createProjectSchema"
+import { ProjectMediaType } from "@/features/Projects/types/projectData"
 import { Button } from "@/ui/shadcn/button"
 import {
   Field,

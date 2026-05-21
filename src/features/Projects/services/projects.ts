@@ -1,4 +1,7 @@
-import { createProjectDataDto, ProjectData } from "@/types/projectData"
+import {
+  createProjectDataDto,
+  ProjectData,
+} from "@/features/Projects/types/projectData"
 
 export async function getProjectsApi(): Promise<ProjectData[]> {
   const res = await fetch("http://localhost:3000/api/projects")
