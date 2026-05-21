@@ -14,8 +14,7 @@ import EducationSheet from "../../EducationSheet/components/EducationSheet"
 import SkillSheet from "../../SkillSheet/components/SkillsSheet"
 import WorkSheet from "../../WorkSheet/components/WorkSheet"
 import createBioQueryOptions from "@/features/Hero/hooks/createBioQueryOptions"
-import { useQuery, useSuspenseQuery } from "@tanstack/react-query"
-import { Url } from "next/dist/shared/lib/router/router"
+import { useSuspenseQuery } from "@tanstack/react-query"
 
 const Hero = () => {
   const { data, isPending } = useSuspenseQuery(
