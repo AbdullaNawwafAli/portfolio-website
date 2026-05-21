@@ -1,10 +1,10 @@
 import { eq } from "drizzle-orm"
-import { db } from "../drizzle"
-import { bioTable } from "../drizzle/schema"
+import { db } from "../../../../server/db/drizzle"
+import { bioTable } from "../../../../server/db/drizzle/schema"
 import {
   createBioDataDto,
   updateBioDataDto,
-} from "@/features/Hero/features/Hero/types/bioData"
+} from "@/features/Hero/types/bioData"
 
 export async function getBioDb() {
   const bio = await db.query.bioTable.findFirst()

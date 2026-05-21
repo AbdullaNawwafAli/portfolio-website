@@ -3,12 +3,12 @@ import {
   deleteSkillsDataDto,
   updateSkillsDataDto,
 } from "@/features/Hero/features/SkillSheet/types/skills"
-import { db } from "../drizzle"
+import { db } from "../../../../../../server/db/drizzle"
 import {
   educationTable,
   skillInfoTable,
   skillTypeTable,
-} from "../drizzle/schema"
+} from "../../../../../../server/db/drizzle/schema"
 import { create } from "domain"
 import { eq } from "drizzle-orm"
 

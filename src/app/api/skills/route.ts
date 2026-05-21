@@ -2,7 +2,7 @@ import {
   createSkillsDb,
   deleteSkillsDb,
   getSkillsDb,
-} from "@/server/db/queries/skills"
+} from "@/features/Hero/features/SkillSheet/server/queries/skills"
 import { NextResponse } from "next/server"
 
 export async function GET() {

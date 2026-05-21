@@ -8,12 +8,12 @@ import {
 } from "lucide-react"
 import CloudinaryImage from "@/ui/CloudinaryImage"
 import { Button } from "@/ui/shadcn/button"
-import { bioData } from "@/features/Hero/features/Hero/types/bioData"
-import WorkSheet from "../../../../WorkSheet/components/WorkSheet"
-import EducationSheet from "../../../../EducationSheet/components/EducationSheet"
+import { bioData } from "@/features/Hero/types/bioData"
 import { toast } from "sonner"
 import Link from "next/link"
-import SkillSheet from "../../../../SkillSheet/components/SkillsSheet"
+import EducationSheet from "../../EducationSheet/components/EducationSheet"
+import SkillSheet from "../../SkillSheet/components/SkillsSheet"
+import WorkSheet from "../../WorkSheet/components/WorkSheet"
 
 interface HeroProps {
   data: bioData

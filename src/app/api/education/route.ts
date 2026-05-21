@@ -2,7 +2,7 @@ import {
   createEducationDb,
   deleteEducationDb,
   getEducationDb,
-} from "@/server/db/queries/education"
+} from "@/features/Hero/features/EducationSheet/server/queries/education"
 import { NextResponse } from "next/server"
 
 export async function GET() {

@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "../features/Shell/styles/Shell.css";
-@import "../features/Hero/features/Hero/styles/Hero.css";
+@import "../features/Hero/styles/Hero.css";
 
 @custom-variant dark (&:is(.dark *));
 

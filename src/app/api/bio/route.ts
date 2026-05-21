@@ -1,4 +1,8 @@
-import { createBioDb, getBioDb, updateBioDb } from "@/server/db/queries/bio"
+import {
+  createBioDb,
+  getBioDb,
+  updateBioDb,
+} from "@/features/Hero/server/queries/bio"
 import { NextRequest, NextResponse } from "next/server"
 
 export async function GET() {

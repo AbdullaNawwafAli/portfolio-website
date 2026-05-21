@@ -1,11 +1,11 @@
 import { eq } from "drizzle-orm"
-import { db } from "../drizzle"
-import { educationTable } from "../drizzle/schema"
+import { db } from "../../../../../../server/db/drizzle"
+import { educationTable } from "../../../../../../server/db/drizzle/schema"
 import {
   createEducationDataDto,
   deleteEducationDataDto,
   updateEducationDataDto,
-} from "@/features/EducationSheet/types/educationData"
+} from "../../types/educationData"
 
 export async function getEducationDb() {
   const education = await db.query.educationTable.findMany()
