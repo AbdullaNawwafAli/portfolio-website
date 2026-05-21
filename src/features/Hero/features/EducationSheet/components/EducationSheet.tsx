@@ -13,7 +13,7 @@ import { useQuery } from "@tanstack/react-query"
 import { ChevronRight } from "lucide-react"
 import { useState } from "react"
 import EducationCard from "./EducationCard"
-import createEducationQueryOptions from "@/features/TanStackQuery/hooks/createEducationQueryOptions"
+import createEducationQueryOptions from "@/features/Hero/features/EducationSheet/hooks/createEducationQueryOptions"
 
 interface EducationSheetProps {
   displayMode?: boolean
