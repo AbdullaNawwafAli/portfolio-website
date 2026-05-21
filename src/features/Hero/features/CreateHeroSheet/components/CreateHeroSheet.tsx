@@ -12,16 +12,16 @@ import {
   SheetTrigger,
 } from "@/ui/shadcn/sheet"
 import { toast } from "sonner"
-import { createBioApi } from "../../../services/bio"
+import { createBioApi } from "../../Hero/services/bio"
 import Image from "next/image"
 import { useEffect, useState } from "react"
-import { useAppForm } from "../../TanstackForm/hooks/hooks"
+import { useAppForm } from "../../../../TanstackForm/hooks/hooks"
 import { convertToBase64 } from "@/utils/fileUtils"
-import { uploadFileToCloudinaryApi } from "../../../services/cloudinary"
-import { createBioDataDto } from "@/types/bioData"
+import { uploadFileToCloudinaryApi } from "../../../../../services/cloudinary"
+import { createBioDataDto } from "@/features/Hero/features/Hero/types/bioData"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import createBioQueryOptions from "@/features/TanStackQuery/hooks/createBioQueryOptions"
-import { createHeroSchema } from "../lib/zod/createHeroSchema"
+import { createHeroSchema } from "../schemas/createHeroSchema"
 
 export function CreateHeroSheet() {
   //TODO: fix the drawer closing suddenly instead of sliding  when the successfully created

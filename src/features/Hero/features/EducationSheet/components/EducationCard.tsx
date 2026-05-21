@@ -8,23 +8,19 @@ import {
   CardHeader,
   CardTitle,
 } from "@/ui/shadcn/card"
-import { createWorkSchema } from "../../lib/zod/createWorkSchema"
 import { FieldGroup } from "@/ui/shadcn/field"
 import { toast } from "sonner"
 import { Button } from "@/ui/shadcn/button"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { format } from "date-fns"
 import { Trash } from "lucide-react"
+import { createEducationSchema } from "../schemas/createEducationSchema"
+import { createEducationApi, deleteEducationApi } from "../services/education"
 import {
+  EducationData,
   createEducationDataDto,
   deleteEducationDataDto,
-  EducationData,
-} from "@/types/educationData"
-import {
-  createEducationApi,
-  deleteEducationApi,
-} from "../../../../services/education"
-import { createEducationSchema } from "../../lib/zod/createEducationSchema"
+} from "../types/educationData"
 
 interface EducationCardProps {
   data?: EducationData

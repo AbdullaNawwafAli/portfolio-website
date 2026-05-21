@@ -13,11 +13,11 @@ import { SquarePen } from "lucide-react"
 import { useEffect, useState } from "react"
 import Image from "next/image"
 import { useMutation } from "@tanstack/react-query"
-import { changeHeroPhotoSchema } from "../../lib/zod/changeHeroPhotoSchema"
+import { changeHeroPhotoSchema } from "../schemas/changeHeroPhotoSchema"
 import { useAppForm } from "@/features/TanstackForm/hooks/hooks"
 import { toast } from "sonner"
 import { convertToBase64 } from "@/utils/fileUtils"
-import { OverWriteFileToCloudinaryApi } from "../../../../services/cloudinary"
+import { OverWriteFileToCloudinaryApi } from "@/services/cloudinary"
 import { OverWriteFileToCloudinaryApiType } from "@/types/cloudinaryData"
 
 interface ChangeHeroPhotoSheetProps {

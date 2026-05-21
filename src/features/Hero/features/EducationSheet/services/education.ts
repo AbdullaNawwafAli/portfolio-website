@@ -1,8 +1,8 @@
 import {
+  EducationData,
   createEducationDataDto,
   deleteEducationDataDto,
-  EducationData,
-} from "@/types/educationData"
+} from "../types/educationData"
 
 export async function getEducationApi(): Promise<EducationData[]> {
   const res = await fetch("http://localhost:3000/api/education")

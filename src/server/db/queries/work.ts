@@ -5,7 +5,7 @@ import {
   createWorkDataDto,
   deleteWorkDataDto,
   updateWorkDataDto,
-} from "@/types/workData"
+} from "@/features/Hero/features/WorkSheet/types/workData"
 
 export async function getWorkDb() {
   const work = await db.query.workTable.findMany()

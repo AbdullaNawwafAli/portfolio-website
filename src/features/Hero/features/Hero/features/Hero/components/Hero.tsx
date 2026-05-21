@@ -1,20 +1,19 @@
 "use client"
 import {
   ArrowDownToLine,
-  ChevronRight,
   Github,
   Instagram,
   Linkedin,
   Mail,
 } from "lucide-react"
-import CloudinaryImage from "../../../ui/CloudinaryImage"
-import { Button } from "../../../ui/shadcn/button"
-import { bioData } from "@/types/bioData"
-import WorkSheet from "./WorkSheet/WorkSheet"
-import EducationSheet from "./EducationSheet/EducationSheet"
+import CloudinaryImage from "@/ui/CloudinaryImage"
+import { Button } from "@/ui/shadcn/button"
+import { bioData } from "@/features/Hero/features/Hero/types/bioData"
+import WorkSheet from "../../../../WorkSheet/components/WorkSheet"
+import EducationSheet from "../../../../EducationSheet/components/EducationSheet"
 import { toast } from "sonner"
 import Link from "next/link"
-import SkillSheet from "./SkillSheet/SkillsSheet"
+import SkillSheet from "../../../../SkillSheet/components/SkillsSheet"
 
 interface HeroProps {
   data: bioData

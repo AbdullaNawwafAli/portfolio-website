@@ -2,7 +2,7 @@ import {
   createSkillsDataDto,
   deleteSkillsDataDto,
   updateSkillsDataDto,
-} from "@/types/skills"
+} from "@/features/Hero/features/SkillSheet/types/skills"
 import { db } from "../drizzle"
 import {
   educationTable,

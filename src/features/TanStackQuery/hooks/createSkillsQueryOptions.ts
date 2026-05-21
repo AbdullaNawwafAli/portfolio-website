@@ -1,6 +1,6 @@
 import { queryOptions, UseQueryOptions } from "@tanstack/react-query"
-import { getSkillsApi } from "../../../services/skills"
-import { SkillsData } from "@/types/skills"
+import { getSkillsApi } from "../../Hero/features/SkillSheet/services/skills"
+import { SkillsData } from "@/features/Hero/features/SkillSheet/types/skills"
 
 export default function createSkillsQueryOptions<
   TData = SkillsData[],

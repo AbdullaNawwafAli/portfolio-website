@@ -13,9 +13,12 @@ import {
 } from "@/ui/shadcn/sheet"
 import { SquarePen } from "lucide-react"
 import { toast } from "sonner"
-import { updateBioApi } from "../../../../services/bio"
-import { bioData, updateBioDataDto } from "@/types/bioData"
-import { editHeroFormSchema } from "../../lib/zod/editHeroSchema"
+import { updateBioApi } from "../../../services/bio"
+import {
+  bioData,
+  updateBioDataDto,
+} from "@/features/Hero/features/Hero/types/bioData"
+import { editHeroFormSchema } from "../schemas/editHeroSchema"
 import { useMutation } from "@tanstack/react-query"
 import { useAppForm } from "@/features/TanstackForm/hooks/hooks"
 

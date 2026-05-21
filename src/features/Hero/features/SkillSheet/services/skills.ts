@@ -2,7 +2,7 @@ import {
   createSkillsDataDto,
   deleteSkillsDataDto,
   SkillsData,
-} from "@/types/skills"
+} from "@/features/Hero/features/SkillSheet/types/skills"
 
 export async function getSkillsApi(): Promise<SkillsData[]> {
   const res = await fetch("http://localhost:3000/api/skills")

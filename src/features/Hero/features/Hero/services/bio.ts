@@ -1,4 +1,4 @@
-import { bioData, createBioDataDto, updateBioDataDto } from "@/types/bioData"
+import { bioData, createBioDataDto, updateBioDataDto } from "../types/bioData"
 
 export async function getBioApi(): Promise<bioData> {
   const res = await fetch("http://localhost:3000/api/bio")

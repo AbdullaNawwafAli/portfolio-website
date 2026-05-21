@@ -1,10 +1,5 @@
 import { useAppForm } from "@/features/TanstackForm/hooks/hooks"
 import {
-  createWorkDataDto,
-  deleteWorkDataDto,
-  WorkData,
-} from "@/types/workData"
-import {
   Card,
   CardAction,
   CardContent,
@@ -13,7 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/ui/shadcn/card"
-import { createWorkSchema } from "../../lib/zod/createWorkSchema"
+import { createWorkSchema } from "../schemas/createWorkSchema"
 import {
   FieldContent,
   FieldDescription,
@@ -24,10 +19,15 @@ import {
 } from "@/ui/shadcn/field"
 import { toast } from "sonner"
 import { Button } from "@/ui/shadcn/button"
-import { createWorkApi, deleteWorkApi } from "../../../../services/work"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { format } from "date-fns"
 import { Trash } from "lucide-react"
+import { createWorkApi, deleteWorkApi } from "../services/work"
+import {
+  WorkData,
+  createWorkDataDto,
+  deleteWorkDataDto,
+} from "../types/workData"
 
 interface WorkCardProps {
   data?: WorkData

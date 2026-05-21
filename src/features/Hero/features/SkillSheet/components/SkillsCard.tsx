@@ -8,7 +8,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/ui/shadcn/card"
-import { createWorkSchema } from "../../lib/zod/createWorkSchema"
 import {
   FieldContent,
   FieldDescription,
@@ -21,17 +20,16 @@ import { toast } from "sonner"
 import { Button } from "@/ui/shadcn/button"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { Trash } from "lucide-react"
-import { createSkillsSchema } from "../../lib/zod/createSkillsSchema"
+import { createSkillsSchema } from "../schemas/createSkillsSchema"
+import { convertToBase64 } from "@/utils/fileUtils"
+import { uploadFileToCloudinaryApi } from "@/services/cloudinary"
+import { CldImage } from "next-cloudinary"
+import { createSkillsApi, deleteSkillsApi } from "../services/skills"
 import {
+  SkillsData,
   createSkillsDataDto,
   deleteSkillsDataDto,
-  Skill,
-  SkillsData,
-} from "@/types/skills"
-import { createSkillsApi, deleteSkillsApi } from "../../../../services/skills"
-import { convertToBase64 } from "@/utils/fileUtils"
-import { uploadFileToCloudinaryApi } from "../../../../services/cloudinary"
-import { CldImage } from "next-cloudinary"
+} from "../types/skills"
 
 interface SkillsCardProps {
   data?: SkillsData

@@ -5,7 +5,7 @@ import {
   createEducationDataDto,
   deleteEducationDataDto,
   updateEducationDataDto,
-} from "@/types/educationData"
+} from "@/features/EducationSheet/types/educationData"
 
 export async function getEducationDb() {
   const education = await db.query.educationTable.findMany()
