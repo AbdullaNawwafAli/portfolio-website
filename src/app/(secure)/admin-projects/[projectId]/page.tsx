@@ -1,5 +1,5 @@
 import { getQueryClient } from "@/features/TanStackQuery/lib/getQueryClient"
-import createProjectByIdQueryOption from "@/features/TanStackQuery/hooks/createProjectByIdQueryOption"
+import createProjectByIdQueryOption from "@/features/Projects/hooks/createProjectByIdQueryOption"
 import { Button } from "@/ui/shadcn/button"
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query"
 import Link from "next/link"
