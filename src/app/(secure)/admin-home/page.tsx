@@ -1,4 +1,4 @@
-import AdminHero from "@/features/Hero/features/Hero/features/AdminHero/components/AdminHero"
+import AdminHero from "@/features/Hero/features/AdminHero/components/AdminHero"
 import { getQueryClient } from "@/features/TanStackQuery/lib/getQueryClient"
 import { getEducationApi } from "@/features/Hero/features/EducationSheet/services/education"
 import { getSkillsApi } from "../../../features/Hero/features/SkillSheet/services/skills"
