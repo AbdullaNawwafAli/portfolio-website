@@ -1,7 +1,7 @@
 import {
   createProjectDb,
   getProjectsDb,
-} from "@/server/db/queries/projects"
+} from "@/features/Projects/queries/projects"
 import { NextResponse } from "next/server"
 
 export async function GET() {
