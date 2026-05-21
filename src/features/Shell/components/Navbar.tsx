@@ -1,8 +1,7 @@
-"use client"
 import Image from "next/image"
 import { Button } from "../../../ui/shadcn/button"
 import { ReactNode } from "react"
-import { useRouter } from "next/navigation"
+import Link from "next/link"
 
 interface NavBarProps {
   children: ReactNode
@@ -13,7 +12,6 @@ const Navbar = ({ children }: NavBarProps) => {
     { label: "Projects", route: "/projects" },
     { label: "Home", route: "/" },
   ]
-  const router = useRouter()
 
   return (
     <>
@@ -39,13 +37,14 @@ const Navbar = ({ children }: NavBarProps) => {
         {/*Buttons in invisible columns*/}
         {navBarButtons.map((button) => (
           <div className="navbar-button-container" key={button.label}>
-            <Button
-              variant={"ghost"}
-              className="px-0 font-nav font-semibold hover:bg-transparent"
-              onClick={() => router.push(button.route)}
-            >
-              {button.label}
-            </Button>
+            <Link href={button.route}>
+              <Button
+                variant={"ghost"}
+                className="px-0 font-nav font-semibold hover:bg-transparent"
+              >
+                {button.label}
+              </Button>
+            </Link>
           </div>
         ))}
       </div>
@@ -56,9 +55,11 @@ const Navbar = ({ children }: NavBarProps) => {
       <div className="navbar-container">
         {navBarButtons.map((button) => (
           <div className="mobile-navbar-button-container" key={button.label}>
-            <Button variant={"ghost"} className="px-0 font-nav font-semibold">
-              {button.label}
-            </Button>
+            <Link href={button.route}>
+              <Button variant={"ghost"} className="px-0 font-nav font-semibold">
+                {button.label}
+              </Button>
+            </Link>
           </div>
         ))}
       </div>
