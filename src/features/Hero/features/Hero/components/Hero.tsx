@@ -8,18 +8,19 @@ import {
 } from "lucide-react"
 import CloudinaryImage from "@/ui/CloudinaryImage"
 import { Button } from "@/ui/shadcn/button"
-import { bioData } from "@/features/Hero/types/bioData"
 import { toast } from "sonner"
 import Link from "next/link"
 import EducationSheet from "../../EducationSheet/components/EducationSheet"
 import SkillSheet from "../../SkillSheet/components/SkillsSheet"
 import WorkSheet from "../../WorkSheet/components/WorkSheet"
+import createBioQueryOptions from "@/features/Hero/hooks/createBioQueryOptions"
+import { useQuery, useSuspenseQuery } from "@tanstack/react-query"
+import { Url } from "next/dist/shared/lib/router/router"
 
-interface HeroProps {
-  data: bioData
-}
-
-const Hero = ({ data }: HeroProps) => {
+const Hero = () => {
+  const { data, isPending } = useSuspenseQuery(
+    createBioQueryOptions({ staleTime: 1000 * 60 * 5 })
+  )
   const handleEmailCopyClick = async (email: string) => {
     await navigator.clipboard.writeText(email)
     toast.success("Email copied to clipboard")
@@ -32,7 +33,7 @@ const Hero = ({ data }: HeroProps) => {
           {/*Hero Image*/}
           <div className="hero-image-container">
             <CloudinaryImage
-              src={data.bio_picture_cloudinary_id}
+              src={data.bio_picture_cloudinary_id as string}
               alt="Hero Image"
               width={500}
               height={500}
@@ -45,9 +46,9 @@ const Hero = ({ data }: HeroProps) => {
             <div className="hero-content">
               {/* Name and Social Icons Row */}
               <div className="hero-name-row">
-                <div className="hero-name">{data.name}</div>
+                <div className="hero-name">{data?.name}</div>
                 <div className="hero-social-row">
-                  <div className="hero-name-subtext">{data.name_subtext}</div>
+                  <div className="hero-name-subtext">{data?.name_subtext}</div>
 
                   {[...Array(3).keys()].map((key) => (
                     <div key={key} className="hero-spacer" />
@@ -56,7 +57,7 @@ const Hero = ({ data }: HeroProps) => {
                   <div className="hero-social-button">
                     <Button
                       variant={"ghost"}
-                      onClick={() => handleEmailCopyClick(data.email)}
+                      onClick={() => handleEmailCopyClick(data.email as string)}
                       className="cursor-pointer"
                     >
                       <Mail />
