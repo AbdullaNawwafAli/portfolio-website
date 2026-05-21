@@ -4,6 +4,8 @@ import createProjectsQueryOptions from "@/features/Projects/hooks/createProjects
 import { Button } from "@/ui/shadcn/button"
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query"
 import Link from "next/link"
+import PageHeaderTypography from "@/ui/typography/PageHeaderTypography"
+import PageLayoutWrapper from "@/ui/wrappers/PageLayoutWrapper"
 
 const AdminProjectsPage = async () => {
   const queryClient = getQueryClient()
@@ -13,17 +15,15 @@ const AdminProjectsPage = async () => {
   )
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <div className="flex flex-col gap-2 flex-1 h-full py-10 w-full">
+      <PageLayoutWrapper>
         <div className="flex justify-between">
-          <span className="font-heading text-3xl font-semibold text-primary">
-            My Projects
-          </span>
+          <PageHeaderTypography>My Projects</PageHeaderTypography>
           <Link href={"/admin-projects/new-project"}>
             <Button className="capitalize font-sans">New Project</Button>
           </Link>
         </div>
         <AdminPageCards />
-      </div>
+      </PageLayoutWrapper>
     </HydrationBoundary>
   )
 }
