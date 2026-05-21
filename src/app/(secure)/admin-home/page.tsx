@@ -3,7 +3,7 @@ import { getQueryClient } from "@/features/TanStackQuery/lib/getQueryClient"
 import { getEducationApi } from "@/features/Hero/features/EducationSheet/services/education"
 import { getSkillsApi } from "../../../features/Hero/features/SkillSheet/services/skills"
 import { getWorkApi } from "../../../features/Hero/features/WorkSheet/services/work"
-import createBioQueryOptions from "@/features/TanStackQuery/hooks/createBioQueryOptions"
+import createBioQueryOptions from "@/features/Hero/hooks/createBioQueryOptions"
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query"
 
 const AdminHomePage = async () => {
