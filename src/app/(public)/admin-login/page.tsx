@@ -1,4 +1,4 @@
-import GithubLoginButton from "@/ui/GithubLoginButton"
+import GithubLoginButton from "@/features/AdminLogin/components/GithubLoginButton"
 import PageLayoutWrapper from "@/ui/wrappers/PageLayoutWrapper"
 
 const AdminLoginPage = () => {

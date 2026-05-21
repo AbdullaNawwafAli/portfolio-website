@@ -1,6 +1,6 @@
 "use client"
-import { Button } from "./shadcn/button"
-import { login } from "@/server/actions/auth"
+import { Button } from "../../../ui/shadcn/button"
+import { login } from "@/features/AdminLogin/server/actions/auth"
 
 const GithubLoginButton = () => {
   const handleLogin = async () => {
