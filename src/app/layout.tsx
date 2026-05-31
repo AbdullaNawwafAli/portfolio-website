@@ -29,12 +29,7 @@ export default function RootLayout({
 
           {/*Content */}
           <Toaster />
-          <div className="content">
-            <Navbar>
-              {children}
-              <Footer />
-            </Navbar>
-          </div>
+          <div className="content">{children}</div>
         </QueryProvider>
       </body>
     </html>

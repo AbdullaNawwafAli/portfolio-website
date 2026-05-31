@@ -5,12 +5,13 @@ import Link from "next/link"
 
 interface NavBarProps {
   children: ReactNode
+  admin?: boolean
 }
 
-const Navbar = ({ children }: NavBarProps) => {
+const Navbar = ({ children, admin = false }: NavBarProps) => {
   const navBarButtons = [
-    { label: "Projects", route: "/projects" },
-    { label: "Home", route: "/" },
+    { label: "Projects", route: "/projects", adminRoute: "/admin-projects" },
+    { label: "Home", route: "/", adminRoute: "/admin-home" },
   ]
 
   return (
@@ -42,7 +43,9 @@ const Navbar = ({ children }: NavBarProps) => {
               className="px-0 font-nav font-semibold hover:bg-transparent"
               asChild
             >
-              <Link href={button.route}>{button.label}</Link>
+              <Link href={!admin ? button.route : button.adminRoute}>
+                {button.label}
+              </Link>
             </Button>
           </div>
         ))}
@@ -59,7 +62,9 @@ const Navbar = ({ children }: NavBarProps) => {
               className="px-0 font-nav font-semibold"
               asChild
             >
-              <Link href={button.route}>{button.label}</Link>
+              <Link href={!admin ? button.route : button.adminRoute}>
+                {button.label}
+              </Link>
             </Button>
           </div>
         ))}
