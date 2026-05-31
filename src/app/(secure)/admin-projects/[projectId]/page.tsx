@@ -5,6 +5,7 @@ import { dehydrate, HydrationBoundary } from "@tanstack/react-query"
 import Link from "next/link"
 import PageHeaderTypography from "@/ui/typography/PageHeaderTypography"
 import PageLayoutWrapper from "@/ui/wrappers/PageLayoutWrapper"
+import ProjectMediaViewer from "@/features/Projects/features/ProjectView/components/ProjectMediaViewer"
 
 interface AdminViewProjectPageProps {
   params: Promise<{ projectId: string }>
@@ -32,7 +33,9 @@ const AdminViewProjectPage = async ({ params }: AdminViewProjectPageProps) => {
             <Link href="/admin-projects">Back</Link>
           </Button>
         </div>
-        <div className="w-full h-full"></div>
+        <div className="w-full h-full px-10">
+          <ProjectMediaViewer projectId={projectId} />
+        </div>
       </PageLayoutWrapper>
     </HydrationBoundary>
   )
